@@ -25,9 +25,9 @@ const AvatarSelection = () => {
     <div>
       <h2>Selecciona un avatar</h2>
 
-      <button onClick={() => setSkin("mujer")}>Mujer</button>
-      <button onClick={() => setSkin("hombre")}>Hombre</button>
-      <button onClick={() => setSkin("no_binario")}>No binario</button>
+      <button onClick={() => setSkin("Female")}>Mujer</button>
+      <button onClick={() => setSkin("Man")}>Hombre</button>
+      <button onClick={() => setSkin("Alternative")}>No binario</button>
 
       <p>Dale un nombre</p>
       <form onSubmit={handleGuardar}>

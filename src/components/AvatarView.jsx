@@ -5,12 +5,15 @@ import Character from '../models/Character';
 import Man from '../models/Man';
 import Alternative from '../models/Alternative';
 import { useEffect } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 
-const AvatarView = ({ avatarSkin }) => {
+const AvatarView = () => {
   const [animation, setAnimation] = useState('Female_Idle');
   const avatarRef = useRef();
   const [rotationY, setRotationY] = useState(0);
+  const { user, partida } = useAuth();
+  const avatarSkin = partida?.avatar_skin || "Female";
 
   const isDragging = useRef(false);
   const lastX = useRef(0);
@@ -30,7 +33,7 @@ const AvatarView = ({ avatarSkin }) => {
   
 
   const handleMouseMove = (e) => {
-    if (!isDragging.current) return; // Si no está arrastrando no hace nada
+    if (!isDragging.current) return; // Si no está arrastrando, no hace nada
   
     const deltaX = e.clientX - lastX.current; // Diferencia entre la posición anterior y la nueva
     lastX.current = e.clientX; // Actualizar la última posición del cursor
@@ -40,15 +43,15 @@ const AvatarView = ({ avatarSkin }) => {
   
 
   const handleClick = () => {
-    // Cambiar a la animación de salto
-    //si es Female o Alternative:
-    setAnimation('Female_Jump');
-    // si es Man: setAnimation('HumanArmature|Man_Jump');
-
-    // Después de un tiempo, volver a la animación idle
+    if (avatarSkin === "Female" || avatarSkin === "Alternative") {
+      setAnimation("Female_Jump");
+    } else {
+      setAnimation("HumanArmature|Man_Jump");
+    }
+  
     setTimeout(() => {
-      setAnimation('Female_Idle');
-    }, 1000); // Tiempo de duración de la animación 
+      setAnimation(avatarSkin === "Female" || avatarSkin === "Alternative" ? "Female_Idle" : "Man_Idle");
+    }, 1000);
   };
 
   return (
@@ -61,11 +64,9 @@ const AvatarView = ({ avatarSkin }) => {
         <spotLight position={[0, 10, 0]} angle={0.15} intensity={1} />
         
         <group ref={avatarRef}>
-        
-          <Character animation={animation} position={[0, -2.6, -3.5]} rotation={[0.2, rotationY, 0]} skin={avatarSkin} />
-           {/*<Man animation={animation} position={[0, -2.7, -3.5]} rotation={[0.2, 0, 0]} skin={avatarSkin} />*/}
-         {/*   <Alternative animation={animation} position={[0, -2.7, -3.5]} rotation={[0.2, 0, 0]} skin={avatarSkin} />*/}
-       
+          {avatarSkin === 'Female' && <Character animation={animation} position={[0, -2.6, -3.5]} rotation={[0.2, rotationY, 0]} />}
+          {avatarSkin === 'Alternative' && <Alternative animation={animation} position={[0, -2.6, -3.5]} rotation={[0.2, rotationY, 0]} />}
+          {avatarSkin === 'Man' && <Man animation={animation} position={[0, -2.6, -3.5]} rotation={[0.2, rotationY, 0]} />}
         </group>
 
         
