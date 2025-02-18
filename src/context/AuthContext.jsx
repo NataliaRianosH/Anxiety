@@ -1,0 +1,272 @@
+import { createContext, useContext, useState, useEffect } from "react";
+import { supabase } from "../supabase/client";
+import { useNavigate } from "react-router-dom";
+
+const AuthContext = createContext();
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [partida, setPartida] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Verificar sesión al cargar la app
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        setUser(session.user);
+        console.log("Usuario activo al iniciar:", session.user);
+        await verificarOCrearPartida(session.user.id);
+      }
+      setLoading(false);
+    };
+
+    checkUser();
+
+    // Listener para cambios de sesión (login/logout)
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log("Cambio de sesión detectado:", event);
+      setUser(session?.user || null);
+      if (event === "SIGNED_IN") navigate("/profile"); 
+      if (event === "SIGNED_OUT") {
+        setPartida(null);
+        navigate("/login");
+      }
+    });
+
+    return () => {
+      authListener?.subscription.unsubscribe();
+    };
+  }, [navigate]);
+
+  const register = async (email, password, name) => {
+    // Registro con correo y contraseña
+    const { user, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      setError(error.message);
+      return;
+    }
+
+    // Actualización del perfil con el nombre del usuario
+    const { error: updateError } = await supabase.auth.updateUser({
+      data: {
+        full_name: name,
+      },
+    });
+
+    if (updateError) {
+      setError(updateError.message);
+    } else {
+      // Redirigir al perfil
+      navigate("/profile");
+    }
+  };
+
+  // Inicio de sesión con email/contraseña
+  const login = async (email, password) => {
+    const { user, error } = await supabase.auth.signInWithPassword({ email, password });
+    
+    if (error) {
+      return error.message; // Retorna el mensaje de error en lugar de solo loguearlo
+    }
+  
+    return null; // Si no hay error, retorna null
+  };
+
+  const resetPassword = async (email) => {
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: "http://localhost:5173/reset-password",
+    });
+  
+    if (error) {
+      console.error("Error al enviar correo de recuperación:", error.message);
+      return { success: false, error: error.message };
+    }
+  
+    return { success: true };
+  };
+
+  const updatePassword = async (newPassword) => {
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+  
+    if (error) {
+      console.error("Error al actualizar contraseña:", error.message);
+      return { success: false, error: error.message };
+    }
+  
+    return { success: true };
+  };
+  
+  // Inicio de sesión con Google
+  const loginWithGoogle = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
+
+    if (error) {
+      console.error("Error en login con Google:", error.message);
+      return;
+    }
+  };
+
+  // Cerrar sesión
+  const logout = async () => {
+    console.log("Intentando cerrar sesión...");
+    const { error } = await supabase.auth.signOut();
+    
+    if (error) {
+      console.error("Error al cerrar sesión:", error.message);
+      return;
+    }
+
+    console.log("Sesión cerrada exitosamente");
+  };
+
+  
+  const verificarOCrearPartida = async (userId) => {
+    if (!userId) return;
+  
+    try {
+      // Buscar si el usuario ya tiene una partida
+      const { data: partidaExistente, error } = await supabase
+        .from("Partida")
+        .select("*")
+        .eq("user_id", userId)
+        .limit(1) // Evita problemas si hay varias
+        .maybeSingle(); // No lanza error si no hay resultados
+  
+      if (error) {
+        console.error("Error buscando partida:", error.message);
+        return;
+      }
+  
+      if (partidaExistente) {
+        console.log("Partida encontrada:", partidaExistente);
+        setPartida(partidaExistente);
+        return; // 🚨 IMPORTANTE: Detener aquí si ya hay partida
+      }else{
+
+        
+      // Si no hay partida, crear una nueva
+      const { data: nuevaPartida, error: errorInsert } = await supabase
+      .from("Partida")
+      .insert([
+        {
+          user_id: userId,
+          avatar_name: "default",
+          avatar_skin: "default",
+          veces_jugadas: 0,
+          estado: false,
+          ultimo_logro: "",
+        }
+      ])
+      .select()
+      .single();
+
+    if (errorInsert) {
+      console.error("Error al crear partida:", errorInsert.message);
+      return;
+    }
+
+    console.log("Nueva partida creada:", nuevaPartida);
+    setPartida(nuevaPartida);
+        
+      }
+  
+    } catch (err) {
+      console.error("Error en verificarOCrearPartida:", err);
+    }
+  };
+  
+  const guardarAvatar = async (avatarName, skin) => {
+    if (!user) return { success: false, error: "Usuario no autenticado" };
+  
+    try {
+      const { error } = await supabase
+        .from("Partida")
+        .update({
+          avatar_name: avatarName,
+          avatar_skin: skin,
+        })
+        .eq("user_id", user.id);
+  
+      if (error) {
+        console.error("Error al actualizar avatar:", error.message);
+        return { success: false, error: error.message };
+      }
+  
+      console.log("Avatar actualizado correctamente");
+      navigate("/profile");
+      return { success: true };
+    } catch (err) {
+      console.error("Error en guardarAvatar:", err);
+      return { success: false, error: err.message };
+    }
+  };
+
+  const reiniciarPartida = async () => {
+    if (!user || !partida) return { success: false, error: "No se encontró la partida" };
+  
+    try {
+      const { error } = await supabase
+        .from("Partida")
+        .update({
+          estado: true,
+          ultimo_logro: "", // Opcional: Reiniciar progreso
+        })
+        .eq("user_id", user.id);
+  
+      if (error) {
+        console.error("Error al reiniciar la partida:", error.message);
+        return { success: false, error: error.message };
+      }
+  
+      console.log("Partida reiniciada correctamente");
+      
+      // Actualizar estado en el frontend
+      setPartida((prev) => ({
+        ...prev,
+        estado: true,
+        fecha_inicio: new Date(),
+        fecha_fin: null,
+        ultimo_logro: "",
+      }));
+  
+      return { success: true };
+    } catch (err) {
+      console.error("Error en reiniciarPartida:", err);
+      return { success: false, error: err.message };
+    }
+  };
+  
+  
+
+
+
+
+
+
+
+
+  return (
+    <AuthContext.Provider value={{ 
+      user, partida, login, loginWithGoogle, logout, loading, 
+     register, resetPassword, updatePassword, guardarAvatar,
+     reiniciarPartida  }}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
+};
