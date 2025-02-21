@@ -8,6 +8,7 @@ import { MapControls, useKeyboardControls } from "@react-three/drei";
 import { useControls } from "leva";
 import { Man } from "../models/Man";
 import { Alternative } from "../models/Alternative";
+import { useAuth } from "../context/AuthContext";
 
 const normalizeAngle = (angle) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;
@@ -29,7 +30,11 @@ const lerpAngle = (start, end, t) => {
 
   return normalizeAngle(start + (end - start) * t);
 };
+
 const CharacterController = () => {
+  const { user, partida } = useAuth();
+  const avatarSkin = partida?.avatar_skin || "Female";
+
   const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED, JUMP_FORCE } = useControls(
     "Character Control",
     {
@@ -64,6 +69,7 @@ const CharacterController = () => {
   const isJumping = useRef(false);
 
   useEffect(() => {
+    console.log(avatarSkin);
     const onMouseDown = (e) => {
       isClicking.current = true;
     };
@@ -132,12 +138,17 @@ const CharacterController = () => {
           Math.cos(rotationTarget.current + characterRotationTarget.current) *
           speed;
         if (speed === RUN_SPEED) {
-          setAnimation("Female_Run");
+
+          setAnimation(avatarSkin === "Female" || avatarSkin === "Alternative" ? "Female_Run" : "HumanArmature|Man_Run");
+
+        
         } else {
-          setAnimation("Female_Walk");
+          setAnimation(avatarSkin === "Female" || avatarSkin === "Alternative" ? "Female_Walk" : "HumanArmature|Man_Walk");
         }
       } else {
-        setAnimation("Female_Idle");
+        
+        setAnimation(avatarSkin === "Female" || avatarSkin === "Alternative" ? "Female_Idle" : "HumanArmature|Man_Idle");
+
       }
       character.current.rotation.y = lerpAngle(
         character.current.rotation.y,
@@ -146,8 +157,9 @@ const CharacterController = () => {
       );
 
       if (get().jump) {
-        vel.y = JUMP_FORCE; 
-        setAnimation("Female_Jump"); 
+        vel.y = JUMP_FORCE;
+        setAnimation(avatarSkin === "Female" || avatarSkin === "Alternative" ? "Female_Jump" : "HumanArmature|Man_Jump");
+
         console.log("Jumping");
       }
 
@@ -178,11 +190,15 @@ const CharacterController = () => {
         <group ref={cameraTarget} position-z={1.5} />
         <group ref={cameraPosition} position-y={4} position-z={-4} />
         <group ref={character}>
-          <Character scale={1} position-y={-2.3} animation={animation} />
-          {/*** 
-         <Man scale={1} position-y={-2.3} animation={animation} />
-
-         <Alternative scale={1} position-y={-2.3} animation={animation} />*/}
+          {avatarSkin === "Female" && (
+            <Character scale={1} position-y={-2.3} animation={animation} />
+          )}
+          {avatarSkin === "Man" && (
+            <Man scale={1} position-y={-2.3} animation={animation} />
+          )}
+          {avatarSkin === "Alternative" && (
+            <Alternative scale={1} position-y={-2.3} animation={animation} />
+          )}
         </group>
       </group>
 
