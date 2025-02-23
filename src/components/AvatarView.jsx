@@ -19,7 +19,7 @@ const AvatarView = () => {
   const lastX = useRef(0);
 
   useEffect(() => {
-    console.log(animation);
+   // console.log(animation);
   }, []);
 
   const handleMouseDown = (e) => {
