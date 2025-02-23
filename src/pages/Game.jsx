@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import Loader from '../components/Loader'
 import Island from '../models/Island'
@@ -9,6 +9,7 @@ import Grass from '../models/Grass'
 import { Physics, RigidBody } from '@react-three/rapier';
 import CharacterController from '../components/CharacterController'
 import { Man } from '../models/Man'
+import Achievement from '../components/Achievement'
 
 const Game = () => {
 
@@ -66,6 +67,8 @@ const Game = () => {
           />*/}
 
           <CharacterController />
+
+          <Achievement position={[-35, -1, 16]} />
         </Physics>
       </Canvas>
     </section>
