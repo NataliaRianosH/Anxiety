@@ -5,6 +5,7 @@ import Island from '../models/Island'
 import { Environment, OrbitControls } from '@react-three/drei'
 import Sky from '../models/Sky'
 import Character from '../models/Character'
+import Grass from '../models/Grass'
 import { Physics, RigidBody } from '@react-three/rapier';
 import CharacterController from '../components/CharacterController'
 import { Man } from '../models/Man'
@@ -55,11 +56,14 @@ const Game = () => {
         <Sky />
         {/**<AnimatedWater position={[10, -90, -6]} scale={[30, 20, 30]}  rotation = {[0.7, 0.2, 0]}/>**/}
         <Physics debug gravity={[0, -30, 0]}>
-          <Island
+          <Grass  position={[-38, -70, 16]}
+            scale={300}
+            rotation={islanRotation}/>
+          {/** <Island
             position={islandPosition}
             scale={islandscale}
             rotation={islanRotation}
-          />
+          />*/}
 
           <CharacterController />
         </Physics>
