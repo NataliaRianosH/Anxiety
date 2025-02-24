@@ -95,7 +95,7 @@ const CharacterController = () => {
 
       // Obtener la posición actual del avatar
     const position = rb.current.translation();
-    console.log(`Posición del avatar: x=${position.x}, y=${position.y}, z=${position.z}`);
+    //console.log(`Posición del avatar: x=${position.x}, y=${position.y}, z=${position.z}`);
 
 
       const movement = {

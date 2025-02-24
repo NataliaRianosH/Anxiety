@@ -1,14 +1,14 @@
 import { RigidBody } from "@react-three/rapier";
 import { useState } from "react";
 
-const Achievement = ({ id, position, shape = "box" }) => {
+const Achievement = ({ id, position, geometry, collider }) => {
   const [collected, setCollected] = useState(false);
 
   if (collected) return null; // Si ya se recogió, no lo renderiza
 
   return (
     <RigidBody
-      colliders={shape === "box" ? "cuboid" : "ball"}
+      colliders={ collider}
       type="fixed"
       position={position}
       userData={{ isAchievement: true, id }}
@@ -20,11 +20,7 @@ const Achievement = ({ id, position, shape = "box" }) => {
       }}
     >
       <mesh>
-        {shape === "box" ? (
-          <boxGeometry args={[2, 2, 2]} />
-        ) : (
-          <sphereGeometry args={[1, 32, 32]} />
-        )}
+        {geometry}
         <meshStandardMaterial color="gold" />
       </mesh>
     </RigidBody>
