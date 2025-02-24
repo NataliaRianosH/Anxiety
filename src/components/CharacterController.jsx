@@ -93,6 +93,11 @@ const CharacterController = () => {
     if (rb.current) {
       const vel = rb.current.linvel();
 
+      // Obtener la posición actual del avatar
+    const position = rb.current.translation();
+    console.log(`Posición del avatar: x=${position.x}, y=${position.y}, z=${position.z}`);
+
+
       const movement = {
         x: 0,
         z: 0,

@@ -8,7 +8,7 @@ const Character = ({ animation, ...props }) => {
 
 
   useEffect(() => {
-      console.log(actions);
+      //console.log(actions);
       actions[animation]?.reset().fadeIn(0.24).play();
       return () => actions?.[animation]?.fadeOut(0.24);
       

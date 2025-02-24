@@ -1,34 +1,40 @@
-import React, { Suspense, useState } from 'react'
-import { Canvas } from '@react-three/fiber'
-import Loader from '../components/Loader'
-import Island from '../models/Island'
-import { Environment, OrbitControls } from '@react-three/drei'
-import Sky from '../models/Sky'
-import Character from '../models/Character'
-import Grass from '../models/Grass'
-import { Physics, RigidBody } from '@react-three/rapier';
-import CharacterController from '../components/CharacterController'
-import { Man } from '../models/Man'
-import Achievement from '../components/Achievement'
+import React, { Suspense, useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import Loader from "../components/Loader";
+import Island from "../models/Island";
+import { Environment, OrbitControls } from "@react-three/drei";
+import Sky from "../models/Sky";
+import Character from "../models/Character";
+import Grass from "../models/Grass";
+import { Physics, RigidBody } from "@react-three/rapier";
+import CharacterController from "../components/CharacterController";
+import { Man } from "../models/Man";
+import Achievement from "../components/Achievement";
 
 const Game = () => {
+  const achievementsData = [
+    { id: 1, position: [11, 11, 25], shape: "box" },
+    { id: 2, position: [-3, 7, 48], shape: "sphere" },
+    { id: 3, position: [27, 6, 35], shape: "box" },
+    { id: 4, position: [-38.4, 6, 31.8], shape: "sphere" },
+    { id: 5, position: [-29.7, 7, 20.27], shape: "box" },
 
-  
+  ];
+
   const adjustIslandForScreeSize = () => {
     let screenScale = null;
     let screenPosition = [0, 0, 0];
     let rotation = [0, 20, 0];
     if (window.innerWidth < 768) {
-      screenScale = [0.5, 0.5, 0.5]
+      screenScale = [0.5, 0.5, 0.5];
     } else {
-      screenScale = [0.8, 0.8, 0.8]
-
+      screenScale = [0.8, 0.8, 0.8];
     }
-    return [screenScale, screenPosition, rotation]
-  }
+    return [screenScale, screenPosition, rotation];
+  };
 
-  const [islandscale, islandPosition, islanRotation] = adjustIslandForScreeSize();
-
+  const [islandscale, islandPosition, islanRotation] =
+    adjustIslandForScreeSize();
 
   return (
     <section className="w-full h-screen relative">
@@ -39,20 +45,20 @@ const Game = () => {
         {/** camera={{ position: [0, 0, 10], near: 0.1, far: 1000 }}  **/}
         {/** <OrbitControls enableZoom={true} enablePan={true} />**/}
         {/** Componente de carga**/}
-       
-        <ambientLight intensity={0.3} /> 
-      
+
+        <ambientLight intensity={0.3} />
+
         <directionalLight
-          position={[10, 10, 5]} 
-          intensity={0.8} 
-          color="#ffffff" 
+          position={[10, 10, 5]}
+          intensity={0.8}
+          color="#ffffff"
           castShadow
         />
         {/* Sombras ajustadas */}
         <directionalLight
-          position={[-5, 10, -5]} 
-          intensity={0.6} 
-          color="#ffd8a8" 
+          position={[-5, 10, -5]}
+          intensity={0.6}
+          color="#ffd8a8"
         />
         <Sky />
         {/**<AnimatedWater position={[10, -90, -6]} scale={[30, 20, 30]}  rotation = {[0.7, 0.2, 0]}/>**/}
@@ -68,11 +74,13 @@ const Game = () => {
 
           <CharacterController />
 
-          <Achievement position={[-35, 6, 16]} />
+          {achievementsData.map(({ id, position, shape }) => (
+            <Achievement key={id} id={id} position={position} shape={shape} />
+          ))}
         </Physics>
       </Canvas>
     </section>
   );
-}
+};
 
-export default Game
+export default Game;
