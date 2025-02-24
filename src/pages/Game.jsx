@@ -10,20 +10,12 @@ import { Physics, RigidBody } from "@react-three/rapier";
 import CharacterController from "../components/CharacterController";
 import { Man } from "../models/Man";
 import Achievement from "../components/Achievement";
-import Flowerpot from "../models/Flowerpot";
-import Seashell from "../models/Seashell";
 
+import achievementsData from "./AchivementsData";
 const Game = () => {
 
   //Se puede añadir el rigidbody con su collider directamente en el modelo, pero por ahora para las geometrias se pasa
-  const achievementsData = [
-  { id: 1, position: [-38, -3, 19], geometry: <Flowerpot scale={4}/>, collider: "ball" },
-  { id: 2, position: [-30, -4, 16], geometry: <Seashell scale={1} />, collider: "ball" },
-  { id: 3, position: [-15, 0, 11], geometry: <boxGeometry args={[2, 2, 2]} />, collider: "cuboid" },
-  { id: 4, position: [-6, 1, -3], geometry: <sphereGeometry args={[1, 32, 32]} />, collider: "ball" },
-  { id: 5, position: [-30, 0, -13], geometry: <boxGeometry args={[2, 2, 2]} />, collider: "cuboid" },
-];
-
+ 
   
   {/** const achievementsData = [
     { id: 1, position: [11, 11, 25], shape: "box" },
@@ -90,8 +82,8 @@ const Game = () => {
 
           <CharacterController />
 
-          {achievementsData.map(({ id, position, geometry, collider}) => (
-            <Achievement key={id} id={id} position={position} geometry={geometry} collider={collider} />
+          {achievementsData.map(({ id, position, geometry, collider,  title, description }) => (
+            <Achievement key={id} id={id} position={position} geometry={geometry} collider={collider} title={title} description={description} />
           ))}
         </Physics>
       </Canvas>

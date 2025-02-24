@@ -1,7 +1,7 @@
 import { RigidBody } from "@react-three/rapier";
 import { useState } from "react";
 
-const Achievement = ({ id, position, geometry, collider }) => {
+const Achievement = ({ id, position, geometry, collider, title, description  }) => {
   const [collected, setCollected] = useState(false);
 
   if (collected) return null; // Si ya se recogió, no lo renderiza
@@ -14,7 +14,7 @@ const Achievement = ({ id, position, geometry, collider }) => {
       userData={{ isAchievement: true, id }}
       onCollisionEnter={({ other }) => {
         if (other.rigidBodyObject?.name === "character") {
-          console.log(`El personaje recogió el logro #${id}`);
+          console.log(`El personaje recogió el logro #${id}: ${title}`);
           setCollected(true); // Hace que desaparezca
         }
       }}
