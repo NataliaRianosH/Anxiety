@@ -1,0 +1,86 @@
+/* Modal de logros */
+.achievements-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: left;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 650px; 
+  max-height: 80vh; 
+  overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🏆 Header */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.trophy-icon {
+  color: #ffb100;
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #555;
+}
+
+/* Grid de logros */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 15px;
+  overflow-y: auto; 
+  overflow-x: hidden; 
+  max-height: 55vh; 
+  padding-right: 10px;
+  justify-items: center; 
+}
+
+/* Ajuste para el scroll */
+.achievements-grid::-webkit-scrollbar {
+  width: 5px;
+}
+
+.achievements-grid::-webkit-scrollbar-thumb {
+  background: #ffb100;
+  border-radius: 5px;
+}
+
+.achievements-grid::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}

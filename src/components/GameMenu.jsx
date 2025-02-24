@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "../assets/styles/GameMenu.scss";
 import { FaHome, FaUserCircle, FaMap, FaLock, FaTrophy, FaUserFriends, FaComment, FaVolumeUp, FaQuestionCircle, FaBars } from "react-icons/fa"; // Importamos iconos
+import AchievementsModal from "./AchievementsModal";
 
 const GameMenu = () => {
   const { user } = useAuth();
   const nivel = 42;
   const progreso = 70;
+
+  const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
+
 
   return (
     <nav className="game-menu">
@@ -31,7 +35,7 @@ const GameMenu = () => {
       <div className="menu-center">
         <FaMap className="icon" />
          {/* <FaLock className="icon" />*/}
-        <button className="achievements-button">
+         <button className="achievements-button" onClick={() => setIsAchievementsOpen(true)}>
           <FaTrophy className="icon" /> Logros
         </button>
          {/*<FaUserFriends className="icon" />*/}
@@ -44,6 +48,8 @@ const GameMenu = () => {
         <FaQuestionCircle className="icon" />
         <FaBars className="icon" />
       </div>
+
+      <AchievementsModal isOpen={isAchievementsOpen} onClose={() => setIsAchievementsOpen(false)} />
     </nav>
   );
 };
