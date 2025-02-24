@@ -4,7 +4,7 @@ import Seashell from "../models/Seashell";
 const achievementsData = [
   { 
     id: 1, 
-    position: [-29.7, 8, 20.27], 
+    position: [-38, -3, 19], 
     geometry: <Flowerpot scale={4} />, 
     collider: "ball",
     title: "Jardín de la Serenidad", 
@@ -12,7 +12,7 @@ const achievementsData = [
   },
   { 
     id: 2, 
-    position: [-38.4, 5,  31.8], 
+    position: [-30, -4, 16], 
     geometry: <Seashell scale={1} />, 
     collider: "ball",
     title: "Eco Tranquilo", 
@@ -20,7 +20,7 @@ const achievementsData = [
   },
   { 
     id: 3, 
-    position: [27, 6, 35], 
+    position: [-15, 0, 11], 
     geometry: <boxGeometry args={[2, 2, 2]} />, 
     collider: "cuboid",
     title: "Caja de los Pensamientos", 
@@ -28,7 +28,7 @@ const achievementsData = [
   },
   { 
     id: 4, 
-    position: [-3, 7, 48], 
+    position: [-6, 1, -3], 
     geometry: <sphereGeometry args={[1, 32, 32]} />, 
     collider: "ball",
     title: "Esfera del Control", 
@@ -36,7 +36,7 @@ const achievementsData = [
   },
   { 
     id: 5, 
-    position: [11, 11, 25], 
+    position: [-30, 0, -13], 
     geometry: <boxGeometry args={[2, 2, 2]} />, 
     collider: "cuboid",
     title: "Cofre del Autoconocimiento", 
