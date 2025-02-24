@@ -12,6 +12,7 @@ import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import { KeyboardControls } from '@react-three/drei';
+import GameView from './pages/GameView';
 
 
 function App() {
@@ -43,7 +44,9 @@ function App() {
     <Route path="/instructions" element={<Instructions />} />
       
       <Route path="/avatar" element={<AvatarSelection />} />
-      <Route path="/game" element={<Game />} />
+      <Route path="/gamee" element={<Game />} />
+      <Route path="/game" element={<GameView />} />
+
       <Route path="/login" element={<Login />} />
       <Route path="/story" element={<Story />} />
       <Route path="/register" element={<Register />} />
