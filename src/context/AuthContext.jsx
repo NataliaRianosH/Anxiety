@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
         setUser(session.user);
-        console.log("Usuario activo al iniciar:", session.user);
+        //console.log("Usuario activo al iniciar:", session.user);
         await verificarOCrearPartida(session.user.id);
       }
       setLoading(false);
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
     // Listener para cambios de sesión (login/logout)
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log("Cambio de sesión detectado:", event);
+      //console.log("Cambio de sesión detectado:", event);
       setUser(session?.user || null);
       if (event === "SIGNED_IN") navigate("/profile"); 
       if (event === "SIGNED_OUT") {
@@ -154,7 +154,7 @@ export const AuthProvider = ({ children }) => {
       }
   
       if (partidaExistente) {
-        console.log("Partida encontrada:", partidaExistente);
+        //console.log("Partida encontrada:", partidaExistente);
         setPartida(partidaExistente);
         return; // 🚨 IMPORTANTE: Detener aquí si ya hay partida
       }else{

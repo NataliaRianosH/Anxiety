@@ -6,8 +6,8 @@ import AchievementsModal from "./AchievementsModal";
 
 const GameMenu = () => {
   const { user } = useAuth();
-  const nivel = 42;
-  const progreso = 70;
+  const nivel = 2;
+  const progreso = 10;
 
   const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
 
@@ -27,7 +27,7 @@ const GameMenu = () => {
               style={{ width: `${progreso}%` }}
             ></div>
           </div>
-          <span className="level">Nivel {nivel}</span>
+          <span className="level">logros {nivel}</span>
         </div>
       </div>
 

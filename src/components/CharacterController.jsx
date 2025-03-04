@@ -165,7 +165,7 @@ const CharacterController = () => {
         vel.y = JUMP_FORCE;
         setAnimation(avatarSkin === "Female" || avatarSkin === "Alternative" ? "Female_Jump" : "HumanArmature|Man_Jump");
 
-        console.log("Jumping");
+        //console.log("Jumping");
       }
 
       rb.current.setLinvel(vel, true);

@@ -69,16 +69,16 @@ const Game = () => {
         />
         <Sky />
         {/**<AnimatedWater position={[10, -90, -6]} scale={[30, 20, 30]}  rotation = {[0.7, 0.2, 0]}/>**/}
-        <Physics debug gravity={[0, -30, 0]}>
-          {/** <Grass  position={[-38, -70, 16]}
+        <Physics gravity={[0, -30, 0]}>
+         <Grass  position={[-38, -70, 16]}
             scale={300}
-            rotation={islanRotation}/>*/}
+            rotation={islanRotation}/>
           
-          <Island
+          {/**  <Island
             position={islandPosition}
             scale={islandscale}
             rotation={islanRotation}
-          />
+          />*/}
 
           <CharacterController />
 
