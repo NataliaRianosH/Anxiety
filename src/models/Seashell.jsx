@@ -14,13 +14,13 @@ export function Seashell(props) {
         geometry={nodes['Node-Mesh'].geometry}
         material={materials.lambert9SG}
       />
-      {/**
+     
       <mesh
         castShadow
         receiveShadow
         geometry={nodes['Node-Mesh_1'].geometry}
         material={materials.lambert10SG}
-      /> */}
+      /> 
     </group>
   )
 }
