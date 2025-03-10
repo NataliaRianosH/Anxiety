@@ -6,7 +6,7 @@ import logroImg from "../assets/images/logro.png";
 
 
 const AchievementCard = ({ achievement, onClick }) => {
-  const { geometry, title, description } = achievement;
+  const { geometry, title, description, found } = achievement;
   const ref = useRef();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -20,7 +20,8 @@ const AchievementCard = ({ achievement, onClick }) => {
   }, []);
 
   return (
-    <div ref={ref} className="achievement-card" onClick={onClick}>
+    <div ref={ref} className={`achievement-card ${found ? "found" : "not-found"}`} onClick={onClick}>
+
       {/*  Solo renderiza el modelo si está visible para optimizar el rendimiento */}
       <div className="image-placeholder">
         {isVisible ? (
@@ -39,8 +40,11 @@ const AchievementCard = ({ achievement, onClick }) => {
       </div>
 
       {/* Título y descripción SIEMPRE visibles */}
-      <h3 className="title">{title}</h3>
-      <p className="description">{description}</p>
+      <h3 className={`${title} ${found ? "found-title" : "not-found-title"}`}>
+  {title}
+</h3>
+
+
     </div>
   );
 };

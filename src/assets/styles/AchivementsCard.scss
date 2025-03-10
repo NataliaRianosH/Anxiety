@@ -1,12 +1,23 @@
 .achievement-card {
-    background: #ffffff; 
-    padding: 15px;
-    border-radius: 10px;
-    text-align: start;
-    width: 170px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    border: 2px solid #ffbe8f; 
+  background: #ffffff; 
+  padding: 15px;
+  border-radius: 10px;
+  text-align: start;
+  width: 170px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid transparent; // por defecto, el borde es transparente
+
+  /* Si el logro ha sido encontrado, mantiene el borde naranja */
+  &.found {
+      border-color: #ffbe8f;
   }
+
+  /* Si el logro NO ha sido encontrado, usa un borde gris oscuro */
+  &.not-found {
+      border-color: #b9b7b7;
+  }
+}
+
   
   .image-placeholder {
     width: 100%;
@@ -27,15 +38,24 @@
   }
   
   
-  .title {
-    color: #ffb100; 
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-  
+  /* Título del logro */
+.title {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* Título si el logro ha sido encontrado */
+.found-title {
+  color: #ffb100;
+}
+
+/* Título si el logro NO ha sido encontrado */
+.not-found-title {
+  color:  #353535;
+}
+
   .description {
     color: #b0b0b0; 
     font-size: 14px;
   }
-  
