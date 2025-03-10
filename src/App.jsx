@@ -12,6 +12,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import { KeyboardControls } from '@react-three/drei';
 import GameView from './pages/GameView';
+import { AchievementsProvider } from './context/AchievementsContext';
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
   
 
   return (
-
+<AchievementsProvider>
      <KeyboardControls map={keyboardMap}>
     <main >
    
@@ -55,7 +56,7 @@ function App() {
   </Router>
   </main>
   </KeyboardControls>
-  
+  </AchievementsProvider>
   )
 }
 

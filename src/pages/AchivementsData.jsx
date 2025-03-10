@@ -9,7 +9,7 @@ const achievementsData = [
     collider: "ball",
     title: "Jardín de la Serenidad", 
     description: "Has encontrado la maceta que simboliza el crecimiento personal y la calma interior.",
-    found: true
+    found: false
   },
   { 
     id: 2, 
@@ -18,7 +18,7 @@ const achievementsData = [
     collider: "ball",
     title: "Eco Tranquilo", 
     description: "Esta caracola resuena con sonidos relajantes, ayudando a calmar la mente en momentos de ansiedad. contiene los susurros de las olas. Escucha atentamente.",
-    found: true
+    found: false
   },
   { 
     id: 3, 
