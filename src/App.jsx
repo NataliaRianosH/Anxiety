@@ -4,7 +4,6 @@ import { AuthProvider } from './context/AuthContext';
 
 import Login from './pages/Login'
 import Story from './pages/Story'
-import Game from './pages/Game'
 import AvatarSelection from './pages/AvatarSelection';
 import Profile from './pages/Profile';
 import Instructions from './pages/Instructions';
@@ -13,6 +12,7 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import { KeyboardControls } from '@react-three/drei';
 import GameView from './pages/GameView';
+import { AchievementsProvider } from './context/AchievementsContext';
 
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
   
 
   return (
-
+<AchievementsProvider>
      <KeyboardControls map={keyboardMap}>
     <main >
    
@@ -44,7 +44,7 @@ function App() {
     <Route path="/instructions" element={<Instructions />} />
       
       <Route path="/avatar" element={<AvatarSelection />} />
-      <Route path="/gamee" element={<Game />} />
+     
       <Route path="/game" element={<GameView />} />
 
       <Route path="/login" element={<Login />} />
@@ -56,7 +56,7 @@ function App() {
   </Router>
   </main>
   </KeyboardControls>
-  
+  </AchievementsProvider>
   )
 }
 

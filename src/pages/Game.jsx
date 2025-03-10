@@ -74,11 +74,11 @@ const Game = () => {
             scale={300}
             rotation={islanRotation}/>
           
-          {/**  <Island
+          <Island
             position={islandPosition}
             scale={islandscale}
             rotation={islanRotation}
-          />*/}
+          />
 
           <CharacterController />
 
