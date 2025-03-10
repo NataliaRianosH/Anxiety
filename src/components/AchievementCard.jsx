@@ -5,7 +5,7 @@ import "../assets/styles/AchivementsCard.scss";
 import logroImg from "../assets/images/logro.png";
 
 
-const AchievementCard = ({ achievement }) => {
+const AchievementCard = ({ achievement, onClick }) => {
   const { geometry, title, description } = achievement;
   const ref = useRef();
   const [isVisible, setIsVisible] = useState(false);
@@ -20,7 +20,7 @@ const AchievementCard = ({ achievement }) => {
   }, []);
 
   return (
-    <div ref={ref} className="achievement-card">
+    <div ref={ref} className="achievement-card" onClick={onClick}>
       {/*  Solo renderiza el modelo si está visible para optimizar el rendimiento */}
       <div className="image-placeholder">
         {isVisible ? (

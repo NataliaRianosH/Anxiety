@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaTrophy } from "react-icons/fa";
 import "../assets/styles/AchievementsModal.scss";
 import AchievementCard from "./AchievementCard";
 import achievementsData from "../pages/AchivementsData";
+import AchievementDetails from "./AchievementDetails";
 
 const AchievementsModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
+  const [selectedAchievement, setSelectedAchievement] = useState(null);
 
   return (
     <div className="achievements-modal">
@@ -17,14 +19,24 @@ const AchievementsModal = ({ isOpen, onClose }) => {
           </div>
           <button className="close-button" onClick={onClose}>✖</button>
         </div>
-        <div className="achievements-grid">
-        {achievementsData.map((achievement) => (
-            <AchievementCard key={achievement.id} achievement={achievement} />
-          ))}
-
-        </div>
-
-
+        {/* Si hay un logro seleccionado, mostrar la vista de detalles */}
+        {selectedAchievement ? (
+          <AchievementDetails
+            achievement={selectedAchievement} 
+            onBack={() => setSelectedAchievement(null)} 
+          />
+        ) : (
+          // Si no hay un logro seleccionado, mostrar todas las tarjetas
+          <div className="achievements-grid">
+            {achievementsData.map((achievement) => (
+              <AchievementCard 
+                key={achievement.id} 
+                achievement={achievement} 
+                onClick={() => setSelectedAchievement(achievement)} 
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -4,7 +4,6 @@ import { AuthProvider } from './context/AuthContext';
 
 import Login from './pages/Login'
 import Story from './pages/Story'
-import Game from './pages/Game'
 import AvatarSelection from './pages/AvatarSelection';
 import Profile from './pages/Profile';
 import Instructions from './pages/Instructions';
@@ -44,8 +43,8 @@ function App() {
     <Route path="/instructions" element={<Instructions />} />
       
       <Route path="/avatar" element={<AvatarSelection />} />
-      <Route path="/game" element={<Game />} />
-      <Route path="/gamee" element={<GameView />} />
+     
+      <Route path="/game" element={<GameView />} />
 
       <Route path="/login" element={<Login />} />
       <Route path="/story" element={<Story />} />

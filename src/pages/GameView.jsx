@@ -6,8 +6,7 @@ const GameView = () => {
   return (
     <div className="game-container">
         <GameMenu />
-     
-      <Game />
+        <Game />
     </div>
   );
 };
