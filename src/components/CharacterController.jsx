@@ -31,7 +31,7 @@ const lerpAngle = (start, end, t) => {
   return normalizeAngle(start + (end - start) * t);
 };
 
-const CharacterController = () => {
+const CharacterController = ( { anxietyAttack }) => {
   const { user, partida } = useAuth();
   const avatarSkin = partida?.avatar_skin || "Female";
 
@@ -110,7 +110,8 @@ const CharacterController = () => {
         movement.z = -1;
       }
 
-      let speed = get().run ? RUN_SPEED : WALK_SPEED;
+      //let speed = get().run ? RUN_SPEED : WALK_SPEED;
+      let speed = anxietyAttack ? WALK_SPEED : (get().run ? RUN_SPEED : WALK_SPEED);
 
       if (isClicking.current) {
         // console.log("clicking", mouse.x, mouse.y);
@@ -118,7 +119,12 @@ const CharacterController = () => {
           movement.x = -mouse.x;
         }
         movement.z = mouse.y + 0.4;
+        {/**
         if (Math.abs(movement.x) > 0.5 || Math.abs(movement.z) > 0.5) {
+          speed = RUN_SPEED;
+        } */}
+
+        if (!anxietyAttack && (Math.abs(movement.x) > 0.5 || Math.abs(movement.z) > 0.5)) {
           speed = RUN_SPEED;
         }
       }

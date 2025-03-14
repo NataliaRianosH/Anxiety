@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import Loader from "../components/Loader";
 import Island from "../models/Island";
@@ -12,7 +12,16 @@ import { Man } from "../models/Man";
 import Achievement from "../components/Achievement";
 
 import achievementsData from "./AchivementsData";
-const Game = () => {
+const Game = ({ anxietyAttack }) => {
+  const audioRef = useRef(new Audio("/sounds/heartbeat.mp3"));
+  useEffect(() => {
+    if (anxietyAttack) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  }, [anxietyAttack]);
 
   //Se puede añadir el rigidbody con su collider directamente en el modelo, pero por ahora para las geometrias se pasa
  
@@ -73,19 +82,20 @@ const Game = () => {
          <Grass  position={[-38, -70, 16]}
             scale={300}
             rotation={islanRotation}/>
-          
+          {/**
           <Island
             position={islandPosition}
             scale={islandscale}
             rotation={islanRotation}
-          />
+          /> */}
 
-          <CharacterController />
+          <CharacterController anxietyAttack={anxietyAttack} />
 
           {achievementsData.map(({ id, position, geometry, collider,  title, description }) => (
             <Achievement key={id} id={id} position={position} geometry={geometry} collider={collider} title={title} description={description} />
           ))}
         </Physics>
+        
       </Canvas>
     </section>
   );
