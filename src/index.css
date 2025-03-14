@@ -204,7 +204,7 @@ section {
 }
 
 canvas {
-  width: 100% !important; /* Asegura que el Canvas ocupe el 100% de su contenedor */
+  width: 100% !important; 
   height: 100% !important; /* Asegura que el Canvas ocupe el 100% de su contenedor */
 }
 .anxiety-overlay {
