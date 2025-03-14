@@ -1,0 +1,96 @@
+.home-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+  }
+  
+  /* Sección izquierda */
+  .menu-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .icon {
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .username {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .progress-container {
+    width: 100px;
+    height: 6px;
+    background: #444;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 3px;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: #ffffff;
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .level {
+    font-size: 12px;
+    color: #ccc;
+    margin-top: 2px;
+  }
+  
+  /* Sección central */
+  .menu-center {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .game-button {
+    background: black;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .game-button:hover {
+    background: #444;
+  }
+  
+  /* Sección derecha */
+  .menu-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    margin-left: auto;
+    padding-right: 40px;
+  }
+  
