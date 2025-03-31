@@ -9,6 +9,7 @@ import { useControls } from "leva";
 import { Man } from "../models/Man";
 import { Alternative } from "../models/Alternative";
 import { useAuth } from "../context/AuthContext";
+import { Female } from "../models/Female";
 
 const normalizeAngle = (angle) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;
@@ -54,7 +55,7 @@ const CharacterController = ( { anxietyAttack }) => {
   const container = useRef();
   const character = useRef();
 
-  const [animation, setAnimation] = useState("Female_Idle");
+  const [animation, setAnimation] = useState("Idle");
 
   const characterRotationTarget = useRef(0);
   const rotationTarget = useRef(0);
@@ -96,7 +97,6 @@ const CharacterController = ( { anxietyAttack }) => {
       // Obtener la posición actual del avatar
     const position = rb.current.translation();
     //console.log(`Posición del avatar: x=${position.x}, y=${position.y}, z=${position.z}`);
-
 
       const movement = {
         x: 0,
@@ -150,15 +150,15 @@ const CharacterController = ( { anxietyAttack }) => {
           speed;
         if (speed === RUN_SPEED) {
 
-          setAnimation(avatarSkin === "Female" || avatarSkin === "Alternative" ? "Female_Run" : "HumanArmature|Man_Run");
+          setAnimation("Running");
 
         
         } else {
-          setAnimation(avatarSkin === "Female" || avatarSkin === "Alternative" ? "Female_Walk" : "HumanArmature|Man_Walk");
+          setAnimation("Walking");
         }
       } else {
         
-        setAnimation(avatarSkin === "Female" || avatarSkin === "Alternative" ? "Female_Idle" : "HumanArmature|Man_Idle");
+        setAnimation("Idle");
 
       }
       character.current.rotation.y = lerpAngle(
@@ -169,7 +169,7 @@ const CharacterController = ( { anxietyAttack }) => {
 
       if (get().jump) {
         vel.y = JUMP_FORCE;
-        setAnimation(avatarSkin === "Female" || avatarSkin === "Alternative" ? "Female_Jump" : "HumanArmature|Man_Jump");
+        setAnimation("Jumping");
 
         //console.log("Jumping");
       }
@@ -185,11 +185,11 @@ const CharacterController = ( { anxietyAttack }) => {
     );
 
     cameraPosition.current.getWorldPosition(cameraWorldPosition.current);
-    camera.position.lerp(cameraWorldPosition.current, 0.1);
+    camera.position.lerp(cameraWorldPosition.current, 0.2);
 
     if (cameraTarget.current) {
       cameraTarget.current.getWorldPosition(cameraLookAtWorldPosition.current);
-      cameraLookAt.current.lerp(cameraLookAtWorldPosition.current, 0.1);
+      cameraLookAt.current.lerp(cameraLookAtWorldPosition.current, 0.2);
 
       camera.lookAt(cameraLookAt.current);
     }
@@ -199,17 +199,17 @@ const CharacterController = ( { anxietyAttack }) => {
     <RigidBody colliders={false} position={[-38, 6, 16]} lockRotations ref={rb} name="character"
     >
       <group ref={container}>
-        <group ref={cameraTarget} position-z={1.5} />
-        <group ref={cameraPosition} position-y={4} position-z={-4} />
+        <group ref={cameraTarget} position-z={0.8} />
+        <group ref={cameraPosition} position-y={1.5} position-z={-2.5} />
         <group ref={character}>
           {avatarSkin === "Female" && (
-            <Character scale={1} position-y={-2.3} animation={animation} />
+            <Female scale={2.5} position-y={-2.3} animation={animation} />
           )}
           {avatarSkin === "Man" && (
-            <Man scale={1} position-y={-2.3} animation={animation} />
+            <Man scale={70} position-y={-2.3} animation={animation} />
           )}
           {avatarSkin === "Alternative" && (
-            <Alternative scale={1} position-y={-2.3} animation={animation} />
+            <Alternative scale={56} position-y={-2.3} animation={animation} />
           )}
         </group>
       </group>

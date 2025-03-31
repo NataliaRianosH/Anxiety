@@ -1,7 +1,7 @@
 
 import React, { useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
-import characterModel from '../assets/preview/Smooth_Female_Alternative.glb'; 
+import characterModel from '../assets/preview/avatars/avataralternative.glb'; 
 import { useEffect } from 'react';
 
 
@@ -19,74 +19,74 @@ export function Alternative({ animation, ...props }) {
 
   return (
     <group ref={group} {...props} dispose={null}>
-      <group name="Scene">
-        <group name="HumanArmature">
-          <group name="Female">
-            <skinnedMesh
-              name="Cylinder006"
-              geometry={nodes.Cylinder006.geometry}
-              material={materials.Skin}
-              skeleton={nodes.Cylinder006.skeleton}
-            />
-            <skinnedMesh
-              name="Cylinder006_1"
-              geometry={nodes.Cylinder006_1.geometry}
-              material={materials.Eyes}
-              skeleton={nodes.Cylinder006_1.skeleton}
-            />
-            <skinnedMesh
-              name="Cylinder006_2"
-              geometry={nodes.Cylinder006_2.geometry}
-              material={materials.Eyebrows}
-              skeleton={nodes.Cylinder006_2.skeleton}
-            />
-            <skinnedMesh
-              name="Cylinder006_3"
-              geometry={nodes.Cylinder006_3.geometry}
-              material={materials.Shirt}
-              skeleton={nodes.Cylinder006_3.skeleton}
-            />
-            <skinnedMesh
-              name="Cylinder006_4"
-              geometry={nodes.Cylinder006_4.geometry}
-              material={materials.Pants}
-              skeleton={nodes.Cylinder006_4.skeleton}
-            />
-            <skinnedMesh
-              name="Cylinder006_5"
-              geometry={nodes.Cylinder006_5.geometry}
-              material={materials.Shoes}
-              skeleton={nodes.Cylinder006_5.skeleton}
-            />
-            <skinnedMesh
-              name="Cylinder006_6"
-              geometry={nodes.Cylinder006_6.geometry}
-              material={materials.HairBase}
-              skeleton={nodes.Cylinder006_6.skeleton}
-            />
-            <skinnedMesh
-              name="Cylinder006_7"
-              geometry={nodes.Cylinder006_7.geometry}
-              material={materials.Jacket}
-              skeleton={nodes.Cylinder006_7.skeleton}
-            />
-            <skinnedMesh
-              name="Cylinder006_8"
-              geometry={nodes.Cylinder006_8.geometry}
-              material={materials.LightJacket}
-              skeleton={nodes.Cylinder006_8.skeleton}
-            />
-            <skinnedMesh
-              name="Cylinder006_9"
-              geometry={nodes.Cylinder006_9.geometry}
-              material={materials.Hair}
-              skeleton={nodes.Cylinder006_9.skeleton}
-            />
-          </group>
-          <primitive object={nodes.Bone} />
-        </group>
+    <group name="Scene">
+      <group name="Armature" rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+        <primitive object={nodes.mixamorigHips} />
+      </group>
+      <group name="Alternative">
+        <skinnedMesh
+          name="Alternative_1"
+          geometry={nodes.Alternative_1.geometry}
+          material={materials.SkinMaterial}
+          skeleton={nodes.Alternative_1.skeleton}
+        />
+        <skinnedMesh
+          name="Alternative_2"
+          geometry={nodes.Alternative_2.geometry}
+          material={materials.EyesMaterial}
+          skeleton={nodes.Alternative_2.skeleton}
+        />
+        <skinnedMesh
+          name="Alternative_3"
+          geometry={nodes.Alternative_3.geometry}
+          material={materials.EyebrowsMaterial}
+          skeleton={nodes.Alternative_3.skeleton}
+        />
+        <skinnedMesh
+          name="Alternative_4"
+          geometry={nodes.Alternative_4.geometry}
+          material={materials.ShirtMaterial}
+          skeleton={nodes.Alternative_4.skeleton}
+        />
+        <skinnedMesh
+          name="Alternative_5"
+          geometry={nodes.Alternative_5.geometry}
+          material={materials.PantsMaterial}
+          skeleton={nodes.Alternative_5.skeleton}
+        />
+        <skinnedMesh
+          name="Alternative_6"
+          geometry={nodes.Alternative_6.geometry}
+          material={materials.ShoesMaterial}
+          skeleton={nodes.Alternative_6.skeleton}
+        />
+        <skinnedMesh
+          name="Alternative_7"
+          geometry={nodes.Alternative_7.geometry}
+          material={materials.HairBaseMaterial}
+          skeleton={nodes.Alternative_7.skeleton}
+        />
+        <skinnedMesh
+          name="Alternative_8"
+          geometry={nodes.Alternative_8.geometry}
+          material={materials.JacketMaterial}
+          skeleton={nodes.Alternative_8.skeleton}
+        />
+        <skinnedMesh
+          name="Alternative_9"
+          geometry={nodes.Alternative_9.geometry}
+          material={materials.LightJacketMaterial}
+          skeleton={nodes.Alternative_9.skeleton}
+        />
+        <skinnedMesh
+          name="Alternative_10"
+          geometry={nodes.Alternative_10.geometry}
+          material={materials.HairMaterial}
+          skeleton={nodes.Alternative_10.skeleton}
+        />
       </group>
     </group>
+  </group>
   )
 }
 

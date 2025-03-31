@@ -42,9 +42,9 @@ const Game = ({ anxietyAttack }) => {
     let screenPosition = [0, 0, 0];
     let rotation = [0, 20, 0];
     if (window.innerWidth < 768) {
-      screenScale = [0.5, 0.5, 0.5];
+      screenScale = [4 ,4 ,4];
     } else {
-      screenScale = [0.8, 0.8, 0.8];
+      screenScale = [4 ,4 ,4];
     }
     return [screenScale, screenPosition, rotation];
   };
@@ -82,13 +82,12 @@ const Game = ({ anxietyAttack }) => {
          <Grass  position={[-38, -70, 16]}
             scale={300}
             rotation={islanRotation}/>
-          {/**
+         
           <Island
             position={islandPosition}
             scale={islandscale}
             rotation={islanRotation}
-          /> */}
-
+          /> 
           <CharacterController anxietyAttack={anxietyAttack} />
 
           {achievementsData.map(({ id, position, geometry, collider,  title, description }) => (
