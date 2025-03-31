@@ -14,10 +14,8 @@ import { useAnxiety } from "../context/AnxietyContext";
 import achievementsData from "./AchivementsData";
 const Game = () => {
   const { anxietyAttack } = useAnxiety();
-
   
   //Se puede añadir el rigidbody con su collider directamente en el modelo, pero por ahora para las geometrias se pasa
- 
   
   {/** const achievementsData = [
     { id: 1, position: [11, 11, 25], shape: "box" },
