@@ -154,11 +154,11 @@ const CharacterController = ( { anxietyAttack }) => {
 
         
         } else {
-          setAnimation("Walking");
+          setAnimation(anxietyAttack ? "Walking_Sad" : "Walking");
         }
       } else {
         
-        setAnimation("Idle");
+        setAnimation(anxietyAttack ? "Idle_Sad" : "Idle");
 
       }
       character.current.rotation.y = lerpAngle(
@@ -167,11 +167,9 @@ const CharacterController = ( { anxietyAttack }) => {
         0.1
       );
 
-      if (get().jump) {
+      if (get().jump && !anxietyAttack) {
         vel.y = JUMP_FORCE;
         setAnimation("Jumping");
-
-        //console.log("Jumping");
       }
 
       rb.current.setLinvel(vel, true);

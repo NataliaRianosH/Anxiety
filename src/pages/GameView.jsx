@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import GameMenu from "../components/GameMenu"; // Asegúrate de tener este componente
 import Game from "./Game"; // Importa el juego
+import { useAnxiety } from "../context/AnxietyContext";
 
 const GameView = () => {
-  const [anxietyAttack, setAnxietyAttack] = useState(false);
+  
 
-  const triggerAnxiety = () => setAnxietyAttack(true);
-  const stopAnxiety = () => setAnxietyAttack(false);
+  const { anxietyAttack, startAnxietyAttack, endAnxietyAttack } = useAnxiety();
+
 
   return (
-    <div className="game-container">
-         <GameMenu onTriggerAnxiety={triggerAnxiety} onStopAnxiety={stopAnxiety} />
-         <Game anxietyAttack={anxietyAttack} />
-         {anxietyAttack && <div className="anxiety-overlay"></div>}
+    <div className={`game-container ${anxietyAttack ? "blurred" : ""}`}>
+      <GameMenu  />
+      <Game />
+      {anxietyAttack && <div className="anxiety-overlay"></div>}
     </div>
   );
 };

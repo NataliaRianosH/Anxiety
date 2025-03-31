@@ -3,12 +3,14 @@ import { useAuth } from "../context/AuthContext";
 import "../assets/styles/GameMenu.scss";
 import { FaHome, FaUserCircle, FaMap, FaLock,FaEye,FaStop , FaTrophy, FaUserFriends, FaComment, FaVolumeUp, FaQuestionCircle, FaBars } from "react-icons/fa"; // Importamos iconos
 import AchievementsModal from "./AchievementsModal";
+import { useAnxiety } from "../context/AnxietyContext";
 
-const GameMenu = ({ onTriggerAnxiety, onStopAnxiety }) => {
+
+const GameMenu = () => {
   const { user } = useAuth();
   const nivel = 2;
   const progreso = 10;
-
+  const { anxietyAttack, startAnxietyAttack, endAnxietyAttack } = useAnxiety();
   const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
 
 
@@ -41,10 +43,10 @@ const GameMenu = ({ onTriggerAnxiety, onStopAnxiety }) => {
          {/*<FaUserFriends className="icon" />*/}
         <FaComment className="icon" />
         
-        <button onClick={onTriggerAnxiety}>
+        <button onClick={startAnxietyAttack}>
           <FaEye className="icon" /> 
         </button>
-        <button className="stop-button" onClick={onStopAnxiety}>
+        <button className="stop-button" onClick={endAnxietyAttack}>
           <FaStop className="icon" /> 
         </button>
       </div>

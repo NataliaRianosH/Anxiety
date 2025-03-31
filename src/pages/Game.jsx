@@ -10,19 +10,12 @@ import { Physics, RigidBody } from "@react-three/rapier";
 import CharacterController from "../components/CharacterController";
 import { Man } from "../models/Man";
 import Achievement from "../components/Achievement";
-
+import { useAnxiety } from "../context/AnxietyContext";
 import achievementsData from "./AchivementsData";
-const Game = ({ anxietyAttack }) => {
-  const audioRef = useRef(new Audio("/sounds/heartbeat.mp3"));
-  useEffect(() => {
-    if (anxietyAttack) {
-      audioRef.current.play();
-    } else {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-    }
-  }, [anxietyAttack]);
+const Game = () => {
+  const { anxietyAttack } = useAnxiety();
 
+  
   //Se puede añadir el rigidbody con su collider directamente en el modelo, pero por ahora para las geometrias se pasa
  
   
@@ -42,9 +35,9 @@ const Game = ({ anxietyAttack }) => {
     let screenPosition = [0, 0, 0];
     let rotation = [0, 20, 0];
     if (window.innerWidth < 768) {
-      screenScale = [4 ,4 ,4];
+      screenScale = [5 ,5 ,5];
     } else {
-      screenScale = [4 ,4 ,4];
+      screenScale = [5.5 ,5.5 ,5.5];
     }
     return [screenScale, screenPosition, rotation];
   };
