@@ -1,0 +1,58 @@
+.anxiety-challenge {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    z-index: 1000;
+  
+    p {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+  
+    .input-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        max-width: 800px; 
+        margin: 0 auto;
+      
+        input {
+          flex: 1;
+          min-width: 0; 
+          padding: 12px;
+          border-radius: 8px;
+          border: none;
+          font-size: 16px;
+        }
+      
+        button {
+          padding: 12px 20px;
+          border-radius: 8px;
+          border: none;
+          background-color: #fff;
+          color: #000;
+          font-weight: bold;
+          cursor: pointer;
+          white-space: nowrap; 
+        }
+      }
+      
+  
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+  
+    .success {
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
+  

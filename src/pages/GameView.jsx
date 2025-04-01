@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import GameMenu from "../components/GameMenu"; // Asegúrate de tener este componente
+import GameMenu from "../components/GameMenu"; 
 import Game from "./Game"; // Importa el juego
 import { useAnxiety } from "../context/AnxietyContext";
+import AnxietyChallenge from "../components/AnxietyChallenge";
+
 
 const GameView = () => {
   
@@ -10,10 +12,12 @@ const GameView = () => {
 
 
   return (
-    <div className={`game-container ${anxietyAttack ? "blurred" : ""}`}>
+    <div className={`game-container ${anxietyAttack ? "blurred" : ""}`}  style={{ position: "relative", overflow: "hidden" }}>
       <GameMenu  />
       <Game />
       {anxietyAttack && <div className="anxiety-overlay"></div>}
+      {anxietyAttack && <AnxietyChallenge onSuccess={() => {}} />}
+
     </div>
   );
 };

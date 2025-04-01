@@ -14,6 +14,7 @@ import { KeyboardControls } from "@react-three/drei";
 import GameView from "./pages/GameView";
 import { AchievementsProvider } from "./context/AchievementsContext";
 import { AnxietyProvider } from "./context/AnxietyContext";
+import TestIA from "./pages/TestIA";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -45,6 +46,8 @@ function App() {
                 <Route path="/avatar" element={<AvatarSelection />} />
 
                 <Route path="/game" element={<GameView />} />
+                <Route path="/ia" element={<TestIA />} />
+
 
                 <Route path="/login" element={<Login />} />
                 <Route path="/story" element={<Story />} />
