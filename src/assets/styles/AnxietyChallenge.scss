@@ -91,4 +91,13 @@
     }
     
   }
+// Estilos solo para el botón del robot (Bot)
+.bot-toggle svg {
+  color: gray;
+}
+
+.bot-toggle.active svg {
+  color: yellow;
+}
+
   

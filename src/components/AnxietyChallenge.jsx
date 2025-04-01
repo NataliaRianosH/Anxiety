@@ -3,54 +3,80 @@ import { X, HelpCircle, Bot } from "lucide-react";
 import "./../assets/styles/AnxietyChallenge.scss";
 import { useAnxiety } from "../context/AnxietyContext";
 import HelpModal from "./modals/HelpModal";
+import { evaluateMessage } from "../utils/evaluateMessage";
 
 const AnxietyChallenge = ({ onSuccess, onCancel }) => {
-  const { endAnxietyAttack } = useAnxiety();
+  const { endAnxietyAttack, completeAnxietyChallenge } = useAnxiety();
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
   const [completed, setCompleted] = useState(false);
-  const [aiEnabled, setAiEnabled] = useState(false); // futuro uso
+  const [aiEnabled, setAiEnabled] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
-  const { completeAnxietyChallenge } = useAnxiety();
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = () => {
+  const validateInput = () => {
     const mensaje = input.trim();
-
     const soloLetrasYEspacios = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
     if (!soloLetrasYEspacios.test(mensaje)) {
-      setError("Solo puedes escribir letras y espacios.");
-      return;
+      return "Solo puedes escribir letras y espacios.";
     }
-
     const palabras = mensaje.split(/\s+/).filter((p) => p.length > 1);
     if (palabras.length < 3) {
-      setError("Escribe al menos tres palabras.");
-      return;
+      return "Escribe al menos tres palabras.";
     }
-
     const repetidas = new Set(palabras.map((p) => p.toLowerCase()));
     if (repetidas.size / palabras.length < 0.5) {
-      setError("Evita repetir muchas veces las mismas palabras.");
-      return;
+      return "Evita repetir muchas veces las mismas palabras.";
     }
-
     const malas = ["feo", "malo", "tonto", "estúpido", "odio"];
     if (palabras.some((p) => malas.includes(p.toLowerCase()))) {
-      setError("No uses palabras negativas u ofensivas.");
+      return "No uses palabras negativas u ofensivas.";
+    }
+    return "";
+  };
+
+  const handleSubmit = async () => {
+    setError("");
+  
+    const basicValidation = validateInput();
+    if (basicValidation) {
+      setError(basicValidation);
       return;
     }
-
-    setCompleted(true);
-    completeAnxietyChallenge(); 
-    onSuccess();
+  
+    if (aiEnabled) {
+      console.log("Evaluando mensaje con IA...");
+      try {
+        setLoading(true);
+        const respuestaIA = await evaluateMessage(input.trim());
+        console.log("IA dice:", respuestaIA);
+        if (respuestaIA.toLowerCase().includes("sí")) {
+          setCompleted(true);
+          completeAnxietyChallenge();
+          onSuccess();
+        } else {
+          setError(respuestaIA);
+        }
+      } catch (err) {
+        setError("Hubo un error al evaluar con la IA.");
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      console.log("Evaluación normal sin IA.");
+      setCompleted(true);
+      completeAnxietyChallenge();
+      onSuccess();
+    }
   };
+  
 
   const handleCancel = () => {
     const confirmExit = window.confirm(
       "¿Seguro que deseas salir del minijuego?, no obtendrás ninguna recompensa."
     );
     if (confirmExit) {
-      endAnxietyAttack(); // Termina el ataque
+      endAnxietyAttack();
     }
   };
 
@@ -65,9 +91,14 @@ const AnxietyChallenge = ({ onSuccess, onCancel }) => {
           <HelpCircle size={20} />
         </button>
 
-        <button className="icon-btn" disabled>
-          <Bot size={20} />
-        </button>
+        <button
+  className={`icon-btn bot-toggle ${aiEnabled ? "active" : ""}`}
+  onClick={() => setAiEnabled(!aiEnabled)}
+  title="Evaluar con IA"
+>
+  <Bot size={20} />
+</button>
+
       </div>
 
       {!completed ? (
@@ -81,8 +112,11 @@ const AnxietyChallenge = ({ onSuccess, onCancel }) => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Escribe tu mensaje positivo..."
+              disabled={loading}
             />
-            <button onClick={handleSubmit}>Enviar</button>
+            <button onClick={handleSubmit} disabled={loading}>
+              {loading ? "Evaluando..." : "Enviar"}
+            </button>
           </div>
           {error && <p className="error">{error}</p>}
         </>
@@ -91,6 +125,7 @@ const AnxietyChallenge = ({ onSuccess, onCancel }) => {
           ¡Buen trabajo! Has escrito un mensaje positivo.
         </p>
       )}
+
       {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
     </div>
   );
