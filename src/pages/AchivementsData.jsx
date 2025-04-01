@@ -4,10 +4,10 @@ import Seashell from "../models/Seashell";
 const achievementsData = [
   { 
     id: 1, 
-    position: [-29.7, 8, 20.27], 
+    position: [-12.89801, 4.850044250488281, 29.73915863037109], 
     geometry: <Flowerpot scale={4} />, 
     collider: "ball",
-    title: "Jardín de la Serenidad", 
+    title: "Pensamientos positivos", 
     description: "Has encontrado la maceta que simboliza el crecimiento personal y la calma interior.",
     found: false
   },
@@ -136,7 +136,16 @@ const achievementsData = [
     title: "Raíz del Enfoque", 
     description: "Concéntrate en el presente y permite que tus pensamientos crezcan en la dirección correcta.",
     found: false
-  }
+  },
+  { 
+    id: 16, 
+    position: [-29.7, 8, 20.27], 
+    geometry: <Flowerpot scale={4} />, 
+    collider: "ball",
+    title: "Jardín de la Serenidad", 
+    description: "Has encontrado la maceta que simboliza el crecimiento personal y la calma interior.",
+    found: false
+  },
 ];
 
 export default achievementsData;

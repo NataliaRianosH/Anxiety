@@ -11,6 +11,7 @@ const AnxietyChallenge = ({ onSuccess, onCancel }) => {
   const [completed, setCompleted] = useState(false);
   const [aiEnabled, setAiEnabled] = useState(false); // futuro uso
   const [showHelp, setShowHelp] = useState(false);
+  const { completeAnxietyChallenge } = useAnxiety();
 
   const handleSubmit = () => {
     const mensaje = input.trim();
@@ -40,6 +41,7 @@ const AnxietyChallenge = ({ onSuccess, onCancel }) => {
     }
 
     setCompleted(true);
+    completeAnxietyChallenge(); 
     onSuccess();
   };
 
@@ -60,8 +62,8 @@ const AnxietyChallenge = ({ onSuccess, onCancel }) => {
         </button>
 
         <button className="icon-btn" onClick={() => setShowHelp(true)}>
-  <HelpCircle size={20} />
-</button>
+          <HelpCircle size={20} />
+        </button>
 
         <button className="icon-btn" disabled>
           <Bot size={20} />
@@ -86,11 +88,10 @@ const AnxietyChallenge = ({ onSuccess, onCancel }) => {
         </>
       ) : (
         <p className="success">
-          ¡Buen trabajo! Has logrado calmarte con un mensaje positivo.
+          ¡Buen trabajo! Has escrito un mensaje positivo.
         </p>
       )}
       {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
-
     </div>
   );
 };
