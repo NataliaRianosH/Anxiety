@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import "./../assets/styles/AnxietyChallenge.scss";  
+import { X, HelpCircle, Bot } from "lucide-react";
+import "./../assets/styles/AnxietyChallenge.scss";
+import { useAnxiety } from "../context/AnxietyContext";
+import HelpModal from "./modals/HelpModal";
 
-const AnxietyChallenge = ({ onSuccess }) => {
+const AnxietyChallenge = ({ onSuccess, onCancel }) => {
+  const { endAnxietyAttack } = useAnxiety();
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
   const [completed, setCompleted] = useState(false);
+  const [aiEnabled, setAiEnabled] = useState(false); // futuro uso
+  const [showHelp, setShowHelp] = useState(false);
 
   const handleSubmit = () => {
     const mensaje = input.trim();
@@ -15,38 +21,60 @@ const AnxietyChallenge = ({ onSuccess }) => {
       return;
     }
 
-    const palabras = mensaje.split(/\s+/).filter(p => p.length > 1);
+    const palabras = mensaje.split(/\s+/).filter((p) => p.length > 1);
     if (palabras.length < 3) {
       setError("Escribe al menos tres palabras.");
       return;
     }
 
-    const repetidas = new Set(palabras.map(p => p.toLowerCase()));
+    const repetidas = new Set(palabras.map((p) => p.toLowerCase()));
     if (repetidas.size / palabras.length < 0.5) {
       setError("Evita repetir muchas veces las mismas palabras.");
       return;
     }
 
     const malas = ["feo", "malo", "tonto", "estúpido", "odio"];
-    const contieneMala = palabras.some(p => malas.includes(p.toLowerCase()));
-    if (contieneMala) {
+    if (palabras.some((p) => malas.includes(p.toLowerCase()))) {
       setError("No uses palabras negativas u ofensivas.");
       return;
     }
 
     setCompleted(true);
-    onSuccess(); // Aquí luego marcarás el logro como completado
+    onSuccess();
+  };
+
+  const handleCancel = () => {
+    const confirmExit = window.confirm(
+      "¿Seguro que deseas salir del minijuego?, no obtendrás ninguna recompensa."
+    );
+    if (confirmExit) {
+      endAnxietyAttack(); // Termina el ataque
+    }
   };
 
   return (
     <div className="anxiety-challenge">
+      <div className="top-buttons">
+        <button onClick={handleCancel} className="icon-btn">
+          <X size={20} />
+        </button>
+
+        <button className="icon-btn" onClick={() => setShowHelp(true)}>
+  <HelpCircle size={20} />
+</button>
+
+        <button className="icon-btn" disabled>
+          <Bot size={20} />
+        </button>
+      </div>
+
       {!completed ? (
         <>
           <p>
             Estás atravesando un momento de ansiedad. Respira hondo y escribe un
             mensaje positivo para tu avatar.
           </p>
-          <div className="input-wrapper"> {/* ¡Este contenedor es CLAVE! */}
+          <div className="input-wrapper">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -57,11 +85,14 @@ const AnxietyChallenge = ({ onSuccess }) => {
           {error && <p className="error">{error}</p>}
         </>
       ) : (
-        <p className="success">¡Buen trabajo! Has logrado calmarte con un mensaje positivo.</p>
+        <p className="success">
+          ¡Buen trabajo! Has logrado calmarte con un mensaje positivo.
+        </p>
       )}
+      {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
+
     </div>
   );
-  
 };
 
 export default AnxietyChallenge;

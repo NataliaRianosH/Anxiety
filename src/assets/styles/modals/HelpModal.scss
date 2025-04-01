@@ -1,0 +1,71 @@
+.help-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .help-modal {
+    background: white;
+    color: #1a1a1a; // <-- AQUI ESTÁ EL CAMBIO CLAVE
+  
+    border-radius: 12px;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+  
+    h2 {
+      margin-top: 0;
+      font-size: 22px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  
+    p {
+      color: #1a1a1a; // <-- Asegura que <p> no herede blanco
+      margin-bottom: 10px;
+    }
+  
+    ul {
+      padding-left: 20px;
+      margin: 10px 0;
+    }
+  
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+  
+  .modal-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  
+    .icon-btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: #333;
+      transition: transform 0.2s;
+  
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+  
+  
