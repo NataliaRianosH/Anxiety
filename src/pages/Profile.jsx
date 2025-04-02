@@ -1,16 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { supabase } from "../supabase/client"; // Asegúrate de importar Supabase
 import "../assets/styles/Profile.scss";
 import AvatarView from "../components/AvatarView";
 import HomeMenu from "../components/HomeMenu";
+import { useState } from "react";
 
 const Profile = () => {
   const { user, logout, partida, reiniciarPartida } = useAuth();
   const navigate = useNavigate();
+  const [avatarSeleccionado, setAvatarSeleccionado] = useState(
+    partida?.avatar_skin || "Man"
+  );
+  const { actualizarSkinAvatar } = useAuth();
 
   const handleReiniciarPartida = async () => {
-    const confirmacion = window.confirm("⚠️ ¿Seguro que quieres reiniciar la partida? Perderás todo tu progreso.");
+    const confirmacion = window.confirm(
+      " ¿Seguro que quieres reiniciar la partida? Perderás todo tu progreso."
+    );
     if (confirmacion) {
       const result = await reiniciarPartida();
       if (result.success) {
@@ -22,8 +28,12 @@ const Profile = () => {
   };
 
   // Verificar si el usuario tiene un avatar válido (no vacío ni "default")
-  const avatarIncompleto = !partida || !partida.avatar_name || !partida.avatar_skin ||
-    partida.avatar_name === "default" || partida.avatar_skin === "default";
+  const avatarIncompleto =
+    !partida ||
+    !partida.avatar_name ||
+    !partida.avatar_skin ||
+    partida.avatar_name === "default" ||
+    partida.avatar_skin === "default";
 
   // Función para iniciar una nueva partida o reiniciar una existente
   const iniciarPartida = async () => {
@@ -36,7 +46,7 @@ const Profile = () => {
       const { error } = await supabase
         .from("Partida")
         .update({
-          estado: true
+          estado: true,
         })
         .eq("user_id", user.id);
 
@@ -60,13 +70,31 @@ const Profile = () => {
     <div className="profile-page">
       <HomeMenu />
       <div className="wrapper-profile">
-          <div className="avatar-section">
-            <AvatarView avatarSkin={partida?.avatar_skin} />
-            <button className="avatar-button" onClick={() => navigate("/avatar")}>
-              {avatarIncompleto ? "Crear Avatar" : "Cambiar Avatar"}
-            </button>
-          </div>
-    </div>
+        <div className="avatar-section">
+          <AvatarView
+            avatarSkin={partida?.avatar_skin}
+            onAvatarChange={(skin) => setAvatarSeleccionado(skin)}
+          />
+          <button
+            className="avatar-button"
+            disabled={avatarSeleccionado === partida?.avatar_skin}
+            onClick={async () => {
+              const confirmacion = window.confirm("¿Deseas cambiar tu avatar?");
+              if (!confirmacion) return;
+            
+              const result = await actualizarSkinAvatar(avatarSeleccionado);
+            
+              if (result.success) {
+                alert("¡Skin del avatar actualizada correctamente!");
+              } else {
+                alert("Error al actualizar: " + result.error);
+              }
+            }}
+          >
+            Seleccionar Avatar
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

@@ -52,11 +52,35 @@
     cursor: pointer;
 }
 
-
+.avatar-button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+  }
+  
 h1{
     font-size: 40px;
     text-align: center;
 }
 
-
+.arrow-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+  
+    &.left {
+      left: 10px;
+    }
+  
+    &.right {
+      right: 10px;
+    }
+  }
+  
 

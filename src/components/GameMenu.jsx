@@ -42,13 +42,13 @@ const GameMenu = () => {
         </button>
          {/*<FaUserFriends className="icon" />*/}
         <FaComment className="icon" />
-        
+          {/* PARA PROBAR EL MINIJUEGO DE ANSIEDAD
         <button onClick={startAnxietyAttack}>
           <FaEye className="icon" /> 
         </button>
         <button className="stop-button" onClick={endAnxietyAttack}>
           <FaStop className="icon" /> 
-        </button>
+        </button> */}
       </div>
 
       {/* Sección derecha */}
