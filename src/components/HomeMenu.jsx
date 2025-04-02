@@ -44,7 +44,7 @@ const HomeMenu = () => {
       <div className="menu-left">
         <FaUserCircle className="icon user-icon" onClick={toggleSidebar} title="Abrir menú"/>
         <div className="user-details">
-          <span className="username">{user?.name || "Jugador123"}</span>
+          <span className="username">{user?.user_metadata?.full_name || "Jugador12"}</span>
           <div className="progress-container">
           <div
               className="progress-fill"

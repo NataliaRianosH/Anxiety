@@ -22,7 +22,7 @@ const GameMenu = () => {
         <div className="divider"></div>
         <FaUserCircle className="icon user-icon" />
         <div className="user-details">
-          <span className="username">{user?.name || "Jugador123"}</span>
+          <span className="username">{user?.user_metadata?.full_name || "Jugador"}</span>
           <div className="progress-container">
             <div
               className="progress-fill"

@@ -246,6 +246,36 @@ export const AuthProvider = ({ children }) => {
     }
   };
   
+  const actualizarNombreAvatar = async (nuevoNombre) => {
+    if (!user || !partida) return { success: false, error: "No hay sesión activa o partida." };
+  
+    try {
+      const { error } = await supabase
+        .from("Partida")
+        .update({ avatar_name: nuevoNombre })
+        .eq("user_id", user.id);
+  
+      if (error) {
+        console.error("Error al actualizar nombre del avatar:", error.message);
+        return { success: false, error: error.message };
+      }
+  
+     
+      setPartida((prev) => ({
+        ...prev,
+        avatar_name: nuevoNombre,
+      }));
+  
+      console.log("Nombre del avatar actualizado a:", nuevoNombre);
+      return { success: true };
+    } catch (err) {
+      console.error("Error al actualizar nombre:", err);
+      return { success: false, error: err.message };
+    }
+  };
+
+
+
 
   const reiniciarPartida = async () => {
     if (!user || !partida) return { success: false, error: "No se encontró la partida" };
@@ -287,7 +317,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider value={{ 
       user, partida, login, loginWithGoogle, logout, loading, 
      register, resetPassword, updatePassword, guardarAvatar,
-     reiniciarPartida, actualizarSkinAvatar  }}>
+     reiniciarPartida, actualizarSkinAvatar,actualizarNombreAvatar  }}>
       {!loading && children}
     </AuthContext.Provider>
   );
