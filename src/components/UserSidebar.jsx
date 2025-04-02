@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { FaUserCircle, FaUser, FaCog, FaTrophy } from "react-icons/fa";
 import "../assets/styles/UserSidebar.scss";
+import InfoTab from "./UserTabs/InfoTab";
+import SecurityTab from "./UserTabs/SecurityTab";
+import StatsTab from "./UserTabs/StatsTab";
+
 
 const UserSidebar = ({ isOpen, closeSidebar }) => {
   const { user } = useAuth();
@@ -46,7 +50,12 @@ const UserSidebar = ({ isOpen, closeSidebar }) => {
           </button>
         </div>
 
-        <div className="sidebar-content-placeholder">EL CONTENIDO</div>
+        {/* Contenido */}
+        <div>
+          {activeTab === "informacion" && <InfoTab />}
+          {activeTab === "seguridad" && <SecurityTab />}
+          {activeTab === "estadisticas" && <StatsTab />}
+        </div>
       </div>
       <div className="sidebar-divider"></div>
       {/* Botón cerrar sesión */}

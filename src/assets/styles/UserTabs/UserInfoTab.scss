@@ -1,0 +1,65 @@
+.info-card {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 16px 20px;
+    box-shadow: 0 0 0 1px #eee;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+  }
+  
+  .label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .value {
+    color: #444;
+  }
+  
+  .progress-bar-container {
+    background-color: #f1f1f1;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    background-color: #76c7c0;
+    transition: width 0.3s ease;
+  }
+  
+  .edit-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+  
+  .edit-button {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .edit-button:hover {
+    background-color: #f7f7f7;
+  }
+  

@@ -1,0 +1,48 @@
+.stats-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 0 1px #eee;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .stats-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .label {
+    color: #555;
+  }
+  
+  .value {
+    font-weight: 500;
+  }
+  
+  .progress-bar {
+    height: 8px;
+    background-color: #f0f0f0;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background-color: #999;
+    border-radius: 6px 0 0 6px;
+    transition: width 0.3s ease;
+  }
+  

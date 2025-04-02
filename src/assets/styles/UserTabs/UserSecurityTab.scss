@@ -1,0 +1,77 @@
+.security-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 0 1px #eee;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+  }
+  
+  .security-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+    }
+  
+    input {
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+  
+  .input-with-icon {
+    position: relative;
+  
+    input {
+      width: 100%;
+      padding-right: 34px;
+    }
+  
+    .toggle-visibility {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #888;
+      font-size: 14px;
+    }
+  }
+  
+  .update-button {
+    margin-top: 12px;
+    padding: 10px;
+    background-color: #111;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s ease;
+  
+    &:hover {
+      background-color: #222;
+    }
+  }
+  
