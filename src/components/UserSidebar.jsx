@@ -1,30 +1,35 @@
 import React from "react";
-import { useAuth } from "../context/AuthContext"; // ✅ Importamos el contexto
+import { useAuth } from "../context/AuthContext";
+import { FaUserCircle } from "react-icons/fa";
 import "../assets/styles/UserSidebar.scss";
 
 const UserSidebar = ({ isOpen, closeSidebar }) => {
-  const { user, partida } = useAuth(); // ✅ Extraemos la info del usuario desde el contexto
+  const { user } = useAuth();
 
   return (
     <div className={`user-sidebar ${isOpen ? "open" : ""}`}>
+      {/* Botón cerrar */}
       <button className="close-btn" onClick={closeSidebar}>✖</button>
-      
-      {/* ✅ Información del usuario */}
-      <div className="user-info">
-        <h2>{user?.user_metadata?.full_name || "Jugador"}</h2>
-        <p><strong>Email:</strong> {user?.email}</p>
-        
-        {/* ✅ Mostrar información del avatar si existe */}
-        {partida ? (
-          <>
-            <p><strong>Avatar:</strong> {partida.avatar_name}</p>
-            <p><strong>Skin:</strong> {partida.avatar_skin}</p>
-            <p><strong>Progreso:</strong> {partida.progreso || 0}%</p>
-          </>
-        ) : (
-          <p>No tienes una partida activa.</p>
-        )}
+
+      {/* Sección superior */}
+      <div className="sidebar-header">
+        <h2 className="sidebar-title">Perfil de Usuario</h2>
+        <div className="avatar-icon">
+          <FaUserCircle size={80} />
+        </div>
+        <h3 className="username">{user?.user_metadata?.full_name || "Jugador"}</h3>
       </div>
+
+      {/* Sección central (menú + contenido) */}
+      <div className="sidebar-middle">
+        <div className="sidebar-menu-placeholder">IRÁ EL MENÚ</div>
+        <div className="sidebar-content-placeholder">EL CONTENIDO</div>
+      </div>
+      <div className="sidebar-divider"></div>
+      {/* Botón cerrar sesión */}
+      <button className="logout-button">
+        <span>↪</span> Cerrar Sesión
+      </button>
     </div>
   );
 };
