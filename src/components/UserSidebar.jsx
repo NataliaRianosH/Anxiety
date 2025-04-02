@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle, FaUser, FaCog, FaTrophy } from "react-icons/fa";
 import "../assets/styles/UserSidebar.scss";
 
 const UserSidebar = ({ isOpen, closeSidebar }) => {
   const { user } = useAuth();
+  const [activeTab, setActiveTab] = useState("informacion");
 
   return (
     <div className={`user-sidebar ${isOpen ? "open" : ""}`}>
@@ -22,7 +23,29 @@ const UserSidebar = ({ isOpen, closeSidebar }) => {
 
       {/* Sección central (menú + contenido) */}
       <div className="sidebar-middle">
-        <div className="sidebar-menu-placeholder">IRÁ EL MENÚ</div>
+
+         {/* Menú de pestañas */}
+        <div className="sidebar-tabs">
+          <button
+            className={`tab-btn ${activeTab === "informacion" ? "active" : ""}`}
+            onClick={() => setActiveTab("informacion")}
+          >
+            <FaUser className="tab-icon" /> Información
+          </button>
+          <button
+            className={`tab-btn ${activeTab === "seguridad" ? "active" : ""}`}
+            onClick={() => setActiveTab("seguridad")}
+          >
+            <FaCog className="tab-icon" /> Seguridad
+          </button>
+          <button
+            className={`tab-btn ${activeTab === "estadisticas" ? "active" : ""}`}
+            onClick={() => setActiveTab("estadisticas")}
+          >
+            <FaTrophy className="tab-icon" /> Estadísticas
+          </button>
+        </div>
+
         <div className="sidebar-content-placeholder">EL CONTENIDO</div>
       </div>
       <div className="sidebar-divider"></div>

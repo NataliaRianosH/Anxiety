@@ -65,6 +65,8 @@
   gap: 15px;
 }
 
+
+
 .sidebar-menu-placeholder,
 .sidebar-content-placeholder {
   width: 100%;
@@ -74,6 +76,46 @@
   padding: 12px 10px;
   border-radius: 4px;
   box-sizing: border-box;
+}
+.sidebar-tabs {
+  display: flex;
+  width: 100%;
+  max-width: 100%; 
+  gap: 10px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  flex-wrap: nowrap; 
+  overflow: hidden; 
+}
+
+
+.tab-btn {
+  flex: 1 1 0;
+  min-width: 0; 
+  max-width: 100%; 
+  background-color: #f5f5f5;
+  border: none;
+  padding: 6px;
+  font-size: 14px; 
+  border-radius: 6px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #888;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  box-sizing: border-box;
+}
+.tab-btn.active {
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0 0 0 1px #ccc;
+}
+
+.tab-icon {
+  font-size: 16px;
 }
 
 .sidebar-content-placeholder {
