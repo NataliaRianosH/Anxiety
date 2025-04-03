@@ -58,7 +58,7 @@ const HomeMenu = () => {
 
       {/* Sección central */}
       <div className="menu-center">
-        <FaRedo className="icon" onClick={handleReiniciarPartida} title="Reiniciar Partida" />
+        {/**<FaRedo className="icon" onClick={handleReiniciarPartida} title="Reiniciar Partida" />*/}
         <button className="game-button" onClick={() => navigate("/game")}>
           Continuar Partida
         </button>

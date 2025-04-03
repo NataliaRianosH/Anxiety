@@ -194,7 +194,7 @@ const CharacterController = ( { anxietyAttack }) => {
   });
 
   return (
-    <RigidBody colliders={false} position={[-38, 6, 16]} lockRotations ref={rb} name="character"
+    <RigidBody colliders={false} position={[-18, 10, 16]} lockRotations ref={rb} name="character"
     >
       <group ref={container}>
         <group ref={cameraTarget} position-z={0.8} />

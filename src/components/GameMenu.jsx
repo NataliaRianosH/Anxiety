@@ -4,6 +4,7 @@ import "../assets/styles/GameMenu.scss";
 import { FaHome, FaUserCircle, FaMap, FaLock,FaEye,FaStop , FaTrophy, FaUserFriends, FaComment, FaVolumeUp, FaQuestionCircle, FaBars } from "react-icons/fa"; // Importamos iconos
 import AchievementsModal from "./AchievementsModal";
 import { useAnxiety } from "../context/AnxietyContext";
+import { useNavigate } from "react-router-dom";
 
 
 const GameMenu = () => {
@@ -12,13 +13,14 @@ const GameMenu = () => {
   const progreso = 10;
   const { anxietyAttack, startAnxietyAttack, endAnxietyAttack } = useAnxiety();
   const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
+   const navigate = useNavigate();
 
 
   return (
     <nav className="game-menu">
       {/* Sección izquierda */}
       <div className="menu-left">
-        <FaHome className="icon home-icon" />
+        <FaHome className="icon home-icon" onClick={() => navigate("/profile")} />
         <div className="divider"></div>
         <FaUserCircle className="icon user-icon" />
         <div className="user-details">
