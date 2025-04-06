@@ -166,7 +166,7 @@ export const AuthProvider = ({ children }) => {
       .insert([
         {
           user_id: userId,
-          avatar_name: "Female",
+          avatar_name: "Avatar1",
           avatar_skin: "default",
           veces_jugadas: 0,
           estado: false,

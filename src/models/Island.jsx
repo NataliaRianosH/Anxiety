@@ -13,7 +13,7 @@ import islandScene from '../assets/preview/Achivements/island.glb'
 import { RigidBody } from '@react-three/rapier';
 
 
-const Island = (props) => {
+const Island = (props) => { 
 const islandRef = useRef();
   const { nodes, materials } = useGLTF(islandScene);
   return (

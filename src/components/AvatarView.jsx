@@ -1,21 +1,19 @@
 import React, { useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import Character from "../models/Character";
-import Man from "../models/Man";
-import Alternative from "../models/Alternative";
 import { useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
+import { Avatar1 } from "../models/Avatars/Avatar1";
+import { Avatar2 } from "../models/Avatars/Avatar2";
+import { Avatar3 } from "../models/Avatars/Avatar3";
 
 const AvatarView = ({ avatarSkin, onAvatarChange }) => {
   const avatarRef = useRef();
   const [rotationY, setRotationY] = useState(0);
 
-  const [animation, setAnimation] = useState(
-    avatarSkin === "Female" ? "Female_Idle" : "Idle"
-  );
+  const [animation, setAnimation] = useState( "Idle");
 
-  const avatarOptions = ["Female", "Alternative", "Man"];
+  const avatarOptions = ["Avatar1", "Avatar2", "Avatar3"];
 
   // buscamos el índice del avatar actual del usuario
   const initialIndex = avatarOptions.indexOf(avatarSkin);
@@ -28,6 +26,7 @@ const AvatarView = ({ avatarSkin, onAvatarChange }) => {
 
   useEffect(() => {
     // console.log(animation);
+
     console.log("el avatar del jugador es", avatarSkin);
     console.log(currentIndex);
     if (onAvatarChange) {
@@ -56,24 +55,15 @@ const AvatarView = ({ avatarSkin, onAvatarChange }) => {
   //el error q se provoca en las animaciones se resuelve cuando los modelos tengan las animaciones correspondfientes
   const handleClick = () => {
     console.log("Avatar clicked", avatarSkin);
-
-    if (currentIndex === 0) {
-      setAnimation("Female_Jump");
-    } else {
-      console.log("Avatar clicked Greeting,");
-      setAnimation("Greeting");
-    }
+      setAnimation("Jumping");
+ 
 
     setTimeout(
       () => {
-        console.log(
-          "Avatar clicked idle",
-          currentIndex === 0 ? "Female_Idle" : "Idle"
-        );
-
-        setAnimation(currentIndex === 0 ? "Female_Idle" : "Idle");
+    
+        setAnimation( "Idle");
       },
-      currentIndex === 0 ? 1000 : 3000
+       2000 
     );
   };
 
@@ -110,24 +100,25 @@ const AvatarView = ({ avatarSkin, onAvatarChange }) => {
         <spotLight position={[0, 10, 0]} angle={0.15} intensity={1} />
 
         <group ref={avatarRef}>
-          {avatarOptions[currentIndex] === "Female" && (
-            <Character
+          {avatarOptions[currentIndex] === "Avatar1" && (
+            <Avatar1
+              animation={animation}
+              scale={3}
+              position={[0, -2.6, -3.5]}
+              rotation={[0.2, rotationY, 0]}
+            />
+          )}
+          {avatarOptions[currentIndex] === "Avatar2" && (
+            <Avatar2
+              scale={3}
               animation={animation}
               position={[0, -2.6, -3.5]}
               rotation={[0.2, rotationY, 0]}
             />
           )}
-          {avatarOptions[currentIndex] === "Alternative" && (
-            <Alternative
-              scale={83}
-              animation={animation}
-              position={[0, -2.6, -3.5]}
-              rotation={[0.2, rotationY, 0]}
-            />
-          )}
-          {avatarOptions[currentIndex] === "Man" && (
-            <Man
-              scale={98}
+          {avatarOptions[currentIndex] === "Avatar3" && (
+            <Avatar3
+              scale={3}
               animation={animation}
               position={[0, -2.6, -3.5]}
               rotation={[0.2, rotationY, 0]}

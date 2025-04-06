@@ -8,7 +8,7 @@ export const evaluateMessage = async (message) => {
         Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo", // o "gpt-4o-mini" si prefieres
+        model: "gpt-3.5-turbo", // o "gpt-4o-mini" 
         messages: [
           {
             role: "system",

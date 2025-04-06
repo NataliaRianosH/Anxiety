@@ -1,15 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { CapsuleCollider, RigidBody } from "@react-three/rapier";
 import { useFrame } from "@react-three/fiber";
-import Character from "../models/Character";
 import { MathUtils, Vector3 } from "three";
 import { degToRad } from "three/src/math/MathUtils.js";
 import { MapControls, useKeyboardControls } from "@react-three/drei";
 import { useControls } from "leva";
-import { Man } from "../models/Man";
-import { Alternative } from "../models/Alternative";
 import { useAuth } from "../context/AuthContext";
-import { Female } from "../models/Female";
+import { Avatar1 } from "../models/Avatars/Avatar1";
+import { Avatar2 } from "../models/Avatars/Avatar2";
+import { Avatar3 } from "../models/Avatars/Avatar3";
 
 const normalizeAngle = (angle) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;
@@ -34,7 +33,7 @@ const lerpAngle = (start, end, t) => {
 
 const CharacterController = ( { anxietyAttack }) => {
   const { user, partida } = useAuth();
-  const avatarSkin = partida?.avatar_skin || "Female";
+  const avatarSkin = partida?.avatar_skin || "Avatar3";
 
   const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED, JUMP_FORCE } = useControls(
     "Character Control",
@@ -200,14 +199,12 @@ const CharacterController = ( { anxietyAttack }) => {
         <group ref={cameraTarget} position-z={0.8} />
         <group ref={cameraPosition} position-y={1.5} position-z={-2.5} />
         <group ref={character}>
-          {avatarSkin === "Female" && (
-            <Female scale={2.5} position-y={-2.3} animation={animation} />
-          )}
-          {avatarSkin === "Man" && (
-            <Man scale={70} position-y={-2.3} animation={animation} />
-          )}
-          {avatarSkin === "Alternative" && (
-            <Alternative scale={56} position-y={-2.3} animation={animation} />
+          {avatarSkin === "Avatar1" && (
+            <Avatar1 scale={2} position-y={-2.3} animation={animation} />
+          )}{avatarSkin === "Avatar2" && (
+            <Avatar2 scale={2} position-y={-2.3} animation={animation} />
+          )}{avatarSkin === "Avatar3" && (
+            <Avatar3 scale={2} position-y={-2.3} animation={animation} />
           )}
         </group>
       </group>
