@@ -5,13 +5,19 @@ import { FaHome, FaUserCircle, FaMap, FaLock,FaEye,FaStop , FaTrophy, FaUserFrie
 import { useNavigate } from "react-router-dom";
 import AchievementsModal from "./Achivements/AchievementsModal";
 import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
+import { useMindfulness } from "../context/MindfulnessContext";
 
 
 const GameMenu = () => {
   const { user } = useAuth();
   const nivel = 2;
   const progreso = 10;
-
+  const {
+    mindfulnessStarted,
+    startMindfulness,
+    endMindfulness
+  } = useMindfulness(); // PARA PROBAR MINIJUEGO DE MINDFULNESS
+  
   const {positivechallengeStarted, startPositiveChallenge, endPositiveChallenge } = usePositiveThoughts();// para probar el minijuego de pensamientos
   const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
    const navigate = useNavigate();
@@ -45,13 +51,19 @@ const GameMenu = () => {
         </button>
          {/*<FaUserFriends className="icon" />*/}
         <FaComment className="icon" />
-          {/* PARA PROBAR EL MINIJUEGO DE ANSIEDAD
+          {/* PARA PROBAR EL MINIJUEGO DE pensamientos positivos
         <button onClick={startPositiveChallenge}>
           <FaEye className="icon" /> 
         </button>
         <button className="stop-button" onClick={endPositiveChallenge}>
           <FaStop className="icon" /> 
         </button> */}
+        <button onClick={startMindfulness}>
+  <FaEye className="icon" title="Minijuego mindfulness ON" />
+</button>
+<button className="stop-button" onClick={endMindfulness}>
+  <FaStop className="icon" title="Minijuego mindfulness OFF" />
+</button>
       </div>
 
       {/* Sección derecha */}

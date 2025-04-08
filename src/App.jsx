@@ -14,6 +14,9 @@ import { KeyboardControls } from "@react-three/drei";
 import GameView from "./pages/GameView";
 import { AchievementsProvider } from "./context/AchievementsContext";
 import { PositiveThoughtsProvider } from "./context/PositiveThoughtsContext";
+import { MindfulnessProvider } from "./context/MindfulnessContext";
+import { MiniGamesManagerProvider } from "./context/MiniGamesManagerContext";
+
 
 function App() {
   const [count, setCount] = useState(0);
@@ -28,30 +31,40 @@ function App() {
   ];
 
   return (
-    <PositiveThoughtsProvider>
-    <AchievementsProvider>
-      <KeyboardControls map={keyboardMap}>
-        <main>
-          <Router>
-            <AuthProvider>
-              <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/forgot-password" element={<ForgotPassword />} />
-                <Route path="/reset-password" element={<ResetPassword />} />
-                <Route path="/instructions" element={<Instructions />} />
-                <Route path="/avatar" element={<AvatarSelection />} />
-                <Route path="/game" element={<GameView />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/story" element={<Story />} />
-                <Route path="/register" element={<Register />} />
-              </Routes>
-            </AuthProvider>
-          </Router>
-        </main>
-      </KeyboardControls>
-    </AchievementsProvider>
-    </PositiveThoughtsProvider>
+    <MiniGamesManagerProvider>
+      <PositiveThoughtsProvider>
+        <MindfulnessProvider>
+          <AchievementsProvider>
+            <KeyboardControls map={keyboardMap}>
+              <main>
+                <Router>
+                  <AuthProvider>
+                    <Routes>
+                      <Route path="/" element={<Login />} />
+                      <Route path="/profile" element={<Profile />} />
+                      <Route
+                        path="/forgot-password"
+                        element={<ForgotPassword />}
+                      />
+                      <Route
+                        path="/reset-password"
+                        element={<ResetPassword />}
+                      />
+                      <Route path="/instructions" element={<Instructions />} />
+                      <Route path="/avatar" element={<AvatarSelection />} />
+                      <Route path="/game" element={<GameView />} />
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/story" element={<Story />} />
+                      <Route path="/register" element={<Register />} />
+                    </Routes>
+                  </AuthProvider>
+                </Router>
+              </main>
+            </KeyboardControls>
+          </AchievementsProvider>
+        </MindfulnessProvider>
+      </PositiveThoughtsProvider>
+    </MiniGamesManagerProvider>
   );
 }
 

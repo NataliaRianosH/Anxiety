@@ -1,5 +1,6 @@
 // src/context/PositiveThoughtsContext.jsx
 import { createContext, useContext, useState, useEffect, useRef } from "react";
+import { useMiniGameManager } from "./MiniGamesManagerContext";
 
 // 1. Crear el contexto
 const PositiveContext = createContext();
@@ -11,7 +12,8 @@ export const usePositiveThoughts = () => useContext(PositiveContext);
 export const PositiveThoughtsProvider = ({ children }) => {
   const [positiveChallengeStarted, setPositiveChallengeStarted] = useState(false);
   const [positiveMessageValidated, setPositiveMessageValidated] = useState(false);
-  
+  const { activeGame, setActiveGame, isAnyMinigameActive } = useMiniGameManager();
+
   const audioRef = useRef(new Audio("/sounds/heartbeat.mp3"));
 
   useEffect(() => {
@@ -33,12 +35,25 @@ export const PositiveThoughtsProvider = ({ children }) => {
 
   // 5. Funciones para controlar el minijuego
   const startPositiveChallenge = () => {
+    if (isAnyMinigameActive) {
+      console.log(" No se puede iniciar el minijuego de pensamientos positivos porque ya hay otro activo.");
+      return;
+    }
+
     setPositiveChallengeStarted(true);
     setPositiveMessageValidated(false);
+    setActiveGame("positive");
+    console.log(" Minijuego de pensamientos positivos iniciado");
   };
-  const endPositiveChallenge = () => setPositiveChallengeStarted(false);
-  const completePositiveChallenge = () => setPositiveMessageValidated(true);
-
+  const endPositiveChallenge = () => {
+    setPositiveChallengeStarted(false);
+    setActiveGame(null);
+    console.log(" Minijuego de pensamientos positivos terminado");
+  };
+  const completePositiveChallenge = () => {
+    setPositiveMessageValidated(true);
+    console.log(" Minijuego completado");
+  };
 
 
   return (
