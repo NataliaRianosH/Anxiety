@@ -1,7 +1,7 @@
 import { RigidBody } from "@react-three/rapier";
 import { useEffect, useState } from "react";
-import { useAchievements } from "../context/AchievementsContext"; 
-import { useAnxiety } from "../context/AnxietyContext";
+import { useAchievements } from "../../context/AchievementsContext"; 
+import { useAnxiety } from "../../context/AnxietyContext";
 
 const Achievement = ({ id, position, geometry, collider, title }) => {
   const { anxietyCompleted, startAnxietyAttack, endAnxietyAttack } = useAnxiety();

@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import GameMenu from "../components/GameMenu"; 
-import Game from "./Game"; // Importa el juego
 import { useAnxiety } from "../context/AnxietyContext";
 import AnxietyChallenge from "../components/AnxietyChallenge";
+import Game from "../components/Game";
 
 
 const GameView = () => {
   
-
-  const { anxietyAttack, startAnxietyAttack, endAnxietyAttack } = useAnxiety();
-
+  const { anxietyAttack } = useAnxiety();
 
   return (
     <div className={`game-container ${anxietyAttack ? "blurred" : ""}`}  style={{ position: "relative", overflow: "hidden" }}>

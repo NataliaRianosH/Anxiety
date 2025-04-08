@@ -12,11 +12,11 @@ export const evaluateMessage = async (message) => {
         messages: [
           {
             role: "system",
-            content: "Eres un asistente que ayuda a identificar si un mensaje escrito por un usuario es positivo y motivacional.",
+            content: "Eres un asistente que ayuda a identificar si un mensaje escrito por un usuario es positivo y motivacional, para una actividad en la que el jugador debe escribir un mensaje postivo para su avatar.",
           },
           {
             role: "user",
-            content: `¿Este mensaje es positivo y motivacional? "${message}". Responde solo 'Sí' si la respuestá es positiva o 'No' indicando como mejorarlo muy brevemente`,
+            content: `¿Este mensaje es positivo y motivacional? "${message}". Responde solo 'Sí' si la respuestá es positiva o 'No' diciendo por qué y pidiendole al usuario que lo mejore, nada más. `,
           },
         ],
       }),

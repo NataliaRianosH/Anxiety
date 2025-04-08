@@ -1,15 +1,15 @@
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import Loader from "../components/Loader";
+import Loader from "./Loader";
 import Island from "../models/Island";
 import { Environment, OrbitControls } from "@react-three/drei";
 import Sky from "../models/Sky";
 import Grass from "../models/Grass";
 import { Physics, RigidBody } from "@react-three/rapier";
-import CharacterController from "../components/CharacterController";
-import Achievement from "../components/Achievement";
+import CharacterController from "./CharacterController";
 import { useAnxiety } from "../context/AnxietyContext";
-import achievementsData from "./AchivementsData";
+import Achievement from "./Achivements/Achievement";
+import achievementsData from "./Achivements/AchivementsData";
 const Game = () => {
   const { anxietyAttack } = useAnxiety();
   
@@ -79,7 +79,7 @@ const Game = () => {
           <CharacterController anxietyAttack={anxietyAttack} />
 
           {achievementsData.map(({ id, position, geometry, collider,  title, description }) => (
-            <Achievement key={id} id={id} position={position} geometry={geometry} collider={collider} title={title} description={description} />
+            <Achievement  key={id} id={id} position={position} geometry={geometry} collider={collider} title={title} description={description} />
           ))}
         </Physics>
         

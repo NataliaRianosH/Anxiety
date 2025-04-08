@@ -1,5 +1,5 @@
-import Flowerpot from "../models/Flowerpot";
-import Seashell from "../models/Seashell";
+import Flowerpot from "../../models/Flowerpot";
+import Seashell from "../../models/Seashell";
 
 const achievementsData = [
   { 

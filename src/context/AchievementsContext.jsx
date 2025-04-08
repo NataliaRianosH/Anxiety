@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext } from "react";
-import achievementsData from "../pages/AchivementsData"; // Importamos la data original
+import achievementsData from "../components/Achivements/AchivementsData"; // Importamos la data original
 
 const AchievementsContext = createContext();
 

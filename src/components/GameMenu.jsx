@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "../assets/styles/GameMenu.scss";
 import { FaHome, FaUserCircle, FaMap, FaLock,FaEye,FaStop , FaTrophy, FaUserFriends, FaComment, FaVolumeUp, FaQuestionCircle, FaBars } from "react-icons/fa"; // Importamos iconos
-import AchievementsModal from "./AchievementsModal";
+
 import { useAnxiety } from "../context/AnxietyContext";
 import { useNavigate } from "react-router-dom";
+import AchievementsModal from "./Achivements/AchievementsModal";
 
 
 const GameMenu = () => {
