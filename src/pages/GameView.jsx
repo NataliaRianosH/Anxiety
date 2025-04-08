@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import GameMenu from "../components/GameMenu"; 
-import { useAnxiety } from "../context/AnxietyContext";
-import AnxietyChallenge from "../components/AnxietyChallenge";
+import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
 import Game from "../components/Game";
+import PositiveChallenge from "../components/PositiveChallenge";
 
 
 const GameView = () => {
   
-  const { anxietyAttack } = useAnxiety();
+  const {positiveChallengeStarted, endPositiveChallenge } = usePositiveThoughts();
 
   return (
-    <div className={`game-container ${anxietyAttack ? "blurred" : ""}`}  style={{ position: "relative", overflow: "hidden" }}>
+    <div className={`game-container ${        positiveChallengeStarted  ? "blurred" : ""}`}  style={{ position: "relative", overflow: "hidden" }}>
       <GameMenu  />
       <Game />
-      {anxietyAttack && <div className="anxiety-overlay"></div>}
-      {anxietyAttack && <AnxietyChallenge onSuccess={() => {}} />}
+      {positiveChallengeStarted && <div className="anxiety-overlay"></div>}
+      {positiveChallengeStarted && <PositiveChallenge onSuccess={() => {endPositiveChallenge()}} />}
 
     </div>
   );

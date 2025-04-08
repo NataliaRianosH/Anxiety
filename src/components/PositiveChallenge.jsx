@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { X, HelpCircle, Bot } from "lucide-react";
 import "./../assets/styles/AnxietyChallenge.scss";
-import { useAnxiety } from "../context/AnxietyContext";
+import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
+
 import HelpModal from "./modals/HelpModal";
 import { evaluateMessage } from "../utils/evaluateMessage";
 
-const AnxietyChallenge = ({ onSuccess, onCancel }) => {
-  const { endAnxietyAttack, completeAnxietyChallenge } = useAnxiety();
+const PositiveChallenge = ({ onSuccess, onCancel }) => {
+   const {endPositiveChallenge, completePositiveChallenge } = usePositiveThoughts();
+
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
   const [completed, setCompleted] = useState(false);
@@ -52,7 +54,7 @@ const AnxietyChallenge = ({ onSuccess, onCancel }) => {
         console.log("IA dice:", respuestaIA);
         if (respuestaIA.toLowerCase().includes("sí")) {
           setCompleted(true);
-          completeAnxietyChallenge();
+          completePositiveChallenge();
           onSuccess();
         } else {
           setError(respuestaIA);
@@ -65,7 +67,7 @@ const AnxietyChallenge = ({ onSuccess, onCancel }) => {
     } else {
       console.log("Evaluación normal sin IA.");
       setCompleted(true);
-      completeAnxietyChallenge();
+      completePositiveChallenge();
       onSuccess();
     }
   };
@@ -76,7 +78,7 @@ const AnxietyChallenge = ({ onSuccess, onCancel }) => {
       "¿Seguro que deseas salir del minijuego?, no obtendrás ninguna recompensa."
     );
     if (confirmExit) {
-      endAnxietyAttack();
+      endPositiveChallenge();
     }
   };
 
@@ -131,4 +133,4 @@ const AnxietyChallenge = ({ onSuccess, onCancel }) => {
   );
 };
 
-export default AnxietyChallenge;
+export default PositiveChallenge;

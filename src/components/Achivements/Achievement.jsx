@@ -1,32 +1,34 @@
 import { RigidBody } from "@react-three/rapier";
 import { useEffect, useState } from "react";
 import { useAchievements } from "../../context/AchievementsContext"; 
-import { useAnxiety } from "../../context/AnxietyContext";
+import { usePositiveThoughts } from "../../context/PositiveThoughtsContext";
+
 
 const Achievement = ({ id, position, geometry, collider, title }) => {
-  const { anxietyCompleted, startAnxietyAttack, endAnxietyAttack } = useAnxiety();
+  const { positiveMessageValidated, startPositiveChallenge, endPositiveChallenge } = usePositiveThoughts();
   const { collectAchievement } = useAchievements();
   const [collected, setCollected] = useState(false);
   
-  const isSpecial = title === "Pensamientos positivos";
+  const isPositiveChallenge = title === "Pensamientos positivos"; //si el achivement es especial, osea si es el del minijuego
 
   useEffect(() => {
-    console.log("Anxiety completed:", anxietyCompleted);
-    if (isSpecial && anxietyCompleted && !collected) {
+    console.log("Anxiety completed, osea si ya pasó/ganó el juego:", positiveMessageValidated);
+    //si es un logro especial y el mensaje se validó y no se ha recogido
+    if (isPositiveChallenge && positiveMessageValidated && !collected) { 
       console.log("Minijuego completado: recogiendo logro especial");
-      setCollected(true);
+      setCollected(true); //se marca como recogido
       collectAchievement(id);
-      endAnxietyAttack();
+      endPositiveChallenge();
     }
-  }, [anxietyCompleted, isSpecial, collected, collectAchievement, id]);
+  }, [positiveMessageValidated, isPositiveChallenge, collected, collectAchievement, id]);
 
 
   const handleCollision = () => {
-    if (isSpecial) {
+    if (isPositiveChallenge) {
       console.log("Colisionaste con el logro especial: ", title);
       
-      if (!anxietyCompleted) {
-         startAnxietyAttack();
+      if (!positiveMessageValidated) {
+        startPositiveChallenge();
       } 
     } else {
       console.log("Colisionaste un logro normal: ", title);

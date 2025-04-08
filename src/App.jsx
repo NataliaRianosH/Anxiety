@@ -13,8 +13,7 @@ import ResetPassword from "./pages/ResetPassword";
 import { KeyboardControls } from "@react-three/drei";
 import GameView from "./pages/GameView";
 import { AchievementsProvider } from "./context/AchievementsContext";
-import { AnxietyProvider } from "./context/AnxietyContext";
-
+import { PositiveThoughtsProvider } from "./context/PositiveThoughtsContext";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -29,7 +28,7 @@ function App() {
   ];
 
   return (
-    <AnxietyProvider>
+    <PositiveThoughtsProvider>
     <AchievementsProvider>
       <KeyboardControls map={keyboardMap}>
         <main>
@@ -52,7 +51,7 @@ function App() {
         </main>
       </KeyboardControls>
     </AchievementsProvider>
-    </AnxietyProvider>
+    </PositiveThoughtsProvider>
   );
 }
 

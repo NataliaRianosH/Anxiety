@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "../assets/styles/GameMenu.scss";
 import { FaHome, FaUserCircle, FaMap, FaLock,FaEye,FaStop , FaTrophy, FaUserFriends, FaComment, FaVolumeUp, FaQuestionCircle, FaBars } from "react-icons/fa"; // Importamos iconos
-
-import { useAnxiety } from "../context/AnxietyContext";
 import { useNavigate } from "react-router-dom";
 import AchievementsModal from "./Achivements/AchievementsModal";
+import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
 
 
 const GameMenu = () => {
   const { user } = useAuth();
   const nivel = 2;
   const progreso = 10;
-  const { anxietyAttack, startAnxietyAttack, endAnxietyAttack } = useAnxiety();
+
+  const {positivechallengeStarted, startPositiveChallenge, endPositiveChallenge } = usePositiveThoughts();// para probar el minijuego de pensamientos
   const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
    const navigate = useNavigate();
 
@@ -46,10 +46,10 @@ const GameMenu = () => {
          {/*<FaUserFriends className="icon" />*/}
         <FaComment className="icon" />
           {/* PARA PROBAR EL MINIJUEGO DE ANSIEDAD
-        <button onClick={startAnxietyAttack}>
+        <button onClick={startPositiveChallenge}>
           <FaEye className="icon" /> 
         </button>
-        <button className="stop-button" onClick={endAnxietyAttack}>
+        <button className="stop-button" onClick={endPositiveChallenge}>
           <FaStop className="icon" /> 
         </button> */}
       </div>

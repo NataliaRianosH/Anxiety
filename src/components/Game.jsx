@@ -7,11 +7,11 @@ import Sky from "../models/Sky";
 import Grass from "../models/Grass";
 import { Physics, RigidBody } from "@react-three/rapier";
 import CharacterController from "./CharacterController";
-import { useAnxiety } from "../context/AnxietyContext";
+import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
 import Achievement from "./Achivements/Achievement";
 import achievementsData from "./Achivements/AchivementsData";
 const Game = () => {
-  const { anxietyAttack } = useAnxiety();
+  const { positiveChallengeStarted } = usePositiveThoughts();
   
   //Se puede añadir el rigidbody con su collider directamente en el modelo, pero por ahora para las geometrias se pasa
   
@@ -76,7 +76,7 @@ const Game = () => {
             scale={islandscale}
             rotation={islanRotation}
           /> 
-          <CharacterController anxietyAttack={anxietyAttack} />
+          <CharacterController challengeStarted={positiveChallengeStarted} />
 
           {achievementsData.map(({ id, position, geometry, collider,  title, description }) => (
             <Achievement  key={id} id={id} position={position} geometry={geometry} collider={collider} title={title} description={description} />

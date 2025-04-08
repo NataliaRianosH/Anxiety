@@ -9,6 +9,7 @@ import { useAuth } from "../context/AuthContext";
 import { Avatar1 } from "../models/Avatars/Avatar1";
 import { Avatar2 } from "../models/Avatars/Avatar2";
 import { Avatar3 } from "../models/Avatars/Avatar3";
+import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
 
 const normalizeAngle = (angle) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;
@@ -31,7 +32,10 @@ const lerpAngle = (start, end, t) => {
   return normalizeAngle(start + (end - start) * t);
 };
 
-const CharacterController = ( { anxietyAttack }) => {
+const CharacterController = ( { positiveChallengeStarted } ) => {
+  
+
+
   const { user, partida } = useAuth();
   const avatarSkin = partida?.avatar_skin || "Avatar3";
 
@@ -110,7 +114,7 @@ const CharacterController = ( { anxietyAttack }) => {
       }
 
       //let speed = get().run ? RUN_SPEED : WALK_SPEED;
-      let speed = anxietyAttack ? WALK_SPEED : (get().run ? RUN_SPEED : WALK_SPEED);
+      let speed = positiveChallengeStarted ? WALK_SPEED : (get().run ? RUN_SPEED : WALK_SPEED);
 
       if (isClicking.current) {
         // console.log("clicking", mouse.x, mouse.y);
@@ -123,7 +127,7 @@ const CharacterController = ( { anxietyAttack }) => {
           speed = RUN_SPEED;
         } */}
 
-        if (!anxietyAttack && (Math.abs(movement.x) > 0.5 || Math.abs(movement.z) > 0.5)) {
+        if (!positiveChallengeStarted && (Math.abs(movement.x) > 0.5 || Math.abs(movement.z) > 0.5)) {
           speed = RUN_SPEED;
         }
       }
@@ -153,11 +157,11 @@ const CharacterController = ( { anxietyAttack }) => {
 
         
         } else {
-          setAnimation(anxietyAttack ? "Walking_Sad" : "Walking");
+          setAnimation(positiveChallengeStarted ? "Walking_Sad" : "Walking");
         }
       } else {
         
-        setAnimation(anxietyAttack ? "Idle_Sad" : "Idle");
+        setAnimation(positiveChallengeStarted ? "Idle_Sad" : "Idle");
 
       }
       character.current.rotation.y = lerpAngle(
@@ -166,7 +170,7 @@ const CharacterController = ( { anxietyAttack }) => {
         0.1
       );
 
-      if (get().jump && !anxietyAttack) {
+      if (get().jump && !positiveChallengeStarted) {
         vel.y = JUMP_FORCE;
         setAnimation("Jumping");
       }
