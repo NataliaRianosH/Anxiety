@@ -10,28 +10,35 @@ import CharacterController from "./CharacterController";
 import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
 import Achievement from "./Achivements/Achievement";
 import achievementsData from "./Achivements/AchivementsData";
+import { useMindfulness } from "../context/MindfulnessContext";
+import Popsicle from "../models/Popsicle";
+import Clock from "../models/Clock";
+
 const Game = () => {
   const { positiveChallengeStarted } = usePositiveThoughts();
-  
+  const { mindfulnessStarted } = useMindfulness();
+
   //Se puede añadir el rigidbody con su collider directamente en el modelo, pero por ahora para las geometrias se pasa
-  
-  {/** const achievementsData = [
+
+  {
+    /** const achievementsData = [
     { id: 1, position: [11, 11, 25], shape: "box" },
     { id: 2, position: [-3, 7, 48], shape: "sphere" },
     { id: 3, position: [27, 6, 35], shape: "box" },
     { id: 4, position: [-38.4, 6, 31.8], shape: "sphere" },
     { id: 5, position: [-29.7, , 20.27], shape: "box" },
 
-  ];**/}
+  ];**/
+  }
 
   const adjustIslandForScreeSize = () => {
     let screenScale = null;
     let screenPosition = [0, 0, 0];
     let rotation = [0, 20, 0];
     if (window.innerWidth < 768) {
-      screenScale = [5 ,5 ,5];
+      screenScale = [5, 5, 5];
     } else {
-      screenScale = [5.5 ,5.5 ,5.5];
+      screenScale = [5.5, 5.5, 5.5];
     }
     return [screenScale, screenPosition, rotation];
   };
@@ -65,24 +72,62 @@ const Game = () => {
         />
         <Sky />
         {/**  debug <AnimatedWater position={[10, -90, -6]} scale={[30, 20, 30]}  rotation = {[0.7, 0.2, 0]}/>**/}
-        <Physics  gravity={[0, -30, 0]}>
-         
-           <Grass  position={[-38, -70, 16]}
+        <Physics gravity={[0, -30, 0]}>
+          <Grass
+            position={[-38, -62, 16]}
             scale={300}
-            rotation={islanRotation}/>
-         
+            rotation={islanRotation}
+          />
+          {/** 
           <Island
             position={islandPosition}
             scale={islandscale}
             rotation={islanRotation}
-          /> 
+          /> **/}
           <CharacterController challengeStarted={positiveChallengeStarted} />
+         {/**   <Clock position={[-13, 5, 24.4946]} scale={0.21} rotation={[0, -3, 0]}/>
+          <Popsicle position={[-18, 6, 23.6]} scale={2} rotation={[0, 1, 0]}/>
+**/}
+          {achievementsData
+            .filter((achievement) => {
+              if (mindfulnessStarted) {
+              
+                return achievement.category === "mindfulness";
+              }
 
-          {achievementsData.map(({ id, position, geometry, collider,  title, description }) => (
-            <Achievement  key={id} id={id} position={position} geometry={geometry} collider={collider} title={title} description={description} />
-          ))}
+              if (positiveChallengeStarted) {
+                
+                return (
+                  achievement.category === "aprendizaje" ||
+                  achievement.category === "pensamientos"
+                );
+              }
+
+              return achievement.category === "aprendizaje";
+            })
+            .map(
+              ({
+                id,
+                position,
+                geometry,
+                collider,
+                title,
+                description,
+                category,
+              }) => (
+                <Achievement
+                  key={id}
+                  id={id}
+                  position={position}
+                  geometry={geometry}
+                  collider={collider}
+                  title={title}
+                  description={description}
+                  category={category}
+                />
+              )
+            )}
         </Physics>
-        
       </Canvas>
     </section>
   );

@@ -99,7 +99,7 @@ const CharacterController = ( { positiveChallengeStarted } ) => {
 
       // Obtener la posición actual del avatar
     const position = rb.current.translation();
-    //console.log(`Posición del avatar: x=${position.x}, y=${position.y}, z=${position.z}`);
+    console.log(`Posicion del avatar: x=${position.x}, y=${position.y}, z=${position.z}`);
 
       const movement = {
         x: 0,
@@ -116,6 +116,7 @@ const CharacterController = ( { positiveChallengeStarted } ) => {
       //let speed = get().run ? RUN_SPEED : WALK_SPEED;
       let speed = positiveChallengeStarted ? WALK_SPEED : (get().run ? RUN_SPEED : WALK_SPEED);
 
+      {/**
       if (isClicking.current) {
         // console.log("clicking", mouse.x, mouse.y);
         if (Math.abs(mouse.x) > 0.1) {
@@ -125,12 +126,12 @@ const CharacterController = ( { positiveChallengeStarted } ) => {
         {/**
         if (Math.abs(movement.x) > 0.5 || Math.abs(movement.z) > 0.5) {
           speed = RUN_SPEED;
-        } */}
+        } //cerrar aqui
 
         if (!positiveChallengeStarted && (Math.abs(movement.x) > 0.5 || Math.abs(movement.z) > 0.5)) {
           speed = RUN_SPEED;
         }
-      }
+      } */}
 
       if (get().left) {
         movement.x = 1;

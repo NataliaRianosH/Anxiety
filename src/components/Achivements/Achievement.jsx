@@ -4,13 +4,13 @@ import { useAchievements } from "../../context/AchievementsContext";
 import { usePositiveThoughts } from "../../context/PositiveThoughtsContext";
 
 
-const Achievement = ({ id, position, geometry, collider, title }) => {
+const Achievement = ({ id, position, geometry, collider, title, category }) => {
   const { positiveMessageValidated, startPositiveChallenge, endPositiveChallenge } = usePositiveThoughts();
   const { collectAchievement } = useAchievements();
   const [collected, setCollected] = useState(false);
   
-  const isPositiveChallenge = title === "Pensamientos positivos"; //si el achivement es especial, osea si es el del minijuego
-
+  const isPositiveChallenge = category === "pensamientos";
+  
   useEffect(() => {
     console.log("Anxiety completed, osea si ya pasó/ganó el juego:", positiveMessageValidated);
     //si es un logro especial y el mensaje se validó y no se ha recogido

@@ -13,7 +13,7 @@ const GameView = () => {
   return (
     <div className={`game-container ${positiveChallengeStarted || mindfulnessStarted  ? "blurred" : ""}`}  style={{ position: "relative", overflow: "hidden" }}>
       <GameMenu  />
-      <Game />
+      <Game/>
       {(positiveChallengeStarted || mindfulnessStarted) && <div className="anxiety-overlay"></div>}
       {positiveChallengeStarted && <PositiveChallenge onSuccess={() => {endPositiveChallenge()}} />}
 
