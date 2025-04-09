@@ -45,11 +45,17 @@ export const PositiveThoughtsProvider = ({ children }) => {
     setActiveGame("positive");
     console.log(" Minijuego de pensamientos positivos iniciado");
   };
+  
   const endPositiveChallenge = () => {
-    setPositiveChallengeStarted(false);
-    setActiveGame(null);
-    console.log(" Minijuego de pensamientos positivos terminado");
-  };
+  if (!positiveChallengeStarted) {
+    console.log("No se puede terminar el minijuego de pensamientos positivos porque no ha sido iniciado.");
+    return;
+  }
+
+  setPositiveChallengeStarted(false);
+  setActiveGame(null);
+  console.log(" Minijuego de pensamientos positivos terminado");
+};
   const completePositiveChallenge = () => {
     setPositiveMessageValidated(true);
     console.log(" Minijuego completado");

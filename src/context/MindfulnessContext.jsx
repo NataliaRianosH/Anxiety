@@ -34,6 +34,11 @@ export const MindfulnessProvider = ({ children }) => {
 
   // Función para salir del minijuego
   const endMindfulness = () => {
+    if (!mindfulnessStarted) {
+      console.log("No se puede terminar el minijuego de mindfulness porque no ha sido iniciado.");
+      return;
+    }
+  
     setMindfulnessStarted(false);
     setActiveGame(null);
     console.log(" Minijuego mindfulness terminado");
