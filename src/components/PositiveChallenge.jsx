@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { X, HelpCircle, Bot } from "lucide-react";
-import "./../assets/styles/AnxietyChallenge.scss";
+import "./../assets/styles/AnxietyChallenge.scss"; 
 import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
 
 import HelpModal from "./modals/HelpModal";
