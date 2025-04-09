@@ -15,7 +15,8 @@ const GameMenu = () => {
   const {
     mindfulnessStarted,
     startMindfulness,
-    endMindfulness
+    endMindfulness,
+    completeMindfulness,
   } = useMindfulness(); // PARA PROBAR MINIJUEGO DE MINDFULNESS
   
   const {positivechallengeStarted, startPositiveChallenge, endPositiveChallenge } = usePositiveThoughts();// para probar el minijuego de pensamientos
@@ -63,6 +64,12 @@ const GameMenu = () => {
 </button>
 <button className="stop-button" onClick={endMindfulness}>
   <FaStop className="icon" title="Minijuego mindfulness OFF" />
+</button>
+<button  onClick={() => {
+    completeMindfulness(); 
+    endMindfulness();     
+  }}>
+  <FaTrophy className="icon" title="Completar minijuego mindfulness" />
 </button>
       </div>
 

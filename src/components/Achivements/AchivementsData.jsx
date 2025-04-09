@@ -1,3 +1,4 @@
+import Candle from "../../models/Candle";
 import Clock from "../../models/Clock";
 import Flowerpot from "../../models/Flowerpot";
 import Popsicle from "../../models/Popsicle";
@@ -6,8 +7,8 @@ import Seashell from "../../models/Seashell";
 const achievementsData = [
   { 
     id: 1, 
-    position: [-12.89801, 4.850044250488281, 29.73915863037109], 
-    geometry: <Flowerpot scale={4} />, 
+    position: [-19.953176, 6, 21.9437], 
+    geometry: <Seashell scale={0.7} />, 
     collider: "ball",
     title: "Minijuego pensamientos positivos", 
     description: "Has encontrado la maceta que simboliza el crecimiento personal y la calma interior.",
@@ -163,6 +164,16 @@ const achievementsData = [
     description: "Has encontrado la maceta que simboliza el crecimiento personal y la calma interior.",
     found: false,
     category: "aprendizaje"
+  },
+  { 
+    id: 17, 
+    position: [-13.42, 5, 21.14], 
+    geometry: <Candle scale={5} />, 
+    collider: "ball",
+    title: "Estrategias para la Calma", 
+    description: "Has encontrado una vela, que representa la tecnica mindfulness para calmar la ansiedad",
+    found: false,
+    category: "iniciarMinfulness"
   },
 ];
 

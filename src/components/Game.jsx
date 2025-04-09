@@ -13,10 +13,12 @@ import achievementsData from "./Achivements/AchivementsData";
 import { useMindfulness } from "../context/MindfulnessContext";
 import Popsicle from "../models/Popsicle";
 import Clock from "../models/Clock";
+import { useAchievements } from "../context/AchievementsContext";
 
 const Game = () => {
   const { positiveChallengeStarted } = usePositiveThoughts();
   const { mindfulnessStarted } = useMindfulness();
+  const { achievements } = useAchievements();
 
   //Se puede añadir el rigidbody con su collider directamente en el modelo, pero por ahora para las geometrias se pasa
 
@@ -84,49 +86,39 @@ const Game = () => {
             scale={islandscale}
             rotation={islanRotation}
           /> **/}
-          <CharacterController challengeStarted={positiveChallengeStarted} />
-         {/**   <Clock position={[-13, 5, 24.4946]} scale={0.21} rotation={[0, -3, 0]}/>
-          <Popsicle position={[-18, 6, 23.6]} scale={2} rotation={[0, 1, 0]}/>
-**/}
-          {achievementsData
+          <CharacterController
+            positiveChallengeStarted={positiveChallengeStarted}
+          />
+          {/**   <Clock position={[-13, 5, 24.4946]} scale={0.21} rotation={[0, -3, 0]}/>
+          <Popsicle position={[-18, 6, 23.6]} scale={2} rotation={[0, 1, 0]}/>**/}
+          {achievements
             .filter((achievement) => {
-              if (mindfulnessStarted) {
-              
-                return achievement.category === "mindfulness";
-              }
+              if (achievement.found) return false;
 
-              if (positiveChallengeStarted) {
-                
+              if (mindfulnessStarted) {
                 return (
-                  achievement.category === "aprendizaje" ||
-                  achievement.category === "pensamientos"
+                  achievement.category === "mindfulness" ||
+                  achievement.category === "iniciarMinfulness"
                 );
               }
 
-              return achievement.category === "aprendizaje";
+              if (positiveChallengeStarted) {
+                return (
+                  achievement.category === "aprendizaje" ||
+                  achievement.category === "pensamientos" ||
+                  achievement.category === "iniciarMinfulness"
+                );
+              }
+
+              return (
+                achievement.category === "aprendizaje" ||
+                achievement.category === "pensamientos" ||
+                achievement.category === "iniciarMinfulness"
+              );
             })
-            .map(
-              ({
-                id,
-                position,
-                geometry,
-                collider,
-                title,
-                description,
-                category,
-              }) => (
-                <Achievement
-                  key={id}
-                  id={id}
-                  position={position}
-                  geometry={geometry}
-                  collider={collider}
-                  title={title}
-                  description={description}
-                  category={category}
-                />
-              )
-            )}
+            .map((achievement) => (
+              <Achievement key={achievement.id} {...achievement} />
+            ))}
         </Physics>
       </Canvas>
     </section>

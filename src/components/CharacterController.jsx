@@ -99,7 +99,7 @@ const CharacterController = ( { positiveChallengeStarted } ) => {
 
       // Obtener la posición actual del avatar
     const position = rb.current.translation();
-    console.log(`Posicion del avatar: x=${position.x}, y=${position.y}, z=${position.z}`);
+    //console.log(`Posicion del avatar: x=${position.x}, y=${position.y}, z=${position.z}`);
 
       const movement = {
         x: 0,
