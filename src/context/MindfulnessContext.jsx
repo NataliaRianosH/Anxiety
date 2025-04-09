@@ -11,12 +11,16 @@ export const useMindfulness = () => useContext(MindfulnessContext);
 export const MindfulnessProvider = ({ children }) => {
   const [mindfulnessStarted, setMindfulnessStarted] = useState(false);
   const [mindfulnessCompleted, setMindfulnessCompleted] = useState(false);
-  const { activeGame, setActiveGame, isAnyMinigameActive } = useMiniGameManager();
+  const { activeGame, setActiveGame, isAnyMinigameActive } =
+    useMiniGameManager();
+  const [phase, setPhase] = useState(1);
 
   // Función para iniciar el minijuego
   const startMindfulness = () => {
     if (isAnyMinigameActive) {
-      console.log("No se puede iniciar el minijuego de mindfulness porque ya hay otro activo.");
+      console.log(
+        "No se puede iniciar el minijuego de mindfulness porque ya hay otro activo."
+      );
       return;
     }
 
@@ -35,13 +39,23 @@ export const MindfulnessProvider = ({ children }) => {
   // Función para salir del minijuego
   const endMindfulness = () => {
     if (!mindfulnessStarted) {
-      console.log("No se puede terminar el minijuego de mindfulness porque no ha sido iniciado.");
+      console.log(
+        "No se puede terminar el minijuego de mindfulness porque no ha sido iniciado."
+      );
       return;
     }
-  
+
     setMindfulnessStarted(false);
     setActiveGame(null);
     console.log(" Minijuego mindfulness terminado");
+  };
+
+  const nextPhase = () => {
+    setPhase((prev) => (prev < 5 ? prev + 1 : prev));
+  };
+
+  const previousPhase = () => {
+    setPhase((prev) => (prev > 1 ? prev - 1 : prev));
   };
 
   return (
@@ -52,6 +66,9 @@ export const MindfulnessProvider = ({ children }) => {
         startMindfulness,
         completeMindfulness,
         endMindfulness,
+        phase,
+        nextPhase,
+        previousPhase,
       }}
     >
       {children}

@@ -4,6 +4,7 @@ import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
 import Game from "../components/Game";
 import PositiveChallenge from "../components/PositiveChallenge";
 import { useMindfulness } from "../context/MindfulnessContext";
+import MindfulnessChallenge from "../components/MindfulnessChallenge";
 
 
 const GameView = () => {
@@ -16,7 +17,7 @@ const GameView = () => {
       <Game/>
       {(positiveChallengeStarted || mindfulnessStarted) && <div className="anxiety-overlay"></div>}
       {positiveChallengeStarted && <PositiveChallenge onSuccess={() => {endPositiveChallenge()}} />}
-
+      {mindfulnessStarted && <MindfulnessChallenge />}
     </div>
   );
 };
