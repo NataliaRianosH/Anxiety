@@ -97,12 +97,12 @@ const CharacterController = ( { positiveChallengeStarted } ) => {
       document.removeEventListener("touchend", onMouseUp);
     };
   }, []);
-
+  
   useFrame(({ camera, mouse }) => {
     if (rb.current) {
       const vel = rb.current.linvel();
       const position = rb.current.translation();
-  
+      console.log(`Posicion del avatar: x=${position.x},y=${position.y}, z=${position.z}`);
       // Movimiento base con teclado
       const movement = { x: 0, z: 0 };
   
@@ -224,11 +224,12 @@ const CharacterController = ( { positiveChallengeStarted } ) => {
   });
   
   
-
+// position={[-0.00003805636515608, -1.0014218, 36.524597167]}
 
 
   return (
-    <RigidBody colliders={false} position={[-18, 10, 16]} lockRotations ref={rb} name="character"
+   
+    <RigidBody colliders={false} position={[0, 0, 0]} lockRotations ref={rb} name="character"
     >
       <group ref={container}>
         <group ref={cameraTarget} position-z={0.8} />

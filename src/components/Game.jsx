@@ -5,7 +5,7 @@ import Island from "../models/Island";
 import { Environment, OrbitControls } from "@react-three/drei";
 import Sky from "../models/Sky";
 import Grass from "../models/Grass";
-import { Physics, RigidBody } from "@react-three/rapier";
+import { CuboidCollider, Physics, RigidBody } from "@react-three/rapier";
 import CharacterController from "./CharacterController";
 import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
 import Achievement from "./Achivements/Achievement";
@@ -14,6 +14,7 @@ import { useMindfulness } from "../context/MindfulnessContext";
 import Popsicle from "../models/Popsicle";
 import Clock from "../models/Clock";
 import { useAchievements } from "../context/AchievementsContext";
+import Water from "../models/Water";
 
 const Game = () => {
   const { positiveChallengeStarted } = usePositiveThoughts();
@@ -76,10 +77,19 @@ const Game = () => {
         {/**  debug <AnimatedWater position={[10, -90, -6]} scale={[30, 20, 30]}  rotation = {[0.7, 0.2, 0]}/>**/}
         <Physics gravity={[0, -30, 0]}>
           <Grass
-            position={[-38, -62, 16]}
-            scale={300}
+            position={[0, -18, 0]}
+            scale={80}
             rotation={islanRotation}
           />
+            <Water ></Water>
+            <RigidBody type="fixed" colliders={false}>
+  <mesh position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+    <planeGeometry args={[200, 200]} />
+    <meshStandardMaterial color="#1e90ff" transparent opacity={0.3} />
+  </mesh>
+  <CuboidCollider args={[100, 0.5, 100]} position={[0, -4, 0]} />
+</RigidBody>
+
           {/** 
           <Island
             position={islandPosition}
