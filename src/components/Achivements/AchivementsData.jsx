@@ -7,7 +7,7 @@ import Seashell from "../../models/Seashell";
 const achievementsData = [
   { 
     id: 1, 
-    position: [-19.953176, 6, 21.9437], 
+    position: [19.442731, 1, 21.9437], 
     geometry: <Seashell scale={0.7} />, 
     collider: "ball",
     title: "Minijuego pensamientos positivos", 
@@ -17,7 +17,7 @@ const achievementsData = [
   },
   {  
     id: 2, 
-    position: [-25.59708, 5, 21.04], 
+    position: [20.520877, 1, -2.891414], 
     geometry: <Flowerpot scale={4} />, 
     collider: "ball",
     title: "Eco Tranquilo", 
@@ -27,7 +27,7 @@ const achievementsData = [
   },
   { 
     id: 3, 
-    position: [-18, 6, 25.83], 
+    position: [17.22397, 1, -9.74974], 
     geometry: <Flowerpot scale={4} />, 
     collider: "cuboid",
     title: "Caja de los Pensamientos", 
@@ -37,7 +37,7 @@ const achievementsData = [
   },
   { 
     id: 4, 
-    position: [-23.2536, 6, 25.40], 
+    position: [13.76589, 1, -16.7694], 
     geometry: <Flowerpot scale={4} />, 
     collider: "ball",
     title: "Esfera del Control", 
@@ -47,7 +47,7 @@ const achievementsData = [
   },
   { 
     id: 5, 
-    position: [-14, 6, 27.4], 
+    position: [-4.623, 1, -20.7439], 
     geometry: <Flowerpot scale={4} />, 
     collider: "cuboid",
     title: "Cofre del Autoconocimiento", 
@@ -57,7 +57,7 @@ const achievementsData = [
   },
   { 
     id: 6, 
-    position: [-10.6, 6,27.05], 
+    position: [-9.05008, 1,-18.4232], 
     geometry: <Flowerpot scale={4} />, 
     collider: "ball",
     title: "Melodía del Mar", 
@@ -67,7 +67,7 @@ const achievementsData = [
   },
   { 
     id: 7, 
-    position: [-26.177, 6,  23.469], 
+    position: [-13.87709, 1,  -14.0770], 
     geometry: <Popsicle scale={2} />, 
     collider: "cuboid",
     title: "Raíces de Fortaleza", 
@@ -77,7 +77,7 @@ const achievementsData = [
   },
   { 
     id: 8, 
-    position: [-20.90,6, 26.5450057], 
+    position: [-17.883,1, -10.3035], 
     geometry: <Popsicle scale={2} />, 
     collider: "ball",
     title: "Susurro del Viento", 
@@ -87,7 +87,7 @@ const achievementsData = [
   },
   { 
     id: 9, 
-    position: [-16.084, 6, 27.87], 
+    position: [-18.3, 1, 6.36680], 
     geometry: <Popsicle scale={2} />, 
     collider: "cuboid",
     title: "Semilla de la Esperanza", 
@@ -97,7 +97,7 @@ const achievementsData = [
   },
   { 
     id: 10, 
-    position: [-11.905, 6, 28.108], 
+    position: [-14.532, 1, 9.7572], 
     geometry: <Popsicle scale={2} />, 
     collider: "ball",
     title: "Cántico del Océano", 
@@ -107,7 +107,7 @@ const achievementsData = [
   },
   { 
     id: 11, 
-    position: [-7.525, 6, 26.83], 
+    position: [-19.578943, 1, -7.555367], 
     geometry: <Popsicle scale={2} />, 
     collider: "cuboid",
     title: "El Árbol del Equilibrio", 
@@ -117,7 +117,7 @@ const achievementsData = [
   },
   { 
     id: 12, 
-    position: [-11.190, 6, 24.53], 
+    position: [-18.885187, 1, -1.993299], 
     geometry: <Clock scale={0.21} rotation={[0, -3, 0]}/>, 
     collider: "ball",
     title: "Eco del Recuerdo", 
@@ -127,7 +127,7 @@ const achievementsData = [
   },
   { 
     id: 13, 
-    position: [-13.682, 6, 24.87], 
+    position: [-19.92068, 1, 4.1480641], 
     geometry: <Clock scale={0.21} rotation={[0, -3, 0]}/>, 
     collider: "cuboid",
     title: "Jardín Interior", 
@@ -137,7 +137,7 @@ const achievementsData = [
   },
   { 
     id: 14, 
-    position: [-18,  6, 24.2887], 
+    position: [-9.439661,  1, 13.221998], 
     geometry: <Clock scale={0.21} rotation={[0, -3, 0]}/>, 
     collider: "ball",
     title: "Armonía de las Mareas", 
@@ -147,7 +147,7 @@ const achievementsData = [
   },
   { 
     id: 15, 
-    position: [-22,  6, -22.703], 
+    position: [-11.00981,  1, 11.071174], 
     geometry: <Clock scale={0.21} rotation={[0, -3, 0]} />,  
     collider: "cuboid",
     title: "Raíz del Enfoque", 
@@ -157,7 +157,7 @@ const achievementsData = [
   },
   { 
     id: 16, 
-    position: [-22.993,  6, 22.962], 
+    position: [-6.303996,  1, 14.520030], 
     geometry: <Clock scale={0.21} rotation={[0, -3, 0]} />, 
     collider: "ball",
     title: "Jardín de la Serenidad", 
@@ -167,7 +167,7 @@ const achievementsData = [
   },
   { 
     id: 17, 
-    position: [-13.42, 5, 21.14], 
+    position: [6.425997, 0.2, -10.133847], 
     geometry: <Candle scale={5} />, 
     collider: "ball",
     title: "Estrategias para la Calma", 

@@ -31,11 +31,10 @@ build/
 
 # Archivos generados por Three.js y GLTF
 *.bin
-*.gltf
-*.glb
+
 
 # Archivos de preview de modelos 3D
-preview/
+
 screenshots/
 
 # Archivos de entorno
