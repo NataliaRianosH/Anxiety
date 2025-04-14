@@ -10,6 +10,7 @@ import { Avatar1 } from "../models/Avatars/Avatar1";
 import { Avatar2 } from "../models/Avatars/Avatar2";
 import { Avatar3 } from "../models/Avatars/Avatar3";
 import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
+import { useMindfulness } from "../context/MindfulnessContext";
 
 const normalizeAngle = (angle) => {
   while (angle > Math.PI) angle -= 2 * Math.PI;
@@ -33,7 +34,8 @@ const lerpAngle = (start, end, t) => {
 };
 
 const CharacterController = ( { positiveChallengeStarted } ) => {
-  
+  const { mindfulnessStarted, phase } = useMindfulness();
+
 
 
   const { user, partida } = useAuth();
@@ -71,6 +73,9 @@ const CharacterController = ( { positiveChallengeStarted } ) => {
   const isClicking = useRef(false);
 
   const isJumping = useRef(false);
+  const disableMovement = mindfulnessStarted && phase === 1;
+  const phase2Movement = mindfulnessStarted && phase === 2;
+
 
   useEffect(() => {
     console.log(avatarSkin);
@@ -96,106 +101,131 @@ const CharacterController = ( { positiveChallengeStarted } ) => {
   useFrame(({ camera, mouse }) => {
     if (rb.current) {
       const vel = rb.current.linvel();
-
-      // Obtener la posición actual del avatar
-    const position = rb.current.translation();
-    //console.log(`Posicion del avatar: x=${position.x}, y=${position.y}, z=${position.z}`);
-
-      const movement = {
-        x: 0,
-        z: 0,
-      };
-
-      if (get().forward) {
-        movement.z = 1;
+      const position = rb.current.translation();
+  
+      // Movimiento base con teclado
+      const movement = { x: 0, z: 0 };
+  
+      if (get().forward) movement.z = 1;
+      if (get().backward) movement.z = -1;
+      if (get().left) movement.x = 1;
+      if (get().right) movement.x = -1;
+  
+      /*
+      // Movimiento con mouse (solo si no se usan teclas)
+      const usingKeyboard = movement.x !== 0 || movement.z !== 0;
+      const usingClick = isClicking.current && !usingKeyboard;
+  
+      const effectiveMovement = { ...movement };
+  
+      // Si se está usando el click, calcular movimiento desde el mouse
+      if (usingClick) {
+        effectiveMovement.x = -mouse.x;
+        effectiveMovement.z = mouse.y + 0.4;
       }
-      if (get().backward) {
-        movement.z = -1;
+      */
+  
+      // Movimiento efectivo sin click (usa solo teclado)
+      const effectiveMovement = { ...movement };
+  
+      // Invertir controles (solo horizontal) en fase 2
+      if (phase2Movement) {
+        effectiveMovement.x *= -1;
       }
-
-      //let speed = get().run ? RUN_SPEED : WALK_SPEED;
-      let speed = positiveChallengeStarted ? WALK_SPEED : (get().run ? RUN_SPEED : WALK_SPEED);
-
-      {/**
-      if (isClicking.current) {
-        // console.log("clicking", mouse.x, mouse.y);
-        if (Math.abs(mouse.x) > 0.1) {
-          movement.x = -mouse.x;
-        }
-        movement.z = mouse.y + 0.4;
-        {/**
-        if (Math.abs(movement.x) > 0.5 || Math.abs(movement.z) > 0.5) {
-          speed = RUN_SPEED;
-        } //cerrar aqui
-
-        if (!positiveChallengeStarted && (Math.abs(movement.x) > 0.5 || Math.abs(movement.z) > 0.5)) {
-          speed = RUN_SPEED;
-        }
-      } */}
-
-      if (get().left) {
-        movement.x = 1;
+  
+      // Rotación del personaje (solo si se mueve)
+      if (effectiveMovement.x !== 0 || effectiveMovement.z !== 0) {
+        characterRotationTarget.current = Math.atan2(
+          effectiveMovement.x,
+          effectiveMovement.z
+        );
       }
-      if (get().right) {
-        movement.x = -1;
+  
+      // Rotación lateral con teclado
+      if (effectiveMovement.x !== 0) {
+        rotationTarget.current += ROTATION_SPEED * effectiveMovement.x;
       }
-
-      if (movement.x !== 0) {
-        rotationTarget.current += ROTATION_SPEED * movement.x;
+  
+      // Velocidad adaptada por fase
+      let speed = RUN_SPEED;
+  
+      if (positiveChallengeStarted) {
+        speed = WALK_SPEED;
+      } else if (!phase2Movement) {
+        speed = get().run ? RUN_SPEED : WALK_SPEED;
       }
-
-      if (movement.x !== 0 || movement.z !== 0) {
-        characterRotationTarget.current = Math.atan2(movement.x, movement.z);
+  
+      // FASE 1: bloqueado
+      if (disableMovement) {
+        vel.x = 0;
+        vel.z = 0;
+        setAnimation("Anxiety");
+      }
+      // Movimiento
+      else if (effectiveMovement.x !== 0 || effectiveMovement.z !== 0) {
         vel.x =
           Math.sin(rotationTarget.current + characterRotationTarget.current) *
           speed;
         vel.z =
           Math.cos(rotationTarget.current + characterRotationTarget.current) *
           speed;
-        if (speed === RUN_SPEED) {
-
-          setAnimation("Running");
-
-        
-        } else {
-          setAnimation(positiveChallengeStarted ? "Walking_Sad" : "Walking");
-        }
+  
+        setAnimation(
+          speed === RUN_SPEED
+            ? "Running"
+            : positiveChallengeStarted
+            ? "Walking_Sad"
+            : "Walking"
+        );
       } else {
-        
-        setAnimation(positiveChallengeStarted ? "Idle_Sad" : "Idle");
-
+        setAnimation(
+          phase2Movement
+            ? "Look_Around"
+            : positiveChallengeStarted
+            ? "Idle_Sad"
+            : "Idle"
+        );
       }
+  
+      // Salto: solo si no es fase 1 ni fase 2
+      const canJump =
+        !positiveChallengeStarted && !disableMovement && !phase2Movement;
+  
+      if (get().jump && canJump) {
+        vel.y = JUMP_FORCE;
+        setAnimation("Jumping");
+      }
+  
+      rb.current.setLinvel(vel, true);
+  
+      // Rotación suave del avatar
       character.current.rotation.y = lerpAngle(
         character.current.rotation.y,
         characterRotationTarget.current,
         0.1
       );
-
-      if (get().jump && !positiveChallengeStarted) {
-        vel.y = JUMP_FORCE;
-        setAnimation("Jumping");
-      }
-
-      rb.current.setLinvel(vel, true);
     }
-
-    // CAMERA
+  
+    // Movimiento de cámara
     container.current.rotation.y = MathUtils.lerp(
       container.current.rotation.y,
       rotationTarget.current,
       0.1
     );
-
+  
     cameraPosition.current.getWorldPosition(cameraWorldPosition.current);
     camera.position.lerp(cameraWorldPosition.current, 0.2);
-
+  
     if (cameraTarget.current) {
       cameraTarget.current.getWorldPosition(cameraLookAtWorldPosition.current);
       cameraLookAt.current.lerp(cameraLookAtWorldPosition.current, 0.2);
-
       camera.lookAt(cameraLookAt.current);
     }
   });
+  
+  
+
+
 
   return (
     <RigidBody colliders={false} position={[-18, 10, 16]} lockRotations ref={rb} name="character"
