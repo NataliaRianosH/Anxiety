@@ -76,19 +76,15 @@ const Game = () => {
         <Sky />
         {/**  debug <AnimatedWater position={[10, -90, -6]} scale={[30, 20, 30]}  rotation = {[0.7, 0.2, 0]}/>**/}
         <Physics gravity={[0, -30, 0]}>
-          <Grass
-            position={[0, -18, 0]}
-            scale={80}
-            rotation={islanRotation}
-          />
-            <Water ></Water>
-            <RigidBody type="fixed" colliders={false}>
-  <mesh position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-    <planeGeometry args={[200, 200]} />
-    <meshStandardMaterial color="#1e90ff" transparent opacity={0.3} />
-  </mesh>
-  <CuboidCollider args={[100, 0.5, 100]} position={[0, -4, 0]} />
-</RigidBody>
+          <Grass position={[0, -18, 0]} scale={80} rotation={islanRotation} />
+          <Water></Water>
+          <RigidBody type="fixed" colliders={false}>
+            <mesh position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+              <planeGeometry args={[200, 200]} />
+              <meshStandardMaterial color="#1e90ff" transparent opacity={0.3} />
+            </mesh>
+            <CuboidCollider args={[100, 0.5, 100]} position={[0, -4, 0]} />
+          </RigidBody>
 
           {/** 
           <Island
