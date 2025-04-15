@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useEffect, useRef } from "react";
 import { useMiniGameManager } from "./MiniGamesManagerContext";
 
 // 1. Crear el contexto
-const PositiveContext = createContext();
+const PositiveContext = createContext(); 
 
 // 2. Hook para acceder desde cualquier componente
 export const usePositiveThoughts = () => useContext(PositiveContext);
