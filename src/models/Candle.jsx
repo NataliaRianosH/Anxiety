@@ -15,6 +15,7 @@ export function Candle(props) {
         receiveShadow
         geometry={nodes.candle.geometry}
         material={materials.tiny_treats_1}
+        
         scale={100}
       />
     </group>
