@@ -226,7 +226,7 @@ const CharacterController = ({ positiveChallengeStarted }) => {
   return (
     <RigidBody
       colliders={false}
-      position={[0, 0, 0]}
+      position={[0, 5, 0]}
       lockRotations
       ref={rb}
       name="character"

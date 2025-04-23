@@ -6,13 +6,23 @@ import Reloj from "../../models/Achivements/Reloj";
 import Candle from "../../models/Candle";
 import Clock from "../../models/Clock";
 import Popsicle from "../../models/Popsicle";
-import Seashell from "../../models/Seashell";
+import Caracola from "../../models/Achivements/Caracola";
+import Concha from "../../models/Achivements/Concha";
+import CastilloArena from "../../models/Achivements/CastilloArena";
+import EstrellaMar from "../../models/Achivements/EstrellaMar";
+import Flores from "../../models/Achivements/Flores";
+import Hoguera from "../../models/Achivements/Hoguera";
+import Panal from "../../models/Achivements/Panal";
+import Tea from "../../models/Achivements/Tea";
+import Tronco from "../../models/Achivements/Tronco";
+import Vela from "../../models/Achivements/Vela";
 
+ 
 const achievementsData = [
   { 
     id: 1, 
     position: [19.442731, 1, 21.9437], 
-    geometry: <Seashell scale={0.7} />, 
+    geometry: <Concha  />, 
     collider: "ball",
     title: "Minijuego pensamientos positivos", 
     description: "Has encontrado la maceta que simboliza el crecimiento personal y la calma interior.",
@@ -23,7 +33,7 @@ const achievementsData = [
   { 
     id: 2, 
     position: [6.425997, 0.2, -10.133847], 
-    geometry: <Candle scale={5} />, 
+    geometry: <Vela  />, 
     collider: "ball",
     title: "Estrategias para la Calma", 
     description: "Has encontrado una vela, que representa la tecnica mindfulness para calmar la ansiedad",
@@ -84,9 +94,9 @@ const achievementsData = [
   { 
     id: 8, 
     position: [-13.87709, 1,  -14.0770], 
-    geometry: <Popsicle scale={2} />, 
+    geometry: <EstrellaMar/>, 
     collider: "cuboid",
-    title: "Raíces de Fortaleza", 
+    title: " estella Raíces de Fortaleza", 
     description: "Un símbolo de crecimiento y resiliencia. Cada reto superado fortalece tus raíces.",
     found: false,
     category: "aprendizaje"
@@ -94,9 +104,9 @@ const achievementsData = [
   { 
     id: 9, 
     position: [-17.883,1, -10.3035], 
-    geometry: <Popsicle scale={2} />, 
+    geometry: <CastilloArena />, 
     collider: "ball",
-    title: "Susurro del Viento", 
+    title: "Casrillo Susurro del Viento", 
     description: "Cuando la ansiedad te abrume, recuerda que el viento siempre encuentra su camino.",
     found: false,
     category: "aprendizaje"
@@ -104,9 +114,9 @@ const achievementsData = [
   { 
     id: 10, 
     position: [-18.3, 1, 6.36680], 
-    geometry: <Popsicle scale={2} />, 
+    geometry: <Hoguera />, 
     collider: "cuboid",
-    title: "Semilla de la Esperanza", 
+    title: "Hoguera Semilla de la Esperanza", 
     description: "Cada pequeño esfuerzo que hagas crecerá con el tiempo. Nunca subestimes tu progreso.",
     found: false,
     category: "aprendizaje"
@@ -114,9 +124,9 @@ const achievementsData = [
   { 
     id: 11, 
     position: [-14.532, 1, 9.7572], 
-    geometry: <Popsicle scale={2} />, 
+    geometry: <Panal/>, 
     collider: "ball",
-    title: "Cántico del Océano", 
+    title: "Panal Cántico del Océano", 
     description: "Sintoniza con la paz del océano y deja que sus sonidos disipen tus preocupaciones.",
     found: false,
     category: "aprendizaje"
@@ -124,9 +134,9 @@ const achievementsData = [
   { 
     id: 12, 
     position: [-19.578943, 1, -7.555367], 
-    geometry: <Popsicle scale={2} />, 
+    geometry: <Tronco />, 
     collider: "cuboid",
-    title: "El Árbol del Equilibrio", 
+    title: "Tronco El Árbol del Equilibrio", 
     description: "Sus raíces profundas y ramas abiertas representan la armonía entre mente y cuerpo.",
     found: false,
     category: "aprendizaje"
@@ -134,9 +144,10 @@ const achievementsData = [
   { 
     id: 13, 
     position: [-18.885187, 1, -1.993299], 
-    geometry: <Clock scale={0.21} rotation={[0, -3, 0]}/>, 
+    //geometry: <Clock scale={0.21} rotation={[0, -3, 0]}/>, 
+    geometry: <Tea/>, 
     collider: "ball",
-    title: "Eco del Recuerdo", 
+    title: "Tea Eco del Recuerdo", 
     description: "Esta caracola guarda los ecos de momentos felices. Escúchalos cuando necesites ánimo.",
     found: false,
     category: "aprendizaje"
@@ -144,43 +155,15 @@ const achievementsData = [
   { 
     id: 14, 
     position: [-19.92068, 1, 4.1480641], 
-    geometry: <Clock scale={0.21} rotation={[0, -3, 0]}/>, 
+    geometry: <Flores/>, 
     collider: "cuboid",
-    title: "Jardín Interior", 
+    title: "Flores Jardín Interior", 
     description: "Cultiva pensamientos positivos como si fueran flores. Con tiempo y paciencia, florecerán.",
     found: false,
     category: "aprendizaje"
   },
-  { 
-    id: 15, 
-    position: [-9.439661,  1, 13.221998], 
-    geometry: <Clock scale={0.21} rotation={[0, -3, 0]}/>, 
-    collider: "ball",
-    title: "Armonía de las Mareas", 
-    description: "El ritmo del mar nos enseña que todo en la vida tiene su flujo y reflujo. Confía en el proceso.",
-    found: false,
-    category: "aprendizaje"
-  },
-  { 
-    id: 16, 
-    position: [-11.00981,  1, 11.071174], 
-    geometry: <Clock scale={0.21} rotation={[0, -3, 0]} />,  
-    collider: "cuboid",
-    title: "Raíz del Enfoque", 
-    description: "Concéntrate en el presente y permite que tus pensamientos crezcan en la dirección correcta.",
-    found: false,
-    category: "aprendizaje"
-  },
-  { 
-    id: 17, 
-    position: [-6.303996,  1, 14.520030], 
-    geometry: <Clock scale={0.21} rotation={[0, -3, 0]} />, 
-    collider: "ball",
-    title: "Jardín de la Serenidad", 
-    description: "Has encontrado la maceta que simboliza el crecimiento personal y la calma interior.",
-    found: false,
-    category: "aprendizaje"
-  },
+ 
+  
   
 ];
 
