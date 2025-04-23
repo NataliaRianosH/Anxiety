@@ -12,7 +12,7 @@ export const useMindfulness = () => useContext(MindfulnessContext);
 export const MindfulnessProvider = ({ children }) => {
   const [mindfulnessStarted, setMindfulnessStarted] = useState(false);
   const [mindfulnessCompleted, setMindfulnessCompleted] = useState(false);
-  const { resetMindfulnessAchievements } = useAchievements(); 
+  const { resetMindfulnessAchievements, markMindfulnessAchievementsAsCompleted } = useAchievements(); 
   const { activeGame, setActiveGame, isAnyMinigameActive } =
     useMiniGameManager();
   const [phase, setPhase] = useState(1);
@@ -26,6 +26,11 @@ export const MindfulnessProvider = ({ children }) => {
       return;
     }
 
+    if (mindfulnessCompleted) {
+      console.log("Ya completaste el minijuego de mindfulness. No puedes volver a jugarlo. crea otra partida");
+      return;
+    }
+
     setMindfulnessStarted(true);
     setMindfulnessCompleted(false);
     setActiveGame("mindfulness");
@@ -35,7 +40,8 @@ export const MindfulnessProvider = ({ children }) => {
   // Función para completarlo
   const completeMindfulness = () => {
     setMindfulnessCompleted(true);
-    console.log(" Minijuego mindfulness completado, ganaste");
+  markMindfulnessAchievementsAsCompleted(); // Marcar todos como encontrados
+  console.log("Minijuego mindfulness completado, ganaste");
   };
 
   // Función para salir del minijuego
