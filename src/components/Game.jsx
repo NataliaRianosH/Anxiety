@@ -18,7 +18,7 @@ import Water from "../models/Water";
 
 const Game = () => {
   const { positiveChallengeStarted } = usePositiveThoughts();
-  const { mindfulnessStarted } = useMindfulness();
+  const { mindfulnessStarted, phase } = useMindfulness();
   const { achievements } = useAchievements();
 
   //Se puede añadir el rigidbody con su collider directamente en el modelo, pero por ahora para las geometrias se pasa
@@ -102,10 +102,16 @@ const Game = () => {
               if (achievement.found) return false;
 
               if (mindfulnessStarted) {
-                return (
-                  achievement.category === "mindfulness" ||
-                  achievement.category === "iniciarMinfulness"
-                );
+                // Mostrar solo 1 objeto por fase específica
+                const mindfulnessIdsPorFase = {
+                  1: 3, // Libro
+                  2: 4, // Reloj
+                  3: 5, // Paleta
+                  4: 6, // Perfume
+                  5: 7, // Pastel
+                };
+              
+                return achievement.id === mindfulnessIdsPorFase[phase];
               }
 
               if (positiveChallengeStarted) {

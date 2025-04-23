@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { useMiniGameManager } from "./MiniGamesManagerContext";
+import { useAchievements } from "./AchievementsContext";
 
 // 1. Crear el contexto
 const MindfulnessContext = createContext();
@@ -11,6 +12,7 @@ export const useMindfulness = () => useContext(MindfulnessContext);
 export const MindfulnessProvider = ({ children }) => {
   const [mindfulnessStarted, setMindfulnessStarted] = useState(false);
   const [mindfulnessCompleted, setMindfulnessCompleted] = useState(false);
+  const { resetMindfulnessAchievements } = useAchievements(); 
   const { activeGame, setActiveGame, isAnyMinigameActive } =
     useMiniGameManager();
   const [phase, setPhase] = useState(1);
@@ -33,7 +35,7 @@ export const MindfulnessProvider = ({ children }) => {
   // Función para completarlo
   const completeMindfulness = () => {
     setMindfulnessCompleted(true);
-    console.log(" Minijuego mindfulness completado");
+    console.log(" Minijuego mindfulness completado, ganaste");
   };
 
   // Función para salir del minijuego
@@ -46,8 +48,11 @@ export const MindfulnessProvider = ({ children }) => {
     }
 
     setMindfulnessStarted(false);
+    setPhase(1); // Reiniciar fase al cancelar
+    resetMindfulnessAchievements(); // Aquí limpiamos logros de la sesión
     setActiveGame(null);
-    console.log(" Minijuego mindfulness terminado");
+
+    console.log("Minijuego mindfulness cancelado y reiniciado");
   };
 
   const nextPhase = () => {

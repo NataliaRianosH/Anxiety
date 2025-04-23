@@ -232,8 +232,8 @@ const CharacterController = ({ positiveChallengeStarted }) => {
       name="character"
     >
       <group ref={container}>
-        <group ref={cameraTarget} position-z={0.8} />
-        <group ref={cameraPosition} position-y={1.5} position-z={-2.5} />
+        <group ref={cameraTarget} position-z={-0.5} />
+        <group ref={cameraPosition} position-y={1.3} position-z={-2.6} />
         <group ref={character}>
           {avatarSkin === "Avatar1" && (
             <Avatar1 scale={2} position-y={-2.3} animation={animation} />

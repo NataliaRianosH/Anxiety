@@ -33,8 +33,9 @@ function App() {
   return (
     <MiniGamesManagerProvider>
       <PositiveThoughtsProvider>
+      <AchievementsProvider>
         <MindfulnessProvider>
-          <AchievementsProvider>
+         
             <KeyboardControls map={keyboardMap}>
               <main>
                 <Router>
@@ -61,8 +62,9 @@ function App() {
                 </Router>
               </main>
             </KeyboardControls>
-          </AchievementsProvider>
         </MindfulnessProvider>
+        </AchievementsProvider>
+
       </PositiveThoughtsProvider>
     </MiniGamesManagerProvider>
   );

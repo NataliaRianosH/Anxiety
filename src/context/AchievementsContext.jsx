@@ -15,8 +15,20 @@ export const AchievementsProvider = ({ children }) => {
     );
   };
 
+  const resetMindfulnessAchievements = () => {
+    setAchievements((prevAchievements) =>
+      prevAchievements.map((achievement) => {
+        if (achievement.category === "mindfulness") {
+          return { ...achievement, found: false };
+        }
+        return achievement;
+      })
+    );
+  };
+  
+
   return (
-    <AchievementsContext.Provider value={{ achievements, collectAchievement }}>
+    <AchievementsContext.Provider value={{ achievements, collectAchievement, resetMindfulnessAchievements }}>
       {children}
     </AchievementsContext.Provider>
   );
