@@ -226,23 +226,23 @@ const CharacterController = ({ positiveChallengeStarted }) => {
   return (
     <RigidBody
       colliders={false}
-      position={[0, 5, 0]}
+      position={[0, 20, 0]}
       lockRotations
       ref={rb}
       name="character"
     >
       <group ref={container}>
-        <group ref={cameraTarget} position-z={-0.5} />
-        <group ref={cameraPosition} position-y={1.3} position-z={-2.6} />
+        <group ref={cameraTarget} position-z={0} />
+        <group ref={cameraPosition} position-y={1.5} position-z={-2.6} />
         <group ref={character}>
           {avatarSkin === "Avatar1" && (
-            <Avatar1 scale={2} position-y={-2.3} animation={animation} />
+            <Avatar1 scale={1.8} position-y={-2.3} animation={animation} />
           )}
           {avatarSkin === "Avatar2" && (
-            <Avatar2 scale={2} position-y={-2.3} animation={animation} />
+            <Avatar2 scale={1.8} position-y={-2.3} animation={animation} />
           )}
           {avatarSkin === "Avatar3" && (
-            <Avatar3 scale={2} position-y={-2.3} animation={animation} />
+            <Avatar3 scale={1.8} position-y={-2.3} animation={animation} />
           )}
         </group>
       </group>
