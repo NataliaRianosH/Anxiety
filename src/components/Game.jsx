@@ -15,6 +15,9 @@ import Popsicle from "../models/Popsicle";
 import Clock from "../models/Clock";
 import { useAchievements } from "../context/AchievementsContext";
 import Water from "../models/Water";
+import Terreno from "../models/Island/Terrain";
+import { Rocas } from "../models/Island/Rocas";
+import { Palmeras } from "../models/Island/Palmeras";
 
 const Game = () => {
   const { positiveChallengeStarted } = usePositiveThoughts();
@@ -76,8 +79,15 @@ const Game = () => {
         <Sky />
         {/**  debug <AnimatedWater position={[10, -90, -6]} scale={[30, 20, 30]}  rotation = {[0.7, 0.2, 0]}/>**/}
         <Physics gravity={[0, -30, 0]}>
-          <Grass position={[0, -18, 0]} scale={80} rotation={islanRotation} />
-          <Water></Water>
+           {/**    <Grass position={[0, -18, 0]} scale={80} rotation={islanRotation} />
+          <Water></Water>**/}
+         <Terreno></Terreno> 
+         <Rocas>
+
+         </Rocas>
+<Palmeras>
+  
+</Palmeras>
           <RigidBody type="fixed" colliders={false}>
             <mesh position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]}>
               <planeGeometry args={[200, 200]} />

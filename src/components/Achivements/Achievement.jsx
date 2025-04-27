@@ -7,7 +7,7 @@ import { useMindfulness } from "../../context/MindfulnessContext";
 
 const Achievement = ({ id, position, geometry, collider, title, category }) => {
   const { positiveMessageValidated, startPositiveChallenge, endPositiveChallenge } = usePositiveThoughts();
-  const{ mindfulnessCompleted, startMindfulness, endMindfulness } = useMindfulness();
+  const { mindfulnessCompleted, startMindfulness, endMindfulness, phase, nextPhase } = useMindfulness(); // ✅ añadimos phase y nextPhase
 
   const { collectAchievement } = useAchievements();
   const [collected, setCollected] = useState(false);
@@ -35,7 +35,16 @@ const Achievement = ({ id, position, geometry, collider, title, category }) => {
       endMindfulness();
     }
 
-  }, [positiveMessageValidated, isPositiveChallenge, collected, collectAchievement, id, mindfulnessCompleted, isMindfulnessStarter,endMindfulness ]);
+  }, [
+    positiveMessageValidated,
+    isPositiveChallenge,
+    collected,
+    collectAchievement,
+    id,
+    mindfulnessCompleted,
+    isMindfulnessStarter,
+    endMindfulness
+  ]);
 
 
   const handleCollision = () => {
@@ -49,6 +58,48 @@ const Achievement = ({ id, position, geometry, collider, title, category }) => {
       if (!mindfulnessCompleted) {
         startMindfulness();
       }
+    } else if (category === "mindfulness") {
+      // Fase 2: colisión con el reloj (id 4)
+      if (id === 4 && phase === 2) {
+        console.log("Reloj encontrado. Avanzando a la fase 3.");
+        setCollected(true);
+        collectAchievement(id);
+        nextPhase();
+        return;
+      }
+
+      // Fase 3: colisión con la paleta (id 5)
+      if (id === 5 && phase === 3) {
+        console.log("Paleta encontrada. Avanzando a la fase 4.");
+        setCollected(true);
+        collectAchievement(id);
+        nextPhase();
+        return;
+      }
+
+      // ✅ Fase 4: colisión con el perfume (id 6)
+if (id === 6 && phase === 4) {
+  console.log("Perfume encontrado. Avanzando a la fase 5.");
+  setCollected(true);
+  collectAchievement(id);
+  nextPhase();
+  return;
+}
+// ✅ Fase 5: colisión con el pastel (id 7)
+// ✅ Fase 5: colisión con el pastel (id 7)
+if (id === 7 && phase === 5) {
+  console.log("Pastel encontrado. Completando minijuego.");
+  setCollected(true);
+  collectAchievement(id);
+  completeMindfulness(); // marcar como ganado
+  nextPhase(); // pasar a fase 6
+  return;
+}
+
+
+
+      // Aquí se pueden controlar futuras fases
+      console.log("Colisión con objeto mindfulness en fase no programada.");
     } else {
       console.log("Colisionaste un logro normal: ", title);
       setCollected(true);

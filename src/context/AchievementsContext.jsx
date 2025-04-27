@@ -25,10 +25,21 @@ export const AchievementsProvider = ({ children }) => {
       })
     );
   };
+
+  const markMindfulnessAchievementsAsCompleted = () => {
+    setAchievements((prevAchievements) =>
+      prevAchievements.map((achievement) =>
+        achievement.category === "mindfulness"
+          ? { ...achievement, found: true }
+          : achievement
+      )
+    );
+  };
+  
   
 
   return (
-    <AchievementsContext.Provider value={{ achievements, collectAchievement, resetMindfulnessAchievements }}>
+    <AchievementsContext.Provider value={{ achievements, collectAchievement, resetMindfulnessAchievements, markMindfulnessAchievementsAsCompleted }}>
       {children}
     </AchievementsContext.Provider>
   );
