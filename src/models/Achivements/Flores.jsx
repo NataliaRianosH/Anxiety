@@ -11,7 +11,7 @@ export function Flores(props) {
   const { nodes, materials } = useGLTF(Model)
   return (
     <group {...props} dispose={null}>
-      <group position={[0, 0, 0]} scale={0.1}>
+      <group position={[0, 0, 0]} scale={0.07}>
         <mesh
           castShadow
           receiveShadow

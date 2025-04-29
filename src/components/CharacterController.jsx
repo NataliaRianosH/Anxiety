@@ -100,7 +100,7 @@ const CharacterController = ({ positiveChallengeStarted }) => {
     if (rb.current) {
       const vel = rb.current.linvel();
       const position = rb.current.translation();
-     // console.log( `Posicion del avatar: x=${position.x},y=${position.y}, z=${position.z}`);
+      console.log( `Posicion del avatar: x=${position.x},y=${position.y}, z=${position.z}`);
       // Movimiento base con teclado
       const movement = { x: 0, z: 0 };
 
@@ -221,28 +221,28 @@ const CharacterController = ({ positiveChallengeStarted }) => {
     }
   });
 
-  // position={[-0.00003805636515608, -1.0014218, 36.524597167]}
 
+// x=-3.623488187789917,y=13.85675048828125, z=9.041946411132812
   return (
     <RigidBody
       colliders={false}
-      position={[0, 20, 0]}
+      position={[-3.8, 20.828047752380371, 8.1]}
       lockRotations
       ref={rb}
       name="character"
     >
       <group ref={container}>
-        <group ref={cameraTarget} position-z={0} />
-        <group ref={cameraPosition} position-y={1.5} position-z={-2.6} />
+        <group ref={cameraTarget} position-z={-1.2} />
+        <group ref={cameraPosition} position-y={0.7} position-z={-2.5} />
         <group ref={character}>
           {avatarSkin === "Avatar1" && (
-            <Avatar1 scale={1.8} position-y={-2.3} animation={animation} />
+            <Avatar1 scale={1.6} position-y={-2.3} animation={animation} />
           )}
           {avatarSkin === "Avatar2" && (
-            <Avatar2 scale={1.8} position-y={-2.3} animation={animation} />
+            <Avatar2 scale={1.6} position-y={-2.3} animation={animation} />
           )}
           {avatarSkin === "Avatar3" && (
-            <Avatar3 scale={1.8} position-y={-2.3} animation={animation} />
+            <Avatar3 scale={1.6} position-y={-2.3} animation={animation} />
           )}
         </group>
       </group>

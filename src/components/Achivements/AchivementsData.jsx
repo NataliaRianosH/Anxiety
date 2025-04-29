@@ -20,35 +20,41 @@ import Vela from "../../models/Achivements/Vela";
  
 const achievementsData = [
   { 
+  
     id: 1, 
-    position: [19.442731, 1, 21.9437], 
+    position: [-0.024, 3.085684,-10.5266], 
     geometry: <Concha  />, 
     collider: "ball",
     title: "Minijuego pensamientos positivos", 
     description: "Has encontrado la maceta que simboliza el crecimiento personal y la calma interior.",
     found: false,
-    category: "pensamientos"
+    category: "pensamientos",
+    shouldFloat: true,
+
   },
   // Mindfulness
   { 
     id: 2, 
-    position: [6.425997, 0.2, -10.133847], 
+    position: [8.714675903320312, 5, 18.952714], 
     geometry: <Vela  />, 
     collider: "ball",
     title: "Estrategias para la Calma", 
     description: "Has encontrado una vela, que representa la tecnica mindfulness para calmar la ansiedad",
     found: false,
-    category: "iniciarMinfulness"
+    category: "iniciarMinfulness",
+    shouldFloat: true,
+
   },
   {  
     id: 3, 
-    position: [20.520877, 1, -2.891414], 
+    position: [1, 5, 20], 
     geometry: <Libro scale={0.15} />, 
     collider: "ball",
     title: "Libro", 
     description: "Esta caracola resuena con sonidos relajantes, ayudando a calmar la mente en momentos de ansiedad. contiene los susurros de las olas. Escucha atentamente.",
     found: false,
-    category: "mindfulness"
+    category: "mindfulness",
+    shouldFloat: true,
   },
   { 
     id: 4, 
@@ -58,68 +64,79 @@ const achievementsData = [
     title: "Reloj", 
     description: "Un espacio para encerrar preocupaciones y dejarlas atrás, promoviendo un estado de relajación.",
     found: false,
-    category: "mindfulness"
+    category: "mindfulness",
+    shouldFloat: true,
   },
   { 
     id: 5, 
-    position: [13.76589, 1, -16.7694], 
+    position: [-7.559950351715088, 2.2141304, 24.833642959594], 
     geometry: <Paleta  />, 
     collider: "ball",
     title: "Paleta", 
     description: "Representa el equilibrio entre emociones y pensamientos, guiándote hacia la estabilidad emocional.",
     found: false,
     category: "mindfulness", 
+    shouldFloat: true,
+
   },
   { 
-    id: 6, 
-    position: [-4.623, 1, -20.7439], 
+    id: 6,
+    position: [11.1710987091064, 1.916135, -13.37], 
     geometry: <Perfume  />, 
     collider: "cuboid",
     title: "Perfume", 
     description: "Dentro de esta caja se encuentran herramientas para comprender mejor la ansiedad y afrontarla con serenidad. Dicen que quien posea esta caja tendrá el poder de cambiar su propio destino.",
     found: false,
     category: "mindfulness", 
+    shouldFloat: true,
+
   },
   { 
-    id: 7, 
-    position: [-9.05008, 1,-18.4232], 
+    id: 7,
+    position: [-9.3568725, 2,-10.492850], 
     geometry: <Pastel />, 
     collider: "ball",
     title: "Pastel", 
     description: "Esta caracola contiene el eco de las olas, recordándote que la calma está en tu interior.",
     found: false,
     category: "mindfulness", 
+    shouldFloat: true,
+
   },
-  // Aprendizaje
+  // aprendizaje
   { 
     id: 8, 
-    position: [-13.87709, 1,  -14.0770], 
-    geometry: <EstrellaMar/>, 
+    position: [-20.1863,2.354596, 3.541252], 
+    geometry: <Caracola/>, 
     collider: "cuboid",
     title: " estella Raíces de Fortaleza", 
     description: "Un símbolo de crecimiento y resiliencia. Cada reto superado fortalece tus raíces.",
     found: false,
-    category: "aprendizaje"
+    category: "aprendizaje",
+    shouldFloat: false
   },
   { 
-    id: 9, 
-    position: [-17.883,1, -10.3035], 
+    id: 9, //x=8.623517036437988,y=2.146864891052246, z=-13.182964324951172
+    position: [8.6235170, 0.8, -13.1829], 
     geometry: <CastilloArena />, 
     collider: "ball",
     title: "Casrillo Susurro del Viento", 
     description: "Cuando la ansiedad te abrume, recuerda que el viento siempre encuentra su camino.",
     found: false,
-    category: "aprendizaje"
+    category: "aprendizaje",
+    shouldFloat: false
   },
   { 
+  
     id: 10, 
-    position: [-18.3, 1, 6.36680], 
+    position: [-14.781462669372559, 1, -6.732724666595459], 
     geometry: <Hoguera />, 
     collider: "cuboid",
     title: "Hoguera Semilla de la Esperanza", 
     description: "Cada pequeño esfuerzo que hagas crecerá con el tiempo. Nunca subestimes tu progreso.",
     found: false,
-    category: "aprendizaje"
+    category: "aprendizaje",
+    shouldFloat: false,
   },
   { 
     id: 11, 
@@ -129,38 +146,43 @@ const achievementsData = [
     title: "Panal Cántico del Océano", 
     description: "Sintoniza con la paz del océano y deja que sus sonidos disipen tus preocupaciones.",
     found: false,
-    category: "aprendizaje"
+    category: "aprendizaje",
+    shouldFloat: true
   },
   { 
-    id: 12, 
-    position: [-19.578943, 1, -7.555367], 
+    position: [-24.34409332, 0.02, 6.21187], 
     geometry: <Tronco />, 
     collider: "cuboid",
     title: "Tronco El Árbol del Equilibrio", 
     description: "Sus raíces profundas y ramas abiertas representan la armonía entre mente y cuerpo.",
     found: false,
-    category: "aprendizaje"
+    category: "aprendizaje",
+    shouldFloat: false,
   },
   { 
     id: 13, 
-    position: [-18.885187, 1, -1.993299], 
-    //geometry: <Clock scale={0.21} rotation={[0, -3, 0]}/>, 
+
+    position: [-4.435, 8.04, 16.985], 
+    //geometry: <Clock scale={0.21} rotation={[0, -3, 0]}/>, -6.622974872589111,y=2.7990477085113525, z=23.111196517944336
     geometry: <Tea/>, 
     collider: "ball",
     title: "Tea Eco del Recuerdo", 
     description: "Esta caracola guarda los ecos de momentos felices. Escúchalos cuando necesites ánimo.",
     found: false,
-    category: "aprendizaje"
+    category: "aprendizaje",
+    shouldFloat: true,
   },
   { 
     id: 14, 
-    position: [-19.92068, 1, 4.1480641], 
+    position: [-10, 9, 5], 
     geometry: <Flores/>, 
     collider: "cuboid",
     title: "Flores Jardín Interior", 
     description: "Cultiva pensamientos positivos como si fueran flores. Con tiempo y paciencia, florecerán.",
     found: false,
-    category: "aprendizaje"
+    category: "aprendizaje",
+    shouldFloat: true,
+
   },
  
   

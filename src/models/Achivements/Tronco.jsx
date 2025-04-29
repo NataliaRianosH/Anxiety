@@ -10,7 +10,7 @@ export function Tronco(props) {
   const { nodes, materials } = useGLTF(Model)
   return (
     <group {...props} dispose={null}>
-      <group position={[0, 0, 0]} scale={0.2}>
+      <group position={[0, 0, 0]} scale={0.08} rotation={[0,0 ,0.2]}>
         <mesh
           castShadow
           receiveShadow

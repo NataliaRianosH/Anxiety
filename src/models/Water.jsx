@@ -162,7 +162,7 @@ const Water = () => {
   });
 
   return (
-    <mesh position={[0, -1, 0]} scale={30} rotation-x={-Math.PI / 2}>
+    <mesh position={[0, -3.2, 0]} scale={30} rotation-x={-Math.PI / 2}>
       <planeGeometry args={[5, 5, 512, 512]} />
       <waterShaderMaterial ref={materialRef} />
     </mesh>

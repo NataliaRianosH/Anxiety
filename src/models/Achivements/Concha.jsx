@@ -17,7 +17,7 @@ export function Concha(props) {
         geometry={nodes.Concha.geometry}
         material={materials.Concha}
         position={[0,0,0]}
-        scale={0.09}
+        scale={0.06}
       />
     </group>
   )

@@ -16,7 +16,7 @@ export function Tea(props) {
         geometry={nodes.Tasa_de_te.geometry}
         material={materials['Tasa de te']}
         position={[0, 0, 0]}
-        scale={0.1}
+        scale={0.05}
       />
     </group>
   )

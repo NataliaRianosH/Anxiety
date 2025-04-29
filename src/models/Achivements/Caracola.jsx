@@ -13,7 +13,7 @@ export function Caracola(props) {
         geometry={nodes.Caracola.geometry}
         material={materials.Caracola}
         position={[0,0,0]}
-        scale={0.13}
+        scale={0.05}
       />
     </group>
   )

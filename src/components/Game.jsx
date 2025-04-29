@@ -77,23 +77,67 @@ const Game = () => {
           color="#ffd8a8"
         />
         <Sky />
-        {/**  debug <AnimatedWater position={[10, -90, -6]} scale={[30, 20, 30]}  rotation = {[0.7, 0.2, 0]}/>**/}
+        {/**  debug  <AnimatedWater position={[10, -90, -6]} scale={[30, 20, 30]}  rotation = {[0.7, 0.2, 0]}/>**/}
         <Physics gravity={[0, -30, 0]}>
-           {/**    <Grass position={[0, -18, 0]} scale={80} rotation={islanRotation} />
-          <Water></Water>**/}
-         <Terreno></Terreno> 
-         <Rocas>
+           {/**  <Grass position={[0, -18, 0]} scale={80} rotation={islanRotation} />
+            **/}
 
-         </Rocas>
-<Palmeras>
-  
-</Palmeras>
+          <Water></Water>
+          <Rocas></Rocas>
+          <Palmeras></Palmeras>
+          <Terreno></Terreno>
           <RigidBody type="fixed" colliders={false}>
-            <mesh position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-              <planeGeometry args={[200, 200]} />
+            <mesh position={[0, -20, 0]} rotation={[-Math.PI / 2, 0, 0]}>
               <meshStandardMaterial color="#1e90ff" transparent opacity={0.3} />
             </mesh>
-            <CuboidCollider args={[100, 0.5, 100]} position={[0, -4, 0]} />
+            <CuboidCollider args={[70, 0.5, 70]} position={[0, -6, 0]} />
+          </RigidBody>
+
+          {/* PAREDES INVISIBLES ALREDEDOR DEL AGUA */}
+          <RigidBody type="fixed">
+            {/* Pared frontal */}
+            <mesh position={[0, 10, 70]}>
+              <boxGeometry args={[140, 40, 1]} />
+              <meshStandardMaterial
+                color="#ffffff"
+                transparent
+                opacity={0.05}
+              />
+            </mesh>
+            <CuboidCollider args={[70, 20, 0.5]} position={[0, 10, 70]} />
+
+            {/* Pared trasera */}
+            <mesh position={[0, 10, -70]}>
+              <boxGeometry args={[140, 40, 1]} />
+              <meshStandardMaterial
+                color="#ffffff"
+                transparent
+                opacity={0.05}
+              />
+            </mesh>
+            <CuboidCollider args={[70, 20, 0.5]} position={[0, 10, -70]} />
+
+            {/* Pared derecha */}
+            <mesh position={[70, 10, 0]}>
+              <boxGeometry args={[1, 40, 140]} />
+              <meshStandardMaterial
+                color="#ffffff"
+                transparent
+                opacity={0.05}
+              />
+            </mesh>
+            <CuboidCollider args={[0.5, 20, 70]} position={[70, 10, 0]} />
+
+            {/* Pared izquierda */}
+            <mesh position={[-70, 10, 0]}>
+              <boxGeometry args={[1, 40, 140]} />
+              <meshStandardMaterial
+                color="#ffffff"
+                transparent
+                opacity={0.05}
+              />
+            </mesh>
+            <CuboidCollider args={[0.5, 20, 70]} position={[-70, 10, 0]} />
           </RigidBody>
 
           {/** 
@@ -120,7 +164,7 @@ const Game = () => {
                   4: 6, // Perfume
                   5: 7, // Pastel
                 };
-              
+
                 return achievement.id === mindfulnessIdsPorFase[phase];
               }
 
@@ -141,6 +185,8 @@ const Game = () => {
             .map((achievement) => (
               <Achievement key={achievement.id} {...achievement} />
             ))}
+           
+
         </Physics>
       </Canvas>
     </section>
