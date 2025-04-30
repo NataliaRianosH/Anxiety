@@ -19,6 +19,7 @@ import Terreno from "../models/Island/Terrain";
 import { Rocas } from "../models/Island/Rocas";
 import { Palmeras } from "../models/Island/Palmeras";
 import LearningModal from "../components/modals/LearningModal"; //  importar el modal
+import learningData from "../components/modals/learningData";
 
 
 const Game = () => {
@@ -26,9 +27,13 @@ const Game = () => {
   const { mindfulnessStarted, phase } = useMindfulness();
   const { achievements, collectAchievement } = useAchievements();
   const [learningModalOpen, setLearningModalOpen] = useState(false);
+  const [learningModalData, setLearningModalData] = useState(null);
   const handleLearningCollision = (id) => {
-    collectAchievement(id);
-    setLearningModalOpen(true);
+    const data = learningData[id]; // obtenemos los datos desde el archivo
+    if (data) {
+      collectAchievement(id);
+      setLearningModalData(data);
+    }
   };
   //Se puede añadir el rigidbody con su collider directamente en el modelo, pero por ahora para las geometrias se pasa
 
@@ -196,9 +201,13 @@ const Game = () => {
         </Physics>
       </Canvas>
       {/* ✅ Modal estático fuera del Canvas */}
-      {learningModalOpen && (
-        <LearningModal isOpen={true} onClose={() => setLearningModalOpen(false)} />
-      )}
+      {learningModalData && (
+  <LearningModal
+    isOpen={true}
+    data={learningModalData}
+    onClose={() => setLearningModalData(null)}
+  />
+)}
     </section>
   );
 };
