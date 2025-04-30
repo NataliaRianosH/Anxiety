@@ -68,8 +68,8 @@ const achievementsData = [
     shouldFloat: true,
   },
   { 
-    id: 5, 
-    position: [-7.559950351715088, 2.2141304, 24.833642959594], 
+    id: 5,
+    position: [15.56363868713378,4.968834, 11.968585968], 
     geometry: <Paleta  />, 
     collider: "ball",
     title: "Paleta", 
@@ -77,7 +77,6 @@ const achievementsData = [
     found: false,
     category: "mindfulness", 
     shouldFloat: true,
-
   },
   { 
     id: 6,

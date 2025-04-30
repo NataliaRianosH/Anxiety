@@ -100,7 +100,7 @@ const CharacterController = ({ positiveChallengeStarted }) => {
     if (rb.current) {
       const vel = rb.current.linvel();
       const position = rb.current.translation();
-      console.log( `Posicion del avatar: x=${position.x},y=${position.y}, z=${position.z}`);
+      //console.log( `Posicion del avatar: x=${position.x},y=${position.y}, z=${position.z}`);
       // Movimiento base con teclado
       const movement = { x: 0, z: 0 };
 
