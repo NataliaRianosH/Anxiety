@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +9,13 @@ const ResetPassword = () => {
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash.includes("error=access_denied") || hash.includes("otp_expired")) {
+      navigate("/recovery-error");
+    }
+  }, [navigate]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = await updatePassword(password);

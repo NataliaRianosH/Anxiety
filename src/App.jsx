@@ -16,6 +16,7 @@ import { AchievementsProvider } from "./context/AchievementsContext";
 import { PositiveThoughtsProvider } from "./context/PositiveThoughtsContext";
 import { MindfulnessProvider } from "./context/MindfulnessContext";
 import { MiniGamesManagerProvider } from "./context/MiniGamesManagerContext";
+import RecoveryError from "./pages/RecoveryError";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -49,6 +50,7 @@ function App() {
                         path="/reset-password"
                         element={<ResetPassword />}
                       />
+                      <Route path="/recovery-error" element={<RecoveryError />} />
                       <Route path="/instructions" element={<Instructions />} />
                       <Route path="/avatar" element={<AvatarSelection />} />
                       <Route path="/game" element={<GameView />} />

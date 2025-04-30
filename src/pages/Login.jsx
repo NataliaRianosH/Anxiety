@@ -55,9 +55,9 @@ const Login = () => {
             <a href="/forgot-password">¿Olvidaste tu contraseña?</a>
           </div>
 
-          <button className="btn" type="submit">Login</button>
+          <button className="btn" type="submit">Iniciar sesión</button>
 
-          <button className="btn" onClick={loginWithGoogle}>Login with Google</button>
+          <button className="btn" onClick={loginWithGoogle}>Iniciar sesión con Google</button>
 
           <div className="register-link">
 
