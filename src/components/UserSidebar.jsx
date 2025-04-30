@@ -58,6 +58,7 @@ const UserSidebar = ({ isOpen, closeSidebar }) => {
           >
             <FaCog className="tab-icon" /> Seguridad
           </button>
+           {/*
           <button
             className={`tab-btn ${
               activeTab === "estadisticas" ? "active" : ""
@@ -65,14 +66,14 @@ const UserSidebar = ({ isOpen, closeSidebar }) => {
             onClick={() => setActiveTab("estadisticas")}
           >
             <FaTrophy className="tab-icon" /> Estadísticas
-          </button>
+          </button>*/}
         </div>
 
         {/* Contenido */}
         <div>
           {activeTab === "informacion" && <InfoTab />}
           {activeTab === "seguridad" && <SecurityTab />}
-          {activeTab === "estadisticas" && <StatsTab />}
+         {/* { activeTab === "estadisticas" && <StatsTab />} */}
         </div>
       </div>
       <div className="sidebar-divider"></div>
