@@ -16,6 +16,12 @@
   overflow-y: auto;
   //background-color: green;
 }
+.sidebar-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
 .user-sidebar.open {
   transform: translateX(0);

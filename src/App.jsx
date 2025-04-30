@@ -17,7 +17,6 @@ import { PositiveThoughtsProvider } from "./context/PositiveThoughtsContext";
 import { MindfulnessProvider } from "./context/MindfulnessContext";
 import { MiniGamesManagerProvider } from "./context/MiniGamesManagerContext";
 
-
 function App() {
   const [count, setCount] = useState(0);
 
@@ -32,16 +31,13 @@ function App() {
 
   return (
     <Router>
-    <MiniGamesManagerProvider>
-      <PositiveThoughtsProvider>
-      <AuthProvider>
-      <AchievementsProvider>
-        <MindfulnessProvider>
-         
-            <KeyboardControls map={keyboardMap}>
-              <main>
-             
-                 
+      <MiniGamesManagerProvider>
+        <PositiveThoughtsProvider>
+          <AuthProvider>
+            <AchievementsProvider>
+              <MindfulnessProvider>
+                <KeyboardControls map={keyboardMap}>
+                  <main>
                     <Routes>
                       <Route path="/" element={<Login />} />
                       <Route path="/profile" element={<Profile />} />
@@ -60,15 +56,13 @@ function App() {
                       <Route path="/story" element={<Story />} />
                       <Route path="/register" element={<Register />} />
                     </Routes>
-                  
-                
-              </main>
-            </KeyboardControls>
-        </MindfulnessProvider>
-        </AchievementsProvider>
-        </AuthProvider>
-      </PositiveThoughtsProvider>
-    </MiniGamesManagerProvider>
+                  </main>
+                </KeyboardControls>
+              </MindfulnessProvider>
+            </AchievementsProvider>
+          </AuthProvider>
+        </PositiveThoughtsProvider>
+      </MiniGamesManagerProvider>
     </Router>
   );
 }

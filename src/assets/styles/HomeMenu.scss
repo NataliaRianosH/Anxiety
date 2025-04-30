@@ -36,9 +36,14 @@
     font-size: 14px;
     font-weight: bold;
     color: white;
-    //background-color: black;
+    margin-bottom: 2px;    
   }
-  
+  .user-avatar {
+    width: 32px;            
+    height: 32px;
+    border-radius: 50%;       
+    object-fit: cover;        
+  }
   .progress-container {
     width: 100px;
     height: 6px;

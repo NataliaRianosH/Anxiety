@@ -41,11 +41,17 @@
     justify-content: center;
     align-items: flex-start;
   }
-  
   .username {
     font-size: 14px;
     font-weight: bold;
     color: white;
+    margin-bottom: 2px;    
+  }
+  .user-avatar {
+    width: 32px;            
+    height: 32px;
+    border-radius: 50%;       
+    object-fit: cover;        
   }
   
   .progress-container {
@@ -54,7 +60,6 @@
     background: #444;
     border-radius: 3px;
     overflow: hidden;
-    margin-top: 3px;
   }
   
   .progress-fill {
@@ -65,7 +70,7 @@
   
   .level {
     font-size: 12px;
-    color: #ccc;
+    color: #ffffff;
     margin-top: 2px;
   }
   

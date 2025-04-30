@@ -6,29 +6,45 @@ import InfoTab from "./UserTabs/InfoTab";
 import SecurityTab from "./UserTabs/SecurityTab";
 import StatsTab from "./UserTabs/StatsTab";
 
-
 const UserSidebar = ({ isOpen, closeSidebar }) => {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("informacion");
+  const avatarUrl = user?.user_metadata?.avatar_url;
 
   return (
     <div className={`user-sidebar ${isOpen ? "open" : ""}`}>
       {/* Botón cerrar */}
-      <button className="close-btn" onClick={closeSidebar}>✖</button>
+      <button className="close-btn" onClick={closeSidebar}>
+        ✖
+      </button>
 
       {/* Sección superior */}
       <div className="sidebar-header">
         <h2 className="sidebar-title">Perfil de Usuario</h2>
         <div className="avatar-icon">
-          <FaUserCircle size={80} />
+          {avatarUrl ? (
+            <img
+              src={avatarUrl}
+              alt="Foto de perfil"
+              className="sidebar-avatar"
+              onError={(e) => {
+                console.log(" Error cargando imagen. Mostrando ícono.");
+                e.currentTarget.style.display = "none";
+              }}
+            />
+          ) : (
+            <FaUserCircle size={80} />
+          )}
         </div>
-        <h3 className="username">{user?.user_metadata?.full_name || "Jugador"}</h3>
+
+        <h3 className="username">
+          {user?.user_metadata?.full_name || "Jugador"}
+        </h3>
       </div>
 
       {/* Sección central (menú + contenido) */}
       <div className="sidebar-middle">
-
-         {/* Menú de pestañas */}
+        {/* Menú de pestañas */}
         <div className="sidebar-tabs">
           <button
             className={`tab-btn ${activeTab === "informacion" ? "active" : ""}`}
@@ -43,7 +59,9 @@ const UserSidebar = ({ isOpen, closeSidebar }) => {
             <FaCog className="tab-icon" /> Seguridad
           </button>
           <button
-            className={`tab-btn ${activeTab === "estadisticas" ? "active" : ""}`}
+            className={`tab-btn ${
+              activeTab === "estadisticas" ? "active" : ""
+            }`}
             onClick={() => setActiveTab("estadisticas")}
           >
             <FaTrophy className="tab-icon" /> Estadísticas

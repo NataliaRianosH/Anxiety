@@ -20,9 +20,25 @@ import { useNavigate } from "react-router-dom";
 import AchievementsModal from "./Achivements/AchievementsModal";
 import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
 import { useMindfulness } from "../context/MindfulnessContext";
+import { useAchievements } from "../context/AchievementsContext";
 
 const GameMenu = ({ isMuted, setIsMuted }) => {
   const { user } = useAuth();
+  const avatarUrl = user?.user_metadata?.avatar_url;
+
+  if (avatarUrl) {
+    console.log("El usuario tiene imagen de perfil:", avatarUrl);
+  } else {
+    console.log("El usuario NO tiene imagen de perfil.");
+  }
+
+  const { achievements } = useAchievements();
+  const totalLogros = achievements.length;
+  const logrosEncontrados = achievements.filter((a) => a.found).length;
+  const porcentaje = !isNaN(logrosEncontrados / totalLogros)
+    ? Math.round((logrosEncontrados / totalLogros) * 100)
+    : 0;
+
   const nivel = 2;
   const progreso = 10;
   const {
@@ -49,7 +65,22 @@ const GameMenu = ({ isMuted, setIsMuted }) => {
           onClick={() => navigate("/profile")}
         />
         <div className="divider"></div>
-        <FaUserCircle className="icon user-icon" />
+        {avatarUrl ? (
+          <img
+            src={avatarUrl}
+            alt="Foto de perfil"
+            className="user-avatar"
+            onError={(e) => {
+              console.log(
+                "No se pudo cargar la imagen de perfil. Se mostrará el ícono."
+              );
+              e.currentTarget.style.display = "none";
+            }}
+          />
+        ) : (
+          <FaUserCircle className="icon user-icon" />
+        )}
+
         <div className="user-details">
           <span className="username">
             {user?.user_metadata?.full_name || "Jugador"}
@@ -57,10 +88,12 @@ const GameMenu = ({ isMuted, setIsMuted }) => {
           <div className="progress-container">
             <div
               className="progress-fill"
-              style={{ width: `${progreso}%` }}
+              style={{ width: `${porcentaje}%` }}
             ></div>
           </div>
-          <span className="level">logros {nivel}</span>
+          <span className="level">
+            Logros {logrosEncontrados}/{totalLogros}
+          </span>
         </div>
       </div>
 
@@ -102,7 +135,11 @@ const GameMenu = ({ isMuted, setIsMuted }) => {
       {/* Sección derecha */}
       <div className="menu-right">
         <button onClick={() => setIsMuted(!isMuted)} className="icon-button">
-          {isMuted ? <FaVolumeMute className="icon" /> : <FaVolumeUp className="icon" />}
+          {isMuted ? (
+            <FaVolumeMute className="icon" />
+          ) : (
+            <FaVolumeUp className="icon" />
+          )}
         </button>
 
         <FaQuestionCircle className="icon" />

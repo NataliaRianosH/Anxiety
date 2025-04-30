@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
   // Inicio de sesión con email/contraseña
   const login = async (email, password) => {
     const { user, error } = await supabase.auth.signInWithPassword({ email, password });
-    
+   
     if (error) {
       return error.message; // Retorna el mensaje de error en lugar de solo loguearlo
     }

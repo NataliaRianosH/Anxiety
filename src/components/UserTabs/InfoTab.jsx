@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import { FaEdit, FaSave } from "react-icons/fa";
 import "../../assets/styles/UserTabs/UserInfoTab.scss";
 import { useAuth } from "../../context/AuthContext";
+import { useAchievements } from "../../context/AchievementsContext";
 
 const InfoTab = () => {
   const { user, partida, actualizarNombreAvatar } = useAuth();
   const [editando, setEditando] = useState(false);
   const [nuevoNombre, setNuevoNombre] = useState(partida?.avatar_name || "");
+  const { achievements } = useAchievements();
+  const totalLogros = achievements.length;
+  const logrosEncontrados = achievements.filter((a) => a.found).length;
+  const porcentaje =
+    totalLogros > 0 ? Math.round((logrosEncontrados / totalLogros) * 100) : 0;
 
   const handleGuardar = async () => {
     if (!nuevoNombre.trim()) return alert("El nombre no puede estar vacío");
@@ -46,11 +52,11 @@ const InfoTab = () => {
 
       <div className="info-row">
         <span className="label">Progreso:</span>
-        <span className="value">0%</span>
+        <span className="value">{porcentaje}%</span>
       </div>
 
       <div className="progress-bar-container">
-        <div className="progress-bar" style={{ width: "0%" }}></div>
+        <div className="progress-bar" style={{ width: `${porcentaje}%` }}></div>
       </div>
 
       <div className="edit-button-container">
