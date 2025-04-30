@@ -1,23 +1,44 @@
 import { RigidBody } from "@react-three/rapier";
-import { useEffect, useState } from "react";
-import { useAchievements } from "../../context/AchievementsContext"; 
+import { useEffect, useRef, useState } from "react";
+import { useFrame } from "@react-three/fiber"; 
+import { useAchievements } from "../../context/AchievementsContext";
 import { usePositiveThoughts } from "../../context/PositiveThoughtsContext";
 import { useMindfulness } from "../../context/MindfulnessContext";
 
-const Achievement = ({ id, position, geometry, collider, title, category, onShowLearning }) => {
+const Achievement = ({
+  id,
+  position,
+  geometry,
+  collider,
+  title,
+  category,
+  onShowLearning,
+  shouldFloat // recibe prop para flotar
+}) => {
   const { positiveMessageValidated, startPositiveChallenge, endPositiveChallenge } = usePositiveThoughts();
-  const { mindfulnessCompleted, startMindfulness, endMindfulness, phase, nextPhase } = useMindfulness(); // ✅ añadimos phase y nextPhase
+  const { mindfulnessCompleted, startMindfulness, endMindfulness, phase, nextPhase } = useMindfulness(); // añadimos phase y nextPhase
 
   const { collectAchievement } = useAchievements();
   const [collected, setCollected] = useState(false);
-  
+
+  const floatRef = useRef(); //  para rotación/flotación
+  const baseY = useRef(position[1]); //  guardamos Y original solo una vez
+
+  //  efecto flotante y rotación
+  useFrame((state) => {
+    if (!shouldFloat || !floatRef.current) return;
+    const t = state.clock.getElapsedTime();
+    floatRef.current.position.y = Math.sin(t * 2) * 0.2;
+    floatRef.current.rotation.y += 0.004; // velocidad lenta
+  });
+
   const isPositiveChallenge = category === "pensamientos";
   const isMindfulnessStarter = category === "iniciarMinfulness"; //esto quiere decir que es el logro que va a activar el minijuego sobre mindfulness
 
   useEffect(() => {
     console.log("Anxiety completed, osea si ya pasó/ganó el juego:", positiveMessageValidated);
 
-    if (isPositiveChallenge && positiveMessageValidated && !collected) { 
+    if (isPositiveChallenge && positiveMessageValidated && !collected) {
       console.log("Minijuego completado: recogiendo logro especial");
       setCollected(true);
       collectAchievement(id);
@@ -87,7 +108,7 @@ const Achievement = ({ id, position, geometry, collider, title, category, onShow
       console.log("Colisionaste con un logro de aprendizaje:", title);
       setCollected(true);
       collectAchievement(id);
-      if (onShowLearning) onShowLearning(); // AVISA A GAMEVIEW
+      if (onShowLearning) onShowLearning(); //  AVISA A GAMEVIEW
     } else {
       console.log("Colisionaste un logro normal: ", title);
       setCollected(true);
@@ -109,10 +130,12 @@ const Achievement = ({ id, position, geometry, collider, title, category, onShow
         }
       }}
     >
-      <mesh>
-        {geometry}
-        <meshStandardMaterial color="gold" />
-      </mesh>
+      <group ref={shouldFloat ? floatRef : null}> {/* aplica animación solo si flota */}
+        <mesh>
+          {geometry}
+          <meshStandardMaterial color="gold" />
+        </mesh>
+      </group>
     </RigidBody>
   );
 };

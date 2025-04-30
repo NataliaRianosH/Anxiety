@@ -51,7 +51,7 @@ const achievementsData = [
     geometry: <Libro scale={0.15} />, 
     collider: "ball",
     title: "Libro", 
-    description: "Esta caracola resuena con sonidos relajantes, ayudando a calmar la mente en momentos de ansiedad. contiene los susurros de las olas. Escucha atentamente.",
+    description: "Este libro resuena con sonidos relajantes, ayudando a calmar la mente en momentos de ansiedad. contiene los susurros de las olas. Escucha atentamente.",
     found: false,
     category: "mindfulness",
     shouldFloat: true,
@@ -70,7 +70,7 @@ const achievementsData = [
   { 
     id: 5,
     position: [15.56363868713378,4.968834, 11.968585968], 
-    geometry: <Paleta  />, 
+    geometry: <Paleta />, 
     collider: "ball",
     title: "Paleta", 
     description: "Representa el equilibrio entre emociones y pensamientos, guiándote hacia la estabilidad emocional.",
@@ -112,7 +112,7 @@ const achievementsData = [
     description: "Un símbolo de crecimiento y resiliencia. Cada reto superado fortalece tus raíces.",
     found: false,
     category: "aprendizaje",
-    shouldFloat: false
+    shouldFloat: true
   },
   { 
     id: 9, //x=8.623517036437988,y=2.146864891052246, z=-13.182964324951172
