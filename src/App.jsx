@@ -31,15 +31,17 @@ function App() {
   ];
 
   return (
+    <Router>
     <MiniGamesManagerProvider>
       <PositiveThoughtsProvider>
+      <AuthProvider>
       <AchievementsProvider>
         <MindfulnessProvider>
          
             <KeyboardControls map={keyboardMap}>
               <main>
-                <Router>
-                  <AuthProvider>
+             
+                 
                     <Routes>
                       <Route path="/" element={<Login />} />
                       <Route path="/profile" element={<Profile />} />
@@ -58,15 +60,16 @@ function App() {
                       <Route path="/story" element={<Story />} />
                       <Route path="/register" element={<Register />} />
                     </Routes>
-                  </AuthProvider>
-                </Router>
+                  
+                
               </main>
             </KeyboardControls>
         </MindfulnessProvider>
         </AchievementsProvider>
-
+        </AuthProvider>
       </PositiveThoughtsProvider>
     </MiniGamesManagerProvider>
+    </Router>
   );
 }
 
