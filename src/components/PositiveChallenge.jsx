@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { X, HelpCircle, Bot } from "lucide-react";
-import "./../assets/styles/AnxietyChallenge.scss"; 
+import "./../assets/styles/AnxietyChallenge.scss";
 import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
 
 import HelpModal from "./modals/HelpModal";
 import { evaluateMessage } from "../utils/evaluateMessage";
 
 const PositiveChallenge = ({ onSuccess, onCancel }) => {
-   const {endPositiveChallenge, completePositiveChallenge } = usePositiveThoughts();
+  const { endPositiveChallenge, completePositiveChallenge } =
+    usePositiveThoughts();
 
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
@@ -39,13 +40,13 @@ const PositiveChallenge = ({ onSuccess, onCancel }) => {
 
   const handleSubmit = async () => {
     setError("");
-  
+
     const basicValidation = validateInput();
     if (basicValidation) {
       setError(basicValidation);
       return;
     }
-  
+
     if (aiEnabled) {
       console.log("Evaluando mensaje con IA...");
       try {
@@ -71,7 +72,6 @@ const PositiveChallenge = ({ onSuccess, onCancel }) => {
       onSuccess();
     }
   };
-  
 
   const handleCancel = () => {
     const confirmExit = window.confirm(
@@ -85,48 +85,60 @@ const PositiveChallenge = ({ onSuccess, onCancel }) => {
   return (
     <div className="anxiety-challenge">
       <div className="top-buttons">
-        <button onClick={handleCancel} className="icon-btn">
-          <X size={20} />
-        </button>
+        
 
         <button className="icon-btn" onClick={() => setShowHelp(true)}>
           <HelpCircle size={20} />
         </button>
 
         <button
-  className={`icon-btn bot-toggle ${aiEnabled ? "active" : ""}`}
-  onClick={() => setAiEnabled(!aiEnabled)}
-  title="Evaluar con IA"
->
-  <Bot size={20} />
-</button>
+          className={`icon-btn bot-toggle ${aiEnabled ? "active" : ""}`}
+          onClick={() => setAiEnabled(!aiEnabled)}
+          title="Evaluar con IA"
+        >
+          <Bot size={20} />
+        </button>
 
+        <button onClick={handleCancel} className="icon-btn">
+          <X size={20} />
+        </button>
       </div>
 
       {!completed ? (
-        <>
-          <p>
-            Estás atravesando un momento de ansiedad. Respira hondo y escribe un
-            mensaje positivo para tu avatar.
-          </p>
-          <div className="input-wrapper">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Escribe tu mensaje positivo..."
-              disabled={loading}
-            />
-            <button onClick={handleSubmit} disabled={loading}>
-              {loading ? "Evaluando..." : "Enviar"}
-            </button>
-          </div>
-          {error && <p className="error">{error}</p>}
-        </>
-      ) : (
-        <p className="success">
-          ¡Buen trabajo! Has escrito un mensaje positivo.
-        </p>
-      )}
+  <div className="mindfulness-phase">
+    <div className="mindfulness-header">
+      <div className="mindfulness-title">
+        <strong>Mensaje Positivo</strong>
+      </div>
+    </div>
+
+    <div className="mindfulness-description">
+      <p className="main-text">
+        Estás atravesando un momento de ansiedad. Respira hondo y escribe un mensaje positivo para tu avatar.
+      </p>
+      <p className="secondary-text">
+        Este mensaje te ayudará a enfrentar situaciones difíciles en el futuro.
+      </p>
+    </div>
+
+    <div className="input-wrapper">
+      <input
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Escribe tu mensaje positivo..."
+        disabled={loading}
+      />
+      <button onClick={handleSubmit} disabled={loading}>
+        {loading ? "Evaluando..." : "Enviar"}
+      </button>
+    </div>
+
+    {error && <p className="error">{error}</p>}
+  </div>
+) : (
+  <p className="success">¡Buen trabajo! Has escrito un mensaje positivo.</p>
+)}
+
 
       {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
     </div>
