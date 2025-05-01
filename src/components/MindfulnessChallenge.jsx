@@ -1,15 +1,15 @@
-import React, { useState } from "react"; // 
+import React, { useState } from "react"; //
 import { X } from "lucide-react";
 import "../assets/styles/AnxietyChallenge.scss";
 import { useMindfulness } from "../context/MindfulnessContext";
 
-const MindfulnessChallenge = () => { 
+const MindfulnessChallenge = () => {
   const {
     endMindfulness,
     phase,
     nextPhase,
     previousPhase,
-    completeMindfulness
+    completeMindfulness,
   } = useMindfulness();
 
   const [error, setError] = useState("");
@@ -34,7 +34,6 @@ const MindfulnessChallenge = () => {
 
   // Fase 6: mostrar solo el mensaje de finalización y botón
 
-
   return (
     <div className="anxiety-challenge">
       <div className="top-buttons">
@@ -55,7 +54,9 @@ const MindfulnessChallenge = () => {
           <div className="options-group">
             <button onClick={() => validarRespuestaFase1("rojo")}>Rojo</button>
             <button onClick={() => validarRespuestaFase1("azul")}>Azul</button>
-            <button onClick={() => validarRespuestaFase1("verde")}>Verde</button>
+            <button onClick={() => validarRespuestaFase1("verde")}>
+              Verde
+            </button>
           </div>
           {error && <p className="error">{error}</p>}
         </>
@@ -65,11 +66,13 @@ const MindfulnessChallenge = () => {
       {phase === 2 && (
         <>
           <p>
-            Estás en la <strong>Fase 2</strong>: Presta atención al sonido. Un objeto
-            cercano hace <em>tictac</em>. Encuéntralo usando los controles (¡están invertidos!).
+            Estás en la <strong>Fase 2</strong>: Presta atención al sonido. Un
+            objeto cercano hace <em>tictac</em>. Encuéntralo usando los
+            controles (¡están invertidos!).
           </p>
           <p>
-            Camina hasta el objeto (un reloj) y colisiónalo para completar esta fase.
+            Camina hasta el objeto (un reloj) y colisiónalo para completar esta
+            fase.
           </p>
         </>
       )}
@@ -78,10 +81,12 @@ const MindfulnessChallenge = () => {
       {phase === 3 && (
         <>
           <p>
-            Estás en la <strong>Fase 3</strong>: Camina despacio. Tu avatar está sensible, sus movimientos reflejan un estado emocional bajo.
+            Estás en la <strong>Fase 3</strong>: Camina despacio. Tu avatar está
+            sensible, sus movimientos reflejan un estado emocional bajo.
           </p>
           <p>
-            Encuentra el objeto frío y dulce: una paleta. Al tocarla, avanzarás a la siguiente fase.
+            Encuentra el objeto frío y dulce: una paleta. Al tocarla, avanzarás
+            a la siguiente fase.
           </p>
         </>
       )}
@@ -90,11 +95,10 @@ const MindfulnessChallenge = () => {
       {phase === 4 && (
         <>
           <p>
-            Estás en la <strong>Fase 4</strong>: Respira profundamente. En algún lugar hay un aroma calmante que debes encontrar.
+            Estás en la <strong>Fase 4</strong>: Respira profundamente. En algún
+            lugar hay un aroma calmante que debes encontrar.
           </p>
-          <p>
-            Busca el frasco de perfume y camina hacia él para avanzar.
-          </p>
+          <p>Busca el frasco de perfume y camina hacia él para avanzar.</p>
         </>
       )}
 
@@ -102,33 +106,34 @@ const MindfulnessChallenge = () => {
       {phase === 5 && (
         <>
           <p>
-            Estás en la <strong>Fase 5</strong>: El sabor también calma. Busca el pastel.
+            Estás en la <strong>Fase 5</strong>: El sabor también calma. Busca
+            el pastel.
           </p>
           <p>
-            Al tocarlo, completarás el ejercicio. ¡Has llegado al final del minijuego!
+            Al tocarlo, completarás el ejercicio. ¡Has llegado al final del
+            minijuego!
           </p>
         </>
       )}
 
-{phase === 6 && (
+      {phase === 6 && (
         <>
-       
           <h2>¡Has completado el ejercicio de mindfulness!</h2>
           <p>
-            Has utilizado todos tus sentidos para calmar tu mente. Respira, reconoce tu avance y llévate esta calma contigo.
+            Has utilizado todos tus sentidos para calmar tu mente. Respira,
+            reconoce tu avance y llévate esta calma contigo.
           </p>
           <p>¡Felicitaciones por tu logro!</p>
-         
-          <button onClick={() => {
-  completeMindfulness();  // Aquí sí se marca como completado
-}}>
-  Aceptar
-</button>
-        
+
+          <button
+            onClick={() => {
+              completeMindfulness(); // Aquí sí se marca como completado
+            }}
+          >
+            Aceptar
+          </button>
         </>
       )}
-        
-  
 
       {/* Texto general para fases anterior
       {phase > 1 && (
@@ -139,8 +144,6 @@ const MindfulnessChallenge = () => {
           </p>
         </>
       )}*/}
-
-      
 
       {/* Siempre visibles para pruebas manuales */}
       <div className="phase-buttons">

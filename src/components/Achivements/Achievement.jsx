@@ -101,7 +101,7 @@ const Achievement = ({
         console.log("Pastel encontrado. Avanzando a la fase final.");
         setCollected(true);
         collectAchievement(id);
-        nextPhase(); // Solo pasa a fase 6
+        nextPhase();
         return;
       }
       
