@@ -40,6 +40,7 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
         setShowVolumePanel(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -147,10 +148,10 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
       {/* Sección derecha */}
       <div className="menu-right">
         <button
-          onClick={() => setShowVolumePanel(!showVolumePanel)}
+          onClick={() => setShowVolumePanel((prev) => !prev)}
           className="icon-button"
         >
-          {isMuted ? (
+          {volume === 0 ? (
             <FaVolumeMute className="icon" />
           ) : (
             <FaVolumeUp className="icon" />
@@ -161,24 +162,22 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
         <FaBars className="icon" />
 
         {showVolumePanel && (
-          <div className="volume-panel">
+          <div className="volume-panel" ref={volumeRef}>
             <div className="volume-header">
               <span>Volumen</span>
               <button
-  className="mute-button"
-  onClick={() => {
-    if (volume === 0) {
-      // restaurar volumen anterior
-      setVolume(previousVolume || 50);
-    } else {
-      setPreviousVolume(volume);
-      setVolume(0);
-    }
-  }}
->
-  {volume === 0 ? "Activar" : "Silenciar"}
-</button>
-
+                className="mute-button"
+                onClick={() => {
+                  if (volume === 0) {
+                    setVolume(previousVolume || 50);
+                  } else {
+                    setPreviousVolume(volume);
+                    setVolume(0);
+                  }
+                }}
+              >
+                {volume === 0 ? "Activar" : "Silenciar"}
+              </button>
             </div>
             <input
               type="range"
@@ -187,9 +186,8 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
               value={volume}
               onChange={(e) => setVolume(Number(e.target.value))}
             />
-
             <div className="volume-footer">
-              <span>Música</span>
+             {/** Música*/} <span></span>
               <span>{volume}%</span>
             </div>
           </div>

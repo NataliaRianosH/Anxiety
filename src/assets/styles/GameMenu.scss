@@ -118,18 +118,22 @@
     align-items: center;
     justify-content: center;
   }
-  .volume-panel {
+
+
+///VOLUMEN
+.volume-panel {
   position: absolute;
-  top: 60px;
-  right: -20px;
+  top: 30px;
+  right: 30px; // Se aleja un poco del borde
   background: white;
   border-radius: 10px;
-  padding: 14px;
-  max-width: calc(100vw - 20px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 12px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 200px;
   z-index: 999;
-  font-family: 'Inter', sans-serif;
-  color: #0f172a;
+  display: flex;
+  flex-direction: column;
+
 
   .volume-header {
     display: flex;
@@ -137,87 +141,34 @@
     align-items: center;
     font-weight: 600;
     font-size: 14px;
-
-    .mute-button {
-      font-size: 13px;
-      color: #14b8a6;
-      background: none;
-      border: none;
-      cursor: pointer;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
+    color: #111;
+    margin-bottom: 4px;
   }
 
-  input[type="range"] {
-    width: 100%;
-    margin: 12px 0;
-    accent-color: #3b82f6;
-  }
-
-  .volume-footer {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    color: #475569;
-  }
-}
-
-
-
-
-.volume-container {
-  position: relative;
-}
-
-.volume-panel {
-  position: absolute;
-  top: 40px;
-  right: 0;
-  background: white;
-  border-radius: 12px;
-  padding: 12px 16px;
-  width: 220px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  font-family: inherit;
-  z-index: 999;
-
-  .volume-header {
-    display: flex;
-    justify-content: space-between;
+  .mute-button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #1dd1a1;
     font-weight: 600;
-    color: #0f172a;
     font-size: 14px;
-    margin-bottom: 8px;
+    cursor: pointer;
 
-    .mute-button {
-      background: none;
-      border: none;
-      color: #14b8a6;
-      font-size: 13px;
-      cursor: pointer;
-      padding: 0;
-
-      &:hover {
-        text-decoration: underline;
-      }
+    &:hover {
+      text-decoration: underline;
     }
   }
 
   input[type="range"] {
     width: 100%;
     accent-color: #3b82f6;
-    margin: 10px 0;
+    margin: 0;
   }
 
   .volume-footer {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
-    color: #475569;
+    font-size: 13px;
+    color: #444;
   }
 }
-
-  
