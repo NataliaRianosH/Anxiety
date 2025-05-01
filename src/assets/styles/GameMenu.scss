@@ -172,3 +172,69 @@
     color: #444;
   }
 }
+
+.game-dropdown {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: white;
+  color: #111827;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 12px;
+  width: 150px;
+  z-index: 999;
+  font-family: 'Lexend Deca', sans-serif;
+
+  .game-dropdown-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1dd1a1;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .game-dropdown-options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #111827;
+      cursor: pointer;
+      transition: background 0.2s ease;
+
+      .dropdown-icon {
+        font-size: 16px;
+        color: #6b7280;
+      }
+
+      &:hover {
+        background-color: #f3f4f6;
+      }
+
+      &.logout {
+        color: #ef4444;
+        font-weight: 600;
+
+        .dropdown-icon {
+          color: #ef4444;
+        }
+
+        &:hover {
+          background-color: #fee2e2;
+        }
+      }
+    }
+  }
+}

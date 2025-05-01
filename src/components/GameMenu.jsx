@@ -15,6 +15,8 @@ import {
   FaQuestionCircle,
   FaBars,
   FaVolumeMute,
+  FaCog,
+  FaSignOutAlt,
 } from "react-icons/fa"; // Importamos iconos
 import { useNavigate } from "react-router-dom";
 import AchievementsModal from "./Achivements/AchievementsModal";
@@ -28,7 +30,9 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
   const [showVolumePanel, setShowVolumePanel] = useState(false);
   const volumeRef = useRef(null);
   const [previousVolume, setPreviousVolume] = useState(50);
-
+  const [showGameMenu, setShowGameMenu] = useState(false);
+  const gameMenuRef = useRef(null);
+  
   if (avatarUrl) {
     //console.log("El usuario tiene imagen de perfil:", avatarUrl);
   } else {
@@ -39,11 +43,15 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
       if (volumeRef.current && !volumeRef.current.contains(event.target)) {
         setShowVolumePanel(false);
       }
+      if (gameMenuRef.current && !gameMenuRef.current.contains(event.target)) {
+        setShowGameMenu(false);
+      }
     };
-
+  
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  
 
   const { achievements } = useAchievements();
   const totalLogros = achievements.length;
@@ -159,7 +167,34 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
         </button>
 
         <FaQuestionCircle className="icon" />
-        <FaBars className="icon" />
+        <button
+  className="icon-button"
+  onClick={() => setShowGameMenu((prev) => !prev)}
+>
+  <FaBars className="icon" />
+</button>
+
+{showGameMenu && (
+  <div className="game-dropdown" ref={gameMenuRef}>
+  <p className="game-dropdown-title">Menú del juego</p>
+  <ul className="game-dropdown-options">
+    <li>
+      <FaUserCircle className="dropdown-icon" />
+      Mi perfil
+    </li>
+    <li>
+      <FaCog className="dropdown-icon" />
+      Configuración
+    </li>
+    <li className="logout">
+      <FaSignOutAlt className="dropdown-icon" />
+      Cerrar sesión
+    </li>
+  </ul>
+</div>
+
+)}
+
 
         {showVolumePanel && (
           <div className="volume-panel" ref={volumeRef}>
