@@ -38,7 +38,7 @@ const ForgotPassword = () => {
       </div>
 
       
-        <button className="btn" type="submit">Enviar enlace</button>
+        <button className="btn" type="submit" style={{ marginTop: "0px" }}>Enviar enlace</button>
 
         <div className="register-link">
 

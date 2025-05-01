@@ -99,7 +99,7 @@ const GameMenu = ({ isMuted, setIsMuted }) => {
 
       {/* Sección central */}
       <div className="menu-center">
-        <FaMap className="icon" />
+         {/*<FaMap className="icon" />
         {/* <FaLock className="icon" />*/}
         <button
           className="achievements-button"
@@ -108,14 +108,14 @@ const GameMenu = ({ isMuted, setIsMuted }) => {
           <FaTrophy className="icon" /> Logros
         </button>
         {/*<FaUserFriends className="icon" />*/}
-        <FaComment className="icon" />
+        {/* <FaComment className="icon" />
         {/* PARA PROBAR EL MINIJUEGO DE pensamientos positivos
         <button onClick={startPositiveChallenge}>
           <FaEye className="icon" /> 
         </button>
         <button className="stop-button" onClick={endPositiveChallenge}>
           <FaStop className="icon" /> 
-        </button> */}
+        </button> 
         <button onClick={startMindfulness}>
           <FaEye className="icon" title="Minijuego mindfulness ON" />
         </button>
@@ -129,7 +129,7 @@ const GameMenu = ({ isMuted, setIsMuted }) => {
           }}
         >
           <FaTrophy className="icon" title="Completar minijuego mindfulness" />
-        </button>
+        </button>*/}
       </div>
 
       {/* Sección derecha */}

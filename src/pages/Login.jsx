@@ -27,7 +27,7 @@ const Login = () => {
 
         {/* Formulario de inicio de sesión con correo y contraseña */}
         <form onSubmit={handleLogin}>
-          <h1>Login</h1>
+          <h1>Iniciar sesión</h1>
           <div className="input-box">
             <input
               type="email"
