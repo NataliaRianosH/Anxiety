@@ -12,6 +12,8 @@ const GameView = () => {
   const { mindfulnessStarted, endMindfulness, phase } = useMindfulness();
   const audioRef = useRef(null);
   const [isMuted, setIsMuted] = useState(false);
+  const [volume, setVolume] = useState(50); // porcentaje
+
   useEffect(() => {
     const audio = new Audio("/sounds/birds.mp3");
     audio.loop = true;
@@ -27,9 +29,13 @@ const GameView = () => {
   // silenciar cuando cambie isMuted
   useEffect(() => {
     if (audioRef.current) {
-      audioRef.current.volume = isMuted ? 0 : 0.5;
+      const vol = volume / 100;
+      audioRef.current.volume = vol;
+      setIsMuted(vol === 0);
     }
-  }, [isMuted]);
+  }, [volume]);
+  
+  
   return (
     <div
       className={`game-container ${
@@ -37,7 +43,13 @@ const GameView = () => {
       }`}
       style={{ position: "relative", overflow: "hidden" }}
     >
-      <GameMenu isMuted={isMuted} setIsMuted={setIsMuted}/>
+      <GameMenu
+  isMuted={isMuted}
+  setIsMuted={setIsMuted}
+  volume={volume}
+  setVolume={setVolume}
+/>
+
       <Game />
       {(positiveChallengeStarted || (mindfulnessStarted && phase !== 5)) && (
         <div className="anxiety-overlay"></div>

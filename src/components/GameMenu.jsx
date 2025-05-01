@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import "../assets/styles/GameMenu.scss";
 import {
@@ -22,15 +22,27 @@ import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
 import { useMindfulness } from "../context/MindfulnessContext";
 import { useAchievements } from "../context/AchievementsContext";
 
-const GameMenu = ({ isMuted, setIsMuted }) => {
+const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
   const { user } = useAuth();
   const avatarUrl = user?.user_metadata?.avatar_url;
+  const [showVolumePanel, setShowVolumePanel] = useState(false);
+  const volumeRef = useRef(null);
+  const [previousVolume, setPreviousVolume] = useState(50);
 
   if (avatarUrl) {
     //console.log("El usuario tiene imagen de perfil:", avatarUrl);
   } else {
-   // console.log("El usuario NO tiene imagen de perfil.");
+    // console.log("El usuario NO tiene imagen de perfil.");
   }
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (volumeRef.current && !volumeRef.current.contains(event.target)) {
+        setShowVolumePanel(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const { achievements } = useAchievements();
   const totalLogros = achievements.length;
@@ -99,7 +111,7 @@ const GameMenu = ({ isMuted, setIsMuted }) => {
 
       {/* Sección central */}
       <div className="menu-center">
-         {/*<FaMap className="icon" />
+        {/*<FaMap className="icon" />
         {/* <FaLock className="icon" />*/}
         <button
           className="achievements-button"
@@ -134,7 +146,10 @@ const GameMenu = ({ isMuted, setIsMuted }) => {
 
       {/* Sección derecha */}
       <div className="menu-right">
-        <button onClick={() => setIsMuted(!isMuted)} className="icon-button">
+        <button
+          onClick={() => setShowVolumePanel(!showVolumePanel)}
+          className="icon-button"
+        >
           {isMuted ? (
             <FaVolumeMute className="icon" />
           ) : (
@@ -144,6 +159,41 @@ const GameMenu = ({ isMuted, setIsMuted }) => {
 
         <FaQuestionCircle className="icon" />
         <FaBars className="icon" />
+
+        {showVolumePanel && (
+          <div className="volume-panel">
+            <div className="volume-header">
+              <span>Volumen</span>
+              <button
+  className="mute-button"
+  onClick={() => {
+    if (volume === 0) {
+      // restaurar volumen anterior
+      setVolume(previousVolume || 50);
+    } else {
+      setPreviousVolume(volume);
+      setVolume(0);
+    }
+  }}
+>
+  {volume === 0 ? "Activar" : "Silenciar"}
+</button>
+
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={volume}
+              onChange={(e) => setVolume(Number(e.target.value))}
+            />
+
+            <div className="volume-footer">
+              <span>Música</span>
+              <span>{volume}%</span>
+            </div>
+          </div>
+        )}
       </div>
 
       <AchievementsModal

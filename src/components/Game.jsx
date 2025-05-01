@@ -200,7 +200,7 @@ const Game = () => {
 
         </Physics>
       </Canvas>
-      {/* ✅ Modal estático fuera del Canvas */}
+      {/*  Modal estático fuera del Canvas */}
       {learningModalData && (
   <LearningModal
     isOpen={true}
