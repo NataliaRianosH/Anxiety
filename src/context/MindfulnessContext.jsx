@@ -40,8 +40,10 @@ export const MindfulnessProvider = ({ children }) => {
   // Función para completarlo
   const completeMindfulness = () => {
     setMindfulnessCompleted(true);
-  markMindfulnessAchievementsAsCompleted(); // Marcar todos como encontrados
-  console.log("Minijuego mindfulness completado, ganaste");
+    markMindfulnessAchievementsAsCompleted(); // Marcar todos como encontrados
+    console.log("Minijuego mindfulness completado, ganaste");
+    setMindfulnessStarted(false);
+
   };
 
   // Función para salir del minijuego
@@ -62,7 +64,10 @@ export const MindfulnessProvider = ({ children }) => {
   };
 
   const nextPhase = () => {
-    setPhase((prev) => (prev < 5 ? prev + 1 : prev));
+    console.log(phase);
+    setPhase((prev) => (prev < 6 ? prev + 1 : prev));
+    console.log("nueva fase", phase);
+
   };
 
   const previousPhase = () => {

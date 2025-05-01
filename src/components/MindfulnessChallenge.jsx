@@ -1,14 +1,15 @@
-import React, { useState } from "react"; // ✅ Importamos useEffect ya no es necesario
+import React, { useState } from "react"; // 
 import { X } from "lucide-react";
 import "../assets/styles/AnxietyChallenge.scss";
 import { useMindfulness } from "../context/MindfulnessContext";
 
-const MindfulnessChallenge = () => {
+const MindfulnessChallenge = () => { 
   const {
     endMindfulness,
     phase,
     nextPhase,
     previousPhase,
+    completeMindfulness
   } = useMindfulness();
 
   const [error, setError] = useState("");
@@ -24,28 +25,15 @@ const MindfulnessChallenge = () => {
 
   const validarRespuestaFase1 = (respuesta) => {
     if (respuesta.toLowerCase() === "azul") {
+      console.log("Fase 1 completada. Avanzando a la fase 2.");
       nextPhase();
     } else {
       setError("Respuesta incorrecta. Intenta de nuevo.");
     }
   };
 
-  // ✅ Fase 6: mostrar solo el mensaje de finalización y botón
-  if (phase === 6) {
-    return (
-      <div className="anxiety-challenge">
-        <div className="final-message">
-          <h2>¡Has completado el ejercicio de mindfulness!</h2>
-          <p>
-            Has utilizado todos tus sentidos para calmar tu mente. Respira, reconoce tu avance y llévate esta calma contigo.
-          </p>
-          <p>¡Felicitaciones por tu logro!</p>
-          {/* Puedes redirigir o cerrar el modal aquí si lo deseas */}
-          <button onClick={endMindfulness}>Aceptar</button>
-        </div>
-      </div>
-    );
-  }
+  // Fase 6: mostrar solo el mensaje de finalización y botón
+
 
   return (
     <div className="anxiety-challenge">
@@ -122,6 +110,26 @@ const MindfulnessChallenge = () => {
         </>
       )}
 
+{phase === 6 && (
+        <>
+       
+          <h2>¡Has completado el ejercicio de mindfulness!</h2>
+          <p>
+            Has utilizado todos tus sentidos para calmar tu mente. Respira, reconoce tu avance y llévate esta calma contigo.
+          </p>
+          <p>¡Felicitaciones por tu logro!</p>
+         
+          <button onClick={() => {
+  completeMindfulness();  // Aquí sí se marca como completado
+}}>
+  Aceptar
+</button>
+        
+        </>
+      )}
+        
+  
+
       {/* Texto general para fases anterior
       {phase > 1 && (
         <>
@@ -131,6 +139,8 @@ const MindfulnessChallenge = () => {
           </p>
         </>
       )}*/}
+
+      
 
       {/* Siempre visibles para pruebas manuales */}
       <div className="phase-buttons">

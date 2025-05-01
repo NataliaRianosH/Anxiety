@@ -16,7 +16,7 @@ const Achievement = ({
   shouldFloat // recibe prop para flotar
 }) => {
   const { positiveMessageValidated, startPositiveChallenge, endPositiveChallenge } = usePositiveThoughts();
-  const { mindfulnessCompleted, startMindfulness, endMindfulness, phase, nextPhase } = useMindfulness(); // añadimos phase y nextPhase
+  const { mindfulnessCompleted, startMindfulness, endMindfulness, phase, nextPhase, completeMindfulness  } = useMindfulness(); // añadimos phase y nextPhase
 
   const { collectAchievement } = useAchievements();
   const [collected, setCollected] = useState(false);
@@ -36,7 +36,7 @@ const Achievement = ({
   const isMindfulnessStarter = category === "iniciarMinfulness"; //esto quiere decir que es el logro que va a activar el minijuego sobre mindfulness
 
   useEffect(() => {
-    console.log("Anxiety completed, osea si ya pasó/ganó el juego:", positiveMessageValidated);
+    //console.log("Anxiety completed, osea si ya pasó/ganó el juego:", positiveMessageValidated);
 
     if (isPositiveChallenge && positiveMessageValidated && !collected) {
       console.log("Minijuego completado: recogiendo logro especial");
@@ -73,6 +73,8 @@ const Achievement = ({
       if (!mindfulnessCompleted) {
         startMindfulness();
       }
+
+      //En la fase 1 no se colisiona con el libro sino q se responde la pregunta del MindfulnessChallenge por eso no sale aquí
     } else if (category === "mindfulness") {
       if (id === 4 && phase === 2) {
         console.log("Reloj encontrado. Avanzando a la fase 3.");
@@ -94,18 +96,19 @@ const Achievement = ({
         collectAchievement(id);
         nextPhase();
         return;
-      }
+      } 
       if (id === 7 && phase === 5) {
-        console.log("Pastel encontrado. Completando minijuego.");
+        console.log("Pastel encontrado. Avanzando a la fase final.");
         setCollected(true);
         collectAchievement(id);
-        completeMindfulness();
-        nextPhase();
+        nextPhase(); // Solo pasa a fase 6
         return;
       }
-      console.log("Colisión con objeto mindfulness en fase no programada.");
+      
+      
+      //console.log("Colisión con objeto mindfulness en fase no programada.");
     } else if (category === "aprendizaje") {
-      console.log("Colisionaste con un logro de aprendizaje:", title);
+      //console.log("Colisionaste con un logro de aprendizaje:", title);
       setCollected(true);
       collectAchievement(id);
       if (onShowLearning) onShowLearning(); //  AVISA A GAMEVIEW

@@ -27,9 +27,9 @@ const GameMenu = ({ isMuted, setIsMuted }) => {
   const avatarUrl = user?.user_metadata?.avatar_url;
 
   if (avatarUrl) {
-    console.log("El usuario tiene imagen de perfil:", avatarUrl);
+    //console.log("El usuario tiene imagen de perfil:", avatarUrl);
   } else {
-    console.log("El usuario NO tiene imagen de perfil.");
+   // console.log("El usuario NO tiene imagen de perfil.");
   }
 
   const { achievements } = useAchievements();
