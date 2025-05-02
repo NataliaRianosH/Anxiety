@@ -60,7 +60,12 @@ export const PositiveThoughtsProvider = ({ children }) => {
     setPositiveMessageValidated(true);
     console.log(" Minijuego completado");
   };
-
+  const resetPositiveChallenge = () => {
+    setPositiveChallengeStarted(false);
+    setPositiveMessageValidated(false);
+    setActiveGame(null);
+  };
+  
 
   return (
     <PositiveContext.Provider
@@ -70,6 +75,7 @@ export const PositiveThoughtsProvider = ({ children }) => {
         startPositiveChallenge,
         completePositiveChallenge,
         endPositiveChallenge,
+        resetPositiveChallenge
       }}
     >
       {children}

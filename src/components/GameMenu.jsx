@@ -38,7 +38,8 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
   const closeSidebar = () => setIsSidebarOpen(false);
-
+  const { resetMindfulnessChallenge } = useMindfulness();
+  const { resetPositiveChallenge } = usePositiveThoughts();
   if (avatarUrl) {
     //console.log("El usuario tiene imagen de perfil:", avatarUrl);
   } else {
@@ -64,6 +65,8 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
     const res = await reiniciarPartida();
     if (res.success) {
       await refetchAchievements(); // recarga desde Supabase
+      resetMindfulnessChallenge(); // ✅ limpia el minijuego 1
+    resetPositiveChallenge();
       alert("Partida reiniciada");
     }
   };

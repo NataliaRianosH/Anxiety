@@ -70,7 +70,13 @@ export const MindfulnessProvider = ({ children }) => {
     console.log("nueva fase", phase);
 
   };
-
+  const resetMindfulnessChallenge = () => {
+    setMindfulnessStarted(false);
+    setMindfulnessCompleted(false);
+    setPhase(1);
+    setActiveGame(null);
+  };
+  
   const previousPhase = () => {
     setPhase((prev) => (prev > 1 ? prev - 1 : prev));
   };
@@ -86,6 +92,7 @@ export const MindfulnessProvider = ({ children }) => {
         phase,
         nextPhase,
         previousPhase,
+        resetMindfulnessChallenge
       }}
     >
       {children}
