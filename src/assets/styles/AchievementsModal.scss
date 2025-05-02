@@ -12,18 +12,13 @@
 }
 
 .modal-content {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 15px;
-  text-align: left;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  width: 90%;
-  max-width: 650px; 
-  max-height: 80vh; 
-  overflow: hidden; 
-  display: flex;
-  flex-direction: column;
+  width: auto;
+  min-width: 650px;
+  max-width: calc(100vw - 40px); 
+  padding: 20px 20px 20px 20px;
+  box-sizing: border-box;
 }
+
 
 /* Header */
 .modal-header {
@@ -32,6 +27,19 @@
   justify-content: space-between;
   margin-bottom: 15px;
 }
+.modal-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #1dd1a1;
+}
+
+.modal-trophy-icon {
+  font-size: 22px;
+  color: #1dd1a1;
+}
 
 .header-left {
   display: flex;
@@ -39,7 +47,7 @@
 }
 
 .trophy-icon {
-  color: #ffb100;
+  color: #1dd1a1;
   font-size: 24px;
   margin-right: 10px;
 }
@@ -62,13 +70,13 @@ h2 {
 /* Grid de logros */
 .achievements-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(3, 1fr);
   gap: 15px;
-  overflow-y: auto; 
-  overflow-x: hidden; 
-  max-height: 55vh; 
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 60vh;
   padding-right: 10px;
-  justify-items: center; 
+  justify-items: center;
 }
 
 /* Ajuste para el scroll */
@@ -77,10 +85,11 @@ h2 {
 }
 
 .achievements-grid::-webkit-scrollbar-thumb {
-  background: #ffb100;
+  background: #1dd1a1;
   border-radius: 5px;
 }
 
 .achievements-grid::-webkit-scrollbar-track {
   background: #f0f0f0;
 }
+

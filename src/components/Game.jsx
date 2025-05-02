@@ -20,6 +20,7 @@ import { Rocas } from "../models/Island/Rocas";
 import { Palmeras } from "../models/Island/Palmeras";
 import LearningModal from "../components/modals/LearningModal"; //  importar el modal
 import learningData from "../components/modals/learningData";
+import GameCompleteModal from "./modals/GameCompleteModal";
 
 
 const Game = () => {
@@ -28,6 +29,14 @@ const Game = () => {
   const { achievements, collectAchievement } = useAchievements();
   const [learningModalOpen, setLearningModalOpen] = useState(false);
   const [learningModalData, setLearningModalData] = useState(null);
+  const [showGameComplete, setShowGameComplete] = useState(false);
+  useEffect(() => {
+    const allFound = achievements.length > 0 && achievements.every(a => a.found);
+    if (allFound && !showGameComplete) {
+      setShowGameComplete(true);
+    }
+  }, [achievements]);
+  
   const handleLearningCollision = (id) => {
     const data = learningData[id]; // obtenemos los datos desde el archivo
     if (data) {
@@ -208,6 +217,10 @@ const Game = () => {
     onClose={() => setLearningModalData(null)}
   />
 )}
+{showGameComplete && (
+  <GameCompleteModal onClose={() => setShowGameComplete(false)} />
+)}
+
     </section>
   );
 };

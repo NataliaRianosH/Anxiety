@@ -15,10 +15,14 @@ const AchievementsModal = ({ isOpen, onClose }) => {
   return (
     <div className="achievements-modal">
       <div className="modal-content">
-        <div className="modal-header">
-          <h2>Logros</h2>
-          <button className="close-button" onClick={onClose}>✖</button>
-        </div>
+      <div className="modal-header">
+  <h2 className="modal-title">
+    <FaTrophy className="modal-trophy-icon" />
+    Logros
+  </h2>
+  <button className="close-button" onClick={onClose}>✖</button>
+</div>
+
 
         {/* Si hay un logro seleccionado, mostrar los detalles */}
         {selectedAchievement ? (

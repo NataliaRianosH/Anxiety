@@ -40,11 +40,13 @@ export const MindfulnessProvider = ({ children }) => {
   // Función para completarlo
   const completeMindfulness = () => {
     setMindfulnessCompleted(true);
-    markMindfulnessAchievementsAsCompleted(); // Marcar todos como encontrados
-    console.log("Minijuego mindfulness completado, ganaste");
+    markMindfulnessAchievementsAsCompleted();
     setMindfulnessStarted(false);
-
+    setPhase(1); // Reinicia la fase para que no se quede en 6
+    setActiveGame(null); // ESTO ES CLAVE
+    console.log("Minijuego mindfulness completado, ganaste");
   };
+  
 
   // Función para salir del minijuego
   const endMindfulness = () => {

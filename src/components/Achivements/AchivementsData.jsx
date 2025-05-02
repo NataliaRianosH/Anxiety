@@ -139,7 +139,7 @@ const achievementsData = [
   },
   { 
     id: 11, 
-    position: [-14.532, 1, 9.7572], 
+    position: [-14.532, 4, 9.7572], 
     geometry: <Panal/>, 
     collider: "ball",
     title: "Panal Cántico del Océano", 
