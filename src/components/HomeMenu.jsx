@@ -104,26 +104,24 @@ const HomeMenu = () => {
 
       {/* Sección central */}
       <div className="menu-center">
-        {/**<FaRedo className="icon" onClick={handleReiniciarPartida} title="Reiniciar Partida" />*/}
+        {/**<FaRedo className="icon" onClick={handleReiniciarPartida} title="Reiniciar Partida" />
         <button className="game-button" onClick={() => navigate("/game")}>
           Continuar Partida
-        </button>
+        </button>*/}
         {/** <FaPlus className="icon" onClick={iniciarNuevaPartida} title="Nueva Partida" /> */}
       </div>
 
       {/* Sección derecha */}
       <div className="menu-right">
-        <FaVolumeUp className="icon" />
         <FaQuestionCircle className="icon" />
         <FaSignOutAlt
-          className="icon logout-icon"
+          className="icon "
           onClick={logout}
           title="Cerrar Sesión"
         />{" "}
-        {/* ✅ Reemplazado FaBars */}
+        {/* Reemplazado FaBars */}
       </div>
-      {/* Renderizamos el UserSidebar y lo mostramos cuando isSidebarOpen es true */}
-      <UserSidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
+       <UserSidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
     </nav>
   );
 };

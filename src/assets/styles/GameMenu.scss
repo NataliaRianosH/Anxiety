@@ -18,22 +18,12 @@
     gap: 10px;
   }
   
-  .icon {
-    font-size: 22px;
-    color: white;
-    cursor: pointer;
-  }
-  
+
   .home-icon {
     margin-right: 5px;
   }
   
-  .divider {
-    width: 1px;
-    height: 20px;
-    background-color: #888;
-    margin: 0 10px;
-  }
+
   
   .user-details {
     display: flex;
@@ -42,14 +32,14 @@
     align-items: flex-start;
   }
   .username {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     color: white;
-    margin-bottom: 2px;    
+    margin-bottom: 0px;    
   }
   .user-avatar {
-    width: 32px;            
-    height: 32px;
+    width: 40px;            
+    height: 40px;
     border-radius: 50%;       
     object-fit: cover;        
   }
@@ -69,9 +59,9 @@
   }
   
   .level {
-    font-size: 12px;
+    font-size: 14px;
     color: #ffffff;
-    margin-top: 2px;
+    margin-top: 2.5px;
   }
   
   /* Sección central */
@@ -90,7 +80,7 @@
     color: white;
     border: none;
     padding: 5px 15px;
-    font-size: 14px;
+    font-size: 16px;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -123,7 +113,7 @@
 ///VOLUMEN
 .volume-panel {
   position: absolute;
-  top: 30px;
+  top: 45px;
   right: 30px; // Se aleja un poco del borde
   background: white;
   border-radius: 10px;
@@ -175,13 +165,14 @@
 
 .game-dropdown {
   position: absolute;
-  top: 30px;
+  top: 45px;
   right: 30px;
   background: white;
   color: #111827;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  padding: 12px;
+  padding: 0px 12px 12px 12px; // Menos padding arriba
+
   width: 150px;
   z-index: 999;
   font-family: 'Lexend Deca', sans-serif;
@@ -200,7 +191,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
+    display: flex; 
     flex-direction: column;
 
     li {

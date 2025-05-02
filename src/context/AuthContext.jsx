@@ -299,7 +299,7 @@ export const AuthProvider = ({ children }) => {
         console.error(" Error al actualizar tabla Partida:", errorPartida.message);
         return { success: false, error: errorPartida.message };
       } else {
-        console.log("✅ Tabla Partida actualizada correctamente");
+        console.log(" Tabla Partida actualizada correctamente");
       }
   
       // Paso 2: Eliminar logros

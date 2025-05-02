@@ -75,26 +75,32 @@ const Profile = () => {
             avatarSkin={partida?.avatar_skin}
             onAvatarChange={(skin) => setAvatarSeleccionado(skin)}
           />
-          <button
-            className="avatar-button"
-            disabled={avatarSeleccionado === partida?.avatar_skin}
-            onClick={async () => {
-              const confirmacion = window.confirm("¿Deseas cambiar tu avatar?");
-              if (!confirmacion) return;
-            
-              const result = await actualizarSkinAvatar(avatarSeleccionado);
-            
-              if (result.success) {
-                alert("¡Skin del avatar actualizada correctamente!");
-              } else {
-                alert("Error al actualizar: " + result.error);
-              }
-            }}
-          >
-            Seleccionar Avatar
-          </button>
+          {avatarSeleccionado !== partida?.avatar_skin && (
+  <p
+    className="avatar-select-text"
+    onClick={async () => {
+      const confirmacion = window.confirm("¿Deseas cambiar tu avatar?");
+      if (!confirmacion) return;
+
+      const result = await actualizarSkinAvatar(avatarSeleccionado);
+
+      if (result.success) {
+        alert("¡Skin del avatar actualizada correctamente!");
+      } else {
+        alert("Error al actualizar: " + result.error);
+      }
+    }}
+  >
+    Seleccionar avatar
+  </p>
+)}
+
         </div>
       </div>
+      
+<button className="continuar-button" onClick={() => navigate("/game")}>
+          Continuar Partida
+        </button>
     </div>
   );
 };

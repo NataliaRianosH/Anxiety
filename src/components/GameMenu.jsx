@@ -24,9 +24,10 @@ import AchievementsModal from "./Achivements/AchievementsModal";
 import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
 import { useMindfulness } from "../context/MindfulnessContext";
 import { useAchievements } from "../context/AchievementsContext";
+import UserSidebar from "./UserSidebar";
 
 const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
-  const { user, logout, reiniciarPartida} = useAuth();
+  const { user, logout, reiniciarPartida } = useAuth();
   const { refetchAchievements } = useAchievements();
   const avatarUrl = user?.user_metadata?.avatar_url;
   const [showVolumePanel, setShowVolumePanel] = useState(false);
@@ -34,6 +35,9 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
   const [previousVolume, setPreviousVolume] = useState(50);
   const [showGameMenu, setShowGameMenu] = useState(false);
   const gameMenuRef = useRef(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   if (avatarUrl) {
     //console.log("El usuario tiene imagen de perfil:", avatarUrl);
@@ -56,14 +60,14 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
   const handleReiniciar = async () => {
     const ok = window.confirm("¿Seguro que quieres reiniciar la partida?");
     if (!ok) return;
-  
+
     const res = await reiniciarPartida();
     if (res.success) {
       await refetchAchievements(); // recarga desde Supabase
       alert("Partida reiniciada");
     }
   };
-  
+
   const { achievements } = useAchievements();
   const totalLogros = achievements.length;
   const logrosEncontrados = achievements.filter((a) => a.found).length;
@@ -92,25 +96,23 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
     <nav className="game-menu">
       {/* Sección izquierda */}
       <div className="menu-left">
-        <FaHome
-          className="icon home-icon"
-          onClick={() => navigate("/profile")}
-        />
-        <div className="divider"></div>
         {avatarUrl ? (
           <img
             src={avatarUrl}
             alt="Foto de perfil"
             className="user-avatar"
+            onClick={toggleSidebar}
+            title="Abrir menú"
             onError={(e) => {
-              console.log(
-                "No se pudo cargar la imagen de perfil. Se mostrará el ícono."
-              );
               e.currentTarget.style.display = "none";
             }}
           />
         ) : (
-          <FaUserCircle className="icon user-icon" />
+          <FaUserCircle
+            className="icon user-icon"
+            onClick={toggleSidebar}
+            title="Abrir menú"
+          />
         )}
 
         <div className="user-details">
@@ -124,7 +126,7 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
             ></div>
           </div>
           <span className="level">
-            Logros {logrosEncontrados}/{totalLogros}
+            Logros {logrosEncontrados} de {totalLogros}
           </span>
         </div>
       </div>
@@ -193,7 +195,7 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
                 <FaHome className="dropdown-icon" />
                 Home
               </li>
-              <li onClick={() =>  handleReiniciar()}>
+              <li onClick={() => handleReiniciar()}>
                 <FaRedo className="dropdown-icon" />
                 Reiniciar partida
               </li>
@@ -242,6 +244,8 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
         isOpen={isAchievementsOpen}
         onClose={() => setIsAchievementsOpen(false)}
       />
+       <UserSidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
+
     </nav>
   );
 };
