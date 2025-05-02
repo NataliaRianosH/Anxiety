@@ -19,9 +19,9 @@ const HomeMenu = () => {
   const avatarUrl = user?.user_metadata?.avatar_url;
 
   if (avatarUrl) {
-    console.log("El usuario tiene imagen de perfil:", avatarUrl);
+    //console.log("El usuario tiene imagen de perfil:", avatarUrl);
   } else {
-    console.log("El usuario NO tiene imagen de perfil.");
+  //console.log("El usuario NO tiene imagen de perfil.");
   }
   const { achievements } = useAchievements();
   const totalLogros = achievements.length;
@@ -54,10 +54,7 @@ const HomeMenu = () => {
     }
   };
 
-  const handleLogout = async () => {
-    await logout(); //  Cierra sesión
-    navigate("/login"); //  Redirige a la página de login
-  };
+
 
   const iniciarNuevaPartida = () => {
     navigate("/game");
@@ -120,7 +117,7 @@ const HomeMenu = () => {
         <FaQuestionCircle className="icon" />
         <FaSignOutAlt
           className="icon logout-icon"
-          onClick={handleLogout}
+          onClick={logout}
           title="Cerrar Sesión"
         />{" "}
         {/* ✅ Reemplazado FaBars */}

@@ -131,7 +131,7 @@ export const AuthProvider = ({ children }) => {
       console.error("Error al cerrar sesión:", error.message);
       return;
     }
-
+    navigate("/login");
     console.log("Sesión cerrada exitosamente");
   };
 
@@ -278,39 +278,60 @@ export const AuthProvider = ({ children }) => {
 
 
   const reiniciarPartida = async () => {
-    if (!user || !partida) return { success: false, error: "No se encontró la partida" };
+    if (!user || !partida) {
+      console.error("No hay usuario o partida activa");
+      return { success: false, error: "No se encontró la partida" };
+    }
   
     try {
-      const { error } = await supabase
+      console.log("Reiniciando partida para usuario:", user.id);
+  
+      // Paso 1: Actualizar tabla Partida
+      const { error: errorPartida } = await supabase
         .from("Partida")
         .update({
           estado: true,
-          ultimo_logro: "", // Opcional: Reiniciar progreso
+          ultimo_logro: "",
         })
         .eq("user_id", user.id);
   
-      if (error) {
-        console.error("Error al reiniciar la partida:", error.message);
-        return { success: false, error: error.message };
+      if (errorPartida) {
+        console.error(" Error al actualizar tabla Partida:", errorPartida.message);
+        return { success: false, error: errorPartida.message };
+      } else {
+        console.log("✅ Tabla Partida actualizada correctamente");
       }
   
-      console.log("Partida reiniciada correctamente");
-      
-      // Actualizar estado en el frontend
+      // Paso 2: Eliminar logros
+      const { error: errorLogros } = await supabase
+  .from("LogrosUsuario")
+  .delete()
+  .eq("user_id", user.id);
+
+if (errorLogros) {
+  console.error(" Error al eliminar logros:", errorLogros.message);
+  return { success: false, error: errorLogros.message };
+} else {
+  console.log(" Logros eliminados correctamente");
+}
+
+      // Paso 3: Estado local
       setPartida((prev) => ({
         ...prev,
         estado: true,
-        fecha_inicio: new Date(),
-        fecha_fin: null,
         ultimo_logro: "",
       }));
   
+      console.log("✅ Partida reiniciada y logros eliminados");
       return { success: true };
+  
     } catch (err) {
-      console.error("Error en reiniciarPartida:", err);
+      console.error("❌ Error inesperado en reiniciarPartida:", err);
       return { success: false, error: err.message };
     }
   };
+  
+  
   
 
   return (

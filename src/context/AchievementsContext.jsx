@@ -44,8 +44,25 @@ export const AchievementsProvider = ({ children }) => {
       )
     );
   
-    // Si hay sesión activa, guardar en Supabase
     if (user) {
+      // Verificar si ya existe antes de insertar
+      const { data: existing, error: fetchError } = await supabase
+        .from("LogrosUsuario")
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("logro_id", id)
+        .maybeSingle();
+  
+      if (fetchError) {
+        console.error("Error verificando si ya existe el logro:", fetchError.message);
+        return;
+      }
+  
+      if (existing) {
+        console.log("El logro ya estaba registrado, no se vuelve a insertar");
+        return;
+      }
+  
       const { error } = await supabase
         .from("LogrosUsuario")
         .insert([{ user_id: user.id, logro_id: id }]);
@@ -57,6 +74,7 @@ export const AchievementsProvider = ({ children }) => {
       }
     }
   };
+  
   
 
   const resetMindfulnessAchievements = () => {
@@ -80,10 +98,32 @@ export const AchievementsProvider = ({ children }) => {
     );
   };
   
+  const refetchAchievements = async () => {
+    if (!user) return;
+  
+    const { data, error } = await supabase
+      .from("LogrosUsuario")
+      .select("logro_id")
+      .eq("user_id", user.id);
+  
+    if (error) {
+      console.error("Error al recargar logros:", error.message);
+      return;
+    }
+  
+    const encontrados = data.map((item) => item.logro_id);
+    setAchievements((prev) =>
+      prev.map((logro) =>
+        encontrados.includes(logro.id)
+          ? { ...logro, found: true }
+          : { ...logro, found: false }
+      )
+    );
+  };
   
 
   return (
-    <AchievementsContext.Provider value={{ achievements, collectAchievement, resetMindfulnessAchievements, markMindfulnessAchievementsAsCompleted }}>
+    <AchievementsContext.Provider value={{ achievements,refetchAchievements, collectAchievement, resetMindfulnessAchievements, markMindfulnessAchievementsAsCompleted }}>
       {children}
     </AchievementsContext.Provider>
   );

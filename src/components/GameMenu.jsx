@@ -17,6 +17,7 @@ import {
   FaVolumeMute,
   FaCog,
   FaSignOutAlt,
+  FaRedo,
 } from "react-icons/fa"; // Importamos iconos
 import { useNavigate } from "react-router-dom";
 import AchievementsModal from "./Achivements/AchievementsModal";
@@ -25,14 +26,15 @@ import { useMindfulness } from "../context/MindfulnessContext";
 import { useAchievements } from "../context/AchievementsContext";
 
 const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
-  const { user } = useAuth();
+  const { user, logout, reiniciarPartida} = useAuth();
+  const { refetchAchievements } = useAchievements();
   const avatarUrl = user?.user_metadata?.avatar_url;
   const [showVolumePanel, setShowVolumePanel] = useState(false);
   const volumeRef = useRef(null);
   const [previousVolume, setPreviousVolume] = useState(50);
   const [showGameMenu, setShowGameMenu] = useState(false);
   const gameMenuRef = useRef(null);
-  
+
   if (avatarUrl) {
     //console.log("El usuario tiene imagen de perfil:", avatarUrl);
   } else {
@@ -47,12 +49,21 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
         setShowGameMenu(false);
       }
     };
-  
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  const handleReiniciar = async () => {
+    const ok = window.confirm("¿Seguro que quieres reiniciar la partida?");
+    if (!ok) return;
   
-
+    const res = await reiniciarPartida();
+    if (res.success) {
+      await refetchAchievements(); // recarga desde Supabase
+      alert("Partida reiniciada");
+    }
+  };
+  
   const { achievements } = useAchievements();
   const totalLogros = achievements.length;
   const logrosEncontrados = achievements.filter((a) => a.found).length;
@@ -168,33 +179,31 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
 
         <FaQuestionCircle className="icon" />
         <button
-  className="icon-button"
-  onClick={() => setShowGameMenu((prev) => !prev)}
->
-  <FaBars className="icon" />
-</button>
+          className="icon-button"
+          onClick={() => setShowGameMenu((prev) => !prev)}
+        >
+          <FaBars className="icon" />
+        </button>
 
-{showGameMenu && (
-  <div className="game-dropdown" ref={gameMenuRef}>
-  <p className="game-dropdown-title">Menú del juego</p>
-  <ul className="game-dropdown-options">
-    <li>
-      <FaUserCircle className="dropdown-icon" />
-      Mi perfil
-    </li>
-    <li>
-      <FaCog className="dropdown-icon" />
-      Configuración
-    </li>
-    <li className="logout">
-      <FaSignOutAlt className="dropdown-icon" />
-      Cerrar sesión
-    </li>
-  </ul>
-</div>
-
-)}
-
+        {showGameMenu && (
+          <div className="game-dropdown" ref={gameMenuRef}>
+            <p className="game-dropdown-title">Menú del juego</p>
+            <ul className="game-dropdown-options">
+              <li onClick={() => navigate("/profile")}>
+                <FaHome className="dropdown-icon" />
+                Home
+              </li>
+              <li onClick={() =>  handleReiniciar()}>
+                <FaRedo className="dropdown-icon" />
+                Reiniciar partida
+              </li>
+              <li className="logout" onClick={logout}>
+                <FaSignOutAlt className="dropdown-icon" />
+                Cerrar sesión
+              </li>
+            </ul>
+          </div>
+        )}
 
         {showVolumePanel && (
           <div className="volume-panel" ref={volumeRef}>
@@ -222,7 +231,7 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
               onChange={(e) => setVolume(Number(e.target.value))}
             />
             <div className="volume-footer">
-             {/** Música*/} <span></span>
+              {/** Música*/} <span></span>
               <span>{volume}%</span>
             </div>
           </div>

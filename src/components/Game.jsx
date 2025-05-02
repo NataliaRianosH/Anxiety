@@ -31,7 +31,7 @@ const Game = () => {
   const handleLearningCollision = (id) => {
     const data = learningData[id]; // obtenemos los datos desde el archivo
     if (data) {
-      collectAchievement(id);
+      
       setLearningModalData(data);
     }
   };
