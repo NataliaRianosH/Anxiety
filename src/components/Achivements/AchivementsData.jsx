@@ -149,6 +149,7 @@ const achievementsData = [
     shouldFloat: true
   },
   { 
+    id: 12, 
     position: [-24.34409332, 0.02, 6.21187], 
     geometry: <Tronco />, 
     collider: "cuboid",

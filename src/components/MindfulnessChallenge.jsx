@@ -2,6 +2,7 @@ import React, { useState } from "react"; //
 import { X } from "lucide-react";
 import "../assets/styles/AnxietyChallenge.scss";
 import { useMindfulness } from "../context/MindfulnessContext";
+import { useAchievements } from "../context/AchievementsContext";
 
 const MindfulnessChallenge = () => {
   const {
@@ -13,6 +14,7 @@ const MindfulnessChallenge = () => {
   } = useMindfulness();
 
   const [error, setError] = useState("");
+  const { collectAchievement } = useAchievements();
 
   const handleCancel = () => {
     const confirmExit = window.confirm(
@@ -26,6 +28,7 @@ const MindfulnessChallenge = () => {
   const validarRespuestaFase1 = (respuesta) => {
     if (respuesta.toLowerCase() === "azul") {
       console.log("Fase 1 completada. Avanzando a la fase 2.");
+      collectAchievement(3);
       nextPhase();
     } else {
       setError("Respuesta incorrecta. Intenta de nuevo.");

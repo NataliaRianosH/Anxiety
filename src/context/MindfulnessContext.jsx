@@ -12,7 +12,7 @@ export const useMindfulness = () => useContext(MindfulnessContext);
 export const MindfulnessProvider = ({ children }) => {
   const [mindfulnessStarted, setMindfulnessStarted] = useState(false);
   const [mindfulnessCompleted, setMindfulnessCompleted] = useState(false);
-  const { resetMindfulnessAchievements, markMindfulnessAchievementsAsCompleted } = useAchievements(); 
+  const { resetMindfulnessAchievements, markMindfulnessAchievementsAsCompleted, removeMindfulnessAchievementsFromDB } = useAchievements(); 
   const { activeGame, setActiveGame, isAnyMinigameActive } =
     useMiniGameManager();
   const [phase, setPhase] = useState(1);
@@ -49,20 +49,19 @@ export const MindfulnessProvider = ({ children }) => {
   
 
   // Función para salir del minijuego
-  const endMindfulness = () => {
+  const endMindfulness = async () => {
     if (!mindfulnessStarted) {
-      console.log(
-        "No se puede terminar el minijuego de mindfulness porque no ha sido iniciado."
-      );
+      console.log("No se puede terminar el minijuego de mindfulness porque no ha sido iniciado.");
       return;
     }
-
+  
     setMindfulnessStarted(false);
-    setPhase(1); // Reiniciar fase al cancelar
-    resetMindfulnessAchievements(); // Aquí limpiamos logros de la sesión
+    setPhase(1); // Reinicia la fase
+    resetMindfulnessAchievements(); // Limpiar logros del frontend
+    await removeMindfulnessAchievementsFromDB(); // Eliminar de la base de datos
     setActiveGame(null);
-
-    console.log("Minijuego mindfulness cancelado y reiniciado");
+  
+    console.log("Minijuego mindfulness cancelado y reiniciado.");
   };
 
   const nextPhase = () => {

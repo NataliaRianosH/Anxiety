@@ -120,10 +120,31 @@ export const AchievementsProvider = ({ children }) => {
       )
     );
   };
+
+  const removeMindfulnessAchievementsFromDB = async () => {
+    if (!user) return;
+  
+    const mindfulnessIds = achievements
+      .filter((a) => a.category === "mindfulness")
+      .map((a) => a.id);
+  
+    const { error } = await supabase
+      .from("LogrosUsuario")
+      .delete()
+      .eq("user_id", user.id)
+      .in("logro_id", mindfulnessIds);
+  
+    if (error) {
+      console.error("Error al eliminar logros de mindfulness:", error.message);
+    } else {
+      console.log(" Logros de mindfulness eliminados de la base de datos.");
+    }
+  };
+  
   
 
   return (
-    <AchievementsContext.Provider value={{ achievements,refetchAchievements, collectAchievement, resetMindfulnessAchievements, markMindfulnessAchievementsAsCompleted }}>
+    <AchievementsContext.Provider value={{ achievements,refetchAchievements, collectAchievement, resetMindfulnessAchievements, markMindfulnessAchievementsAsCompleted,  removeMindfulnessAchievementsFromDB }}>
       {children}
     </AchievementsContext.Provider>
   );
