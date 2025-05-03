@@ -33,7 +33,8 @@ const AchievementCard = ({ achievement, onClick }) => {
             <OrbitControls enableZoom={false} enablePan={false} />
           </Canvas>
       */
-          <img src={logroImg} alt="Logro" className="achievement-image" />
+          <img src={achievement.image} alt={title} className="achievement-image" />
+
         ) : (
           <p>Cargando...</p> // Alternativa visual cuando no se renderiza el modelo
         )}

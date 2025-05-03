@@ -17,7 +17,23 @@ import Tea from "../../models/Achivements/Tea";
 import Tronco from "../../models/Achivements/Tronco";
 import Vela from "../../models/Achivements/Vela";
 
- 
+//Imagenes 2d
+import velaImg from "../../assets/images/Achivements2D/vela.png";
+import conchaImg from "../../assets/images/Achivements2D/concha.png";
+import caracolaImg from "../../assets/images/Achivements2D/caracola.png";
+import floresImg from "../../assets/images/Achivements2D/flores.png";
+import castilloArenaImg from "../../assets/images/Achivements2D/castillo.png";
+import hogueraImg from "../../assets/images/Achivements2D/hoguera.png";
+import panalImg from "../../assets/images/Achivements2D/panal.png";
+import teaImg from "../../assets/images/Achivements2D/tea.png";
+import troncoImg from "../../assets/images/Achivements2D/tronco.png";
+import paletaImg from "../../assets/images/Achivements2D/paleta.png";
+import pastelImg from "../../assets/images/Achivements2D/pastel.png";
+import perfumeImg from "../../assets/images/Achivements2D/perfume.png";
+import libroImg from "../../assets/images/Achivements2D/libro.png";
+import relojImg from "../../assets/images/Achivements2D/reloj.png";
+
+
 const achievementsData = [
   { 
   
@@ -30,6 +46,7 @@ const achievementsData = [
     found: false,
     category: "pensamientos",
     shouldFloat: true,
+    image: conchaImg,
 
   },
   // Mindfulness
@@ -43,6 +60,7 @@ const achievementsData = [
     found: false,
     category: "iniciarMinfulness",
     shouldFloat: true,
+    image: velaImg,
 
   },
   {  
@@ -55,6 +73,7 @@ const achievementsData = [
     found: false,
     category: "mindfulness",
     shouldFloat: true,
+    image: libroImg,
   },
   { 
     id: 4, 
@@ -66,6 +85,7 @@ const achievementsData = [
     found: false,
     category: "mindfulness",
     shouldFloat: true,
+    image: relojImg,
   },
   { 
     id: 5,
@@ -77,6 +97,7 @@ const achievementsData = [
     found: false,
     category: "mindfulness", 
     shouldFloat: true,
+    image: paletaImg,
   },
   { 
     id: 6,
@@ -88,6 +109,7 @@ const achievementsData = [
     found: false,
     category: "mindfulness", 
     shouldFloat: true,
+    image: perfumeImg,
 
   },
   { 
@@ -100,6 +122,7 @@ const achievementsData = [
     found: false,
     category: "mindfulness", 
     shouldFloat: true,
+    image: pastelImg,
 
   },
   // aprendizaje
@@ -112,7 +135,8 @@ const achievementsData = [
     description: "Un símbolo de crecimiento y resiliencia. Cada reto superado fortalece tus raíces.",
     found: false,
     category: "aprendizaje",
-    shouldFloat: true
+    shouldFloat: true,
+    image: caracolaImg,
   },
   { 
     id: 9, //x=8.623517036437988,y=2.146864891052246, z=-13.182964324951172
@@ -123,7 +147,8 @@ const achievementsData = [
     description: "Cuando la ansiedad te abrume, recuerda que el viento siempre encuentra su camino.",
     found: false,
     category: "aprendizaje",
-    shouldFloat: false
+    shouldFloat: false,
+    image: castilloArenaImg,
   },
   { 
   
@@ -136,6 +161,7 @@ const achievementsData = [
     found: false,
     category: "aprendizaje",
     shouldFloat: false,
+    image: hogueraImg,
   },
   { 
     id: 11, 
@@ -146,7 +172,8 @@ const achievementsData = [
     description: "Sintoniza con la paz del océano y deja que sus sonidos disipen tus preocupaciones.",
     found: false,
     category: "aprendizaje",
-    shouldFloat: true
+    shouldFloat: true,
+    image: panalImg,
   },
   { 
     id: 12, 
@@ -158,6 +185,7 @@ const achievementsData = [
     found: false,
     category: "aprendizaje",
     shouldFloat: false,
+    image: troncoImg,
   },
   { 
     id: 13, 
@@ -171,6 +199,7 @@ const achievementsData = [
     found: false,
     category: "aprendizaje",
     shouldFloat: true,
+    image: teaImg,
   },
   { 
     id: 14, 
@@ -182,6 +211,7 @@ const achievementsData = [
     found: false,
     category: "aprendizaje",
     shouldFloat: true,
+    image: floresImg,
 
   },
  

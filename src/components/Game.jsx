@@ -21,6 +21,7 @@ import { Palmeras } from "../models/Island/Palmeras";
 import LearningModal from "../components/modals/LearningModal"; //  importar el modal
 import learningData from "../components/modals/learningData";
 import GameCompleteModal from "./modals/GameCompleteModal";
+import ResizeHandler from "./ResizeHandler";
 
 
 const Game = () => {
@@ -75,9 +76,11 @@ const Game = () => {
   return (
     <section className="w-full h-screen relative">
       <Canvas
+      
         className="w-full h-screen bg-transparent"
         camera={{ near: 0.1, far: 1000, position: [-50, 10, 21] }}
       >
+        <ResizeHandler />
         {/** camera={{ position: [0, 0, 10], near: 0.1, far: 1000 }}  **/}
         {/** <OrbitControls enableZoom={true} enablePan={true} />**/}
         {/** Componente de carga**/}

@@ -38,7 +38,7 @@ const CharacterController = ({ positiveChallengeStarted }) => {
 
   const { user, partida } = useAuth();
   const avatarSkin = partida?.avatar_skin || "Avatar3";
-
+/**
   const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED, JUMP_FORCE } = useControls(
     "Character Control",
     {
@@ -52,8 +52,13 @@ const CharacterController = ({ positiveChallengeStarted }) => {
       },
       JUMP_FORCE: { value: 10, min: 5, max: 20, step: 1 },
     }
-  );
-
+    
+  ); */
+  const WALK_SPEED = 3;
+  const RUN_SPEED = 10;
+  const ROTATION_SPEED = degToRad(0.5);
+  const JUMP_FORCE = 10;
+  
   const rb = useRef();
   const container = useRef();
   const character = useRef();
