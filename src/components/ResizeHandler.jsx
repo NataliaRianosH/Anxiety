@@ -9,7 +9,7 @@ const ResizeHandler = () => {
       gl.setSize(window.innerWidth, window.innerHeight);
       gl.setPixelRatio(window.devicePixelRatio);
     };
-
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [gl]);
