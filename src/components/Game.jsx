@@ -31,6 +31,8 @@ const Game = () => {
   const [learningModalOpen, setLearningModalOpen] = useState(false);
   const [learningModalData, setLearningModalData] = useState(null);
   const [showGameComplete, setShowGameComplete] = useState(false);
+  const [terrainReady, setTerrainReady] = useState(false);
+
   useEffect(() => {
     const allFound = achievements.length > 0 && achievements.every(a => a.found);
     if (allFound && !showGameComplete) {
@@ -75,6 +77,11 @@ const Game = () => {
 
   return (
     <section className="w-full h-screen relative">
+      {!terrainReady && (
+  <div className="absolute top-1/2 left-1/2 text-white text-xl">
+    Cargando entorno...
+  </div>
+)}
       <Canvas
       
         className="w-full h-screen bg-transparent"
@@ -108,7 +115,8 @@ const Game = () => {
           <Water></Water>
           <Rocas></Rocas>
           <Palmeras></Palmeras>
-          <Terreno></Terreno>
+          <Terreno onLoaded={() => setTerrainReady(true)} />
+
           <RigidBody type="fixed" colliders={false}>
             <mesh position={[0, -20, 0]} rotation={[-Math.PI / 2, 0, 0]}>
               <meshStandardMaterial color="#1e90ff" transparent opacity={0.3} />
@@ -169,9 +177,10 @@ const Game = () => {
             scale={islandscale}
             rotation={islanRotation}
           /> **/}
-          <CharacterController
-            positiveChallengeStarted={positiveChallengeStarted}
-          />
+          {terrainReady && (
+  <CharacterController positiveChallengeStarted={positiveChallengeStarted} />
+)}
+
           {/**   <Clock position={[-13, 5, 24.4946]} scale={0.21} rotation={[0, -3, 0]}/>
           <Popsicle position={[-18, 6, 23.6]} scale={2} rotation={[0, 1, 0]}/>**/}
           {achievements

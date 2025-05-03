@@ -116,20 +116,24 @@ const CharacterController = ({ positiveChallengeStarted }) => {
 
       
       // Movimiento con mouse (solo si no se usan teclas)
+      /**
       const usingKeyboard = movement.x !== 0 || movement.z !== 0;
       const usingClick = isClicking.current && !usingKeyboard;
-  
       const effectiveMovement = { ...movement };
-  
+      let speed = RUN_SPEED;
       // Si se está usando el click, calcular movimiento desde el mouse
       if (usingClick) {
         effectiveMovement.x = -mouse.x;
         effectiveMovement.z = mouse.y + 0.4;
+      
+        const distanciaMouse = Math.sqrt(mouse.x ** 2 + (mouse.y + 0.4) ** 2);
+        speed = Math.min(WALK_SPEED + distanciaMouse * 10, RUN_SPEED);
       }
       
+       */
 
       // Movimiento efectivo sin click (usa solo teclado)
-      //const effectiveMovement = { ...movement };
+      const effectiveMovement = { ...movement };
 
       // Invertir controles (solo horizontal) en fase 2
       if (phase2Movement) {
