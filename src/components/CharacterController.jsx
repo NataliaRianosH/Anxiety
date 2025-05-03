@@ -114,7 +114,7 @@ const CharacterController = ({ positiveChallengeStarted }) => {
       if (get().left) movement.x = 1;
       if (get().right) movement.x = -1;
 
-      /*
+      
       // Movimiento con mouse (solo si no se usan teclas)
       const usingKeyboard = movement.x !== 0 || movement.z !== 0;
       const usingClick = isClicking.current && !usingKeyboard;
@@ -126,10 +126,10 @@ const CharacterController = ({ positiveChallengeStarted }) => {
         effectiveMovement.x = -mouse.x;
         effectiveMovement.z = mouse.y + 0.4;
       }
-      */
+      
 
       // Movimiento efectivo sin click (usa solo teclado)
-      const effectiveMovement = { ...movement };
+      //const effectiveMovement = { ...movement };
 
       // Invertir controles (solo horizontal) en fase 2
       if (phase2Movement) {
