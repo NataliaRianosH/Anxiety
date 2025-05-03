@@ -211,7 +211,7 @@ const CharacterController = ({ positiveChallengeStarted }) => {
           vel.z = forwardZ * (isRunning ? RUN_SPEED * 0.8 : WALK_SPEED * 0.5);
         
           isOnGround.current = false;
-          setAnimation("Jumping");
+          
         }
         
         

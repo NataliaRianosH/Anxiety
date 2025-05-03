@@ -1,71 +1,76 @@
-.help-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 2000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .help-modal {
-    background: white;
-    color: #1a1a1a; // <-- AQUI ESTÁ EL CAMBIO CLAVE
-  
-    border-radius: 12px;
-    padding: 30px;
-    width: 90%;
-    max-width: 500px;
-    position: relative;
-    font-family: 'Poppins', sans-serif;
-  
-    h2 {
-      margin-top: 0;
-      font-size: 22px;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-  
-    p {
-      color: #1a1a1a; // <-- Asegura que <p> no herede blanco
-      margin-bottom: 10px;
-    }
-  
-    ul {
-      padding-left: 20px;
-      margin: 10px 0;
-    }
-  
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-    }
-  }
-  
-  .modal-footer {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-  
-    .icon-btn {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      color: #333;
-      transition: transform 0.2s;
-  
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
-  }
-  
-  
+.learning-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #ffffff;
+  padding: 2rem 2rem 1.5rem 2rem;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 550px;
+  max-height: 80vh;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  font-family: 'Lexend Deca', sans-serif;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-scroll {
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  margin-top: 1rem;
+  max-height: 55vh;
+  text-align: left;
+}
+
+.modal-scroll h3 {
+  color: #008c72;
+  margin-top: 1.2rem;
+}
+
+.modal-scroll p {
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.modal-scroll img {
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 1rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.understood-btn {
+  background-color: #00b894;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  border-radius: 10px;
+  font-weight: bold;
+  margin: 1.5rem auto 0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.close-btn {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
+  z-index: 1;
+}

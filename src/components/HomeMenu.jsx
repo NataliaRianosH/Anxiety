@@ -13,15 +13,16 @@ import {
 } from "react-icons/fa"; // Importamos iconos
 import UserSidebar from "./UserSidebar";
 import { useAchievements } from "../context/AchievementsContext";
-
+import HelpModal from "./modals/HelpModal"; "../components/modals/HelpModal";
 const HomeMenu = () => {
   const { user, partida, reiniciarPartida, logout } = useAuth();
   const avatarUrl = user?.user_metadata?.avatar_url;
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
 
   if (avatarUrl) {
     //console.log("El usuario tiene imagen de perfil:", avatarUrl);
   } else {
-  //console.log("El usuario NO tiene imagen de perfil.");
+    //console.log("El usuario NO tiene imagen de perfil.");
   }
   const { achievements } = useAchievements();
   const totalLogros = achievements.length;
@@ -53,8 +54,6 @@ const HomeMenu = () => {
       }
     }
   };
-
-
 
   const iniciarNuevaPartida = () => {
     navigate("/game");
@@ -113,7 +112,13 @@ const HomeMenu = () => {
 
       {/* Sección derecha */}
       <div className="menu-right">
-        <FaQuestionCircle className="icon" />
+        <button
+          className="icon-button"
+          onClick={() => setIsHelpOpen(true)}
+          title="Ayuda"
+        >
+          <FaQuestionCircle className="icon" />
+        </button>
         <FaSignOutAlt
           className="icon "
           onClick={logout}
@@ -121,7 +126,10 @@ const HomeMenu = () => {
         />{" "}
         {/* Reemplazado FaBars */}
       </div>
-       <UserSidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
+      <UserSidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
+      <HelpModal isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
+
+
     </nav>
   );
 };

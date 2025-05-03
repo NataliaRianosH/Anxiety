@@ -1,67 +1,84 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { X } from "lucide-react";
-import { useAuth } from "../../context/AuthContext";
-import "./../../assets/styles/modals/HelpModal.scss";
-import { ArrowRight, ArrowLeft } from "lucide-react";
+import ayudaTeclas from "../../assets/images/ControlesPrincipales.png";
+import flechasTeclas from "../../assets/images/ControlesMovimiento.png";
+import "../../assets/styles/modals/HelpModal.scss";
 
-
-const HelpModal = ({ onClose }) => {
-  const { user } = useAuth();
-  const avatarName = user?.avatar_name || "Avatar";
-  const [page, setPage] = useState(0);
+const HelpModal = ({ isOpen, onClose }) => {
+  if (!isOpen) return null;
 
   return (
-    <div className="help-modal-overlay">
-      <div className="help-modal">
+    <div
+      className="learning-modal-overlay"
+      onClick={(e) => {
+        if (e.target.classList.contains("learning-modal-overlay")) {
+          onClose();
+        }
+      }}
+    >
+      <div className="modal-content">
         <button className="close-btn" onClick={onClose}>
           <X size={20} />
         </button>
 
-        {page === 0 && (
-          <>
-            <h2>¿Cómo funciona este minijuego?</h2>
-            <p>
-              En este minijuego, estás ayudando a tu compañero <strong>{avatarName}</strong> a calmarse durante un ataque de ansiedad.
-              Para hacerlo, debes escribir un mensaje positivo que lo anime y lo ayude a tranquilizarse.
-            </p>
-            <ul>
-              <li>Debe tener al menos 3 palabras.</li>
-              <li>No puede contener palabras negativas u ofensivas.</li>
-              <li>No repitas las mismas palabras muchas veces.</li>
-            </ul>
-            <p>
-              Si decides cerrar el minijuego ahora, <strong>no obtendrás el logro asociado</strong>. Puedes retomarlo después.
-              Pronto podrás usar inteligencia artificial para recibir retroalimentación sobre tu mensaje.
-            </p>
-          </>
-        )}
+        <div className="modal-scroll">
+          <h2>Ayuda del juego</h2>
 
-        {page === 1 && (
-          <>
-            <h2>¿Por qué este minijuego?</h2>
+          <div className="help-section">
+            <h3>1. ¿Qué es este juego?</h3>
             <p>
-              Muchas personas experimentan pensamientos negativos y ansiedad. Este minijuego busca ayudarte a reconocer esos momentos
-              y a practicar técnicas de autoafirmación que pueden ser útiles en la vida real.
+              Este es un entorno virtual relajante diseñado para ayudarte a entender y manejar la ansiedad. 
+              Aquí podrás explorar a tu ritmo, sin presión, sin competencia y con actividades pensadas para el bienestar.
             </p>
-            <p>
-              Al escribir mensajes positivos para tu avatar, estás desarrollando empatía, calma y enfoque, elementos clave para manejar la ansiedad.
-              Este ejercicio se basa en herramientas de psicología cognitiva y técnicas de mindfulness.
-            </p>
-          </>
-        )}
+            <img src={ayudaTeclas} alt="Controles W A S D" />
+            <p>También puedes moverte con las teclas de dirección:</p>
+            <img src={flechasTeclas} alt="Flechas dirección" />
+          </div>
 
-        <div className="modal-footer">
-          {page > 0 && (
-            <button onClick={() => setPage(page - 1)} className="icon-btn">
-              <ArrowLeft size={20} />
-            </button>
-          )}
-          {page < 1 && (
-            <button onClick={() => setPage(page + 1)} className="icon-btn">
-              <ArrowRight size={20} />
-            </button>
-          )}
+          <div className="help-section">
+            <h3>2. ¿Cómo se juega?</h3>
+            <p>
+              Muévete usando las teclas W A S D o las flechas del teclado. 
+              Si quieres avanzar más rápido, mantén presionada la tecla <strong>Shift</strong>. 
+              Acércate a objetos o colisiónate con ellos para activar interacciones o minijuegos. No hay límites de tiempo.
+            </p>
+          </div>
+
+          <div className="help-section">
+            <h3>3. ¿Qué puedes hacer en el juego?</h3>
+            <p>
+              Puedes explorar escenarios naturales, encontrar elementos ocultos que enseñan a manejar la ansiedad,
+              participar en minijuegos relajantes, y desbloquear logros que reflejan tu avance personal.
+            </p>
+          </div>
+
+          <div className="help-section">
+            <h3>4. ¿Cómo saber qué buscar?</h3>
+            <p>
+              Haz clic en el botón <strong>"Logros"</strong> para ver una lista de los objetos o actividades 
+              que puedes descubrir. Puedes hacer clic en las tarjetas para observar los elementos más de cerca.
+            </p>
+          </div>
+
+          <div className="help-section">
+            <h3>5. ¿Y si no sé por dónde ir?</h3>
+            <p>
+              Este juego no tiene caminos correctos ni objetivos forzados. 
+              Fue diseñado para que explores con calma y curiosidad. Cada rincón puede ofrecer una experiencia significativa.
+            </p>
+          </div>
+
+          <div className="help-section">
+            <h3>6. ¿Qué hace cada botón del menú?</h3>
+            <p><strong>Volumen:</strong> Activa o silencia la música ambiental.</p>
+            <p><strong>Ayuda:</strong> Abre esta ventana de instrucciones.</p>
+            <p><strong>Menú:</strong> Te permite acceder a tu perfil, reiniciar la partida o cerrar sesión.</p>
+          </div>
         </div>
+
+        <button className="understood-btn" onClick={onClose}>
+          Entendido
+        </button>
       </div>
     </div>
   );

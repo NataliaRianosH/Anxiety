@@ -25,6 +25,7 @@ import { usePositiveThoughts } from "../context/PositiveThoughtsContext";
 import { useMindfulness } from "../context/MindfulnessContext";
 import { useAchievements } from "../context/AchievementsContext";
 import UserSidebar from "./UserSidebar";
+import HelpModal from "./modals/HelpModal";
 
 const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
   const { user, logout, reiniciarPartida } = useAuth();
@@ -40,6 +41,8 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
   const closeSidebar = () => setIsSidebarOpen(false);
   const { resetMindfulnessChallenge } = useMindfulness();
   const { resetPositiveChallenge } = usePositiveThoughts();
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
+
   if (avatarUrl) {
     //console.log("El usuario tiene imagen de perfil:", avatarUrl);
   } else {
@@ -65,8 +68,8 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
     const res = await reiniciarPartida();
     if (res.success) {
       await refetchAchievements(); // recarga desde Supabase
-      resetMindfulnessChallenge(); // ✅ limpia el minijuego 1
-    resetPositiveChallenge();
+      resetMindfulnessChallenge(); // limpia el minijuego 1
+      resetPositiveChallenge();
       alert("Partida reiniciada");
     }
   };
@@ -182,7 +185,13 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
           )}
         </button>
 
-        <FaQuestionCircle className="icon" />
+        <button
+          className="icon-button"
+          onClick={() => setIsHelpOpen(true)}
+          title="Ayuda"
+        >
+          <FaQuestionCircle className="icon" />
+        </button>
         <button
           className="icon-button"
           onClick={() => setShowGameMenu((prev) => !prev)}
@@ -247,7 +256,8 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
         isOpen={isAchievementsOpen}
         onClose={() => setIsAchievementsOpen(false)}
       />
-       <UserSidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
+      <UserSidebar isOpen={isSidebarOpen} closeSidebar={closeSidebar} />
+      <HelpModal isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
 
     </nav>
   );
