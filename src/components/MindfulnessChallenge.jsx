@@ -118,7 +118,7 @@ const MindfulnessChallenge = () => {
                 Presta atención al sonido. Un objeto cercano hace tic-tac.
               </p>
               <p className="secondary-text">
-                Camina hasta el objeto (un reloj) y colisiónalo para completar
+                Camina hasta el objeto (un reloj) y recolectalo para completar
                 esta fase.
               </p>
             </div>
@@ -194,18 +194,20 @@ const MindfulnessChallenge = () => {
 
 {phase === 6 && (
   <div className="phase-end">
-    <h2 className="phase-end-title">Técnicas que puedes usar siempre</h2>
+     <h2 className="phase-end-title">Técnicas que puedes usar siempre</h2>
+
+  
     <p className="phase-end-description">
-      Cuando sientas que la ansiedad aparece, recuerda este minijuego.
+      Este minijuego está inspirado en la técnica de mindfulness 5-4-3-2-1, que te ayuda a reconectar con tus sentidos:
+      5 cosas que puedes ver, 4 que puedes tocar, 3 que puedes oír, 2 que puedes oler y 1 que puedes saborear.
     </p>
+
     <p className="phase-end-description">
-      Centrarte en lo que puedes percibir con tu cuerpo es una forma poderosa de volver al presente.
+      Al enfocar tu atención en el presente, calmas tu mente y recuperas el control de tu cuerpo.
     </p>
-    <p className="phase-end-description">
-      Usa esta estrategia como una herramienta de autocuidado.
-    </p>
-    <button className="phase-end-btn" onClick={completeMindfulness}>Aceptar</button>
-  </div>
+
+
+    <button className="phase-end-btn" onClick={completeMindfulness}>Aceptar</button> </div>
 )}
 
 
