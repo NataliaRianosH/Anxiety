@@ -17,7 +17,7 @@ export function Terreno({ onLoaded, ...props }) {
     }
   }, []);
   return (
-      <RigidBody type="fixed" colliders="trimesh">
+      <RigidBody  name="ground"  type="fixed" colliders="trimesh">
     <group {...props} dispose={null}>
       <mesh
         castShadow 

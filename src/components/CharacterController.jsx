@@ -38,27 +38,29 @@ const CharacterController = ({ positiveChallengeStarted }) => {
 
   const { user, partida } = useAuth();
   const avatarSkin = partida?.avatar_skin || "Avatar3";
-/**
-  const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED, JUMP_FORCE } = useControls(
-    "Character Control",
-    {
-      WALK_SPEED: { value: 3, min: 0.1, max: 5, step: 0.1 },
-      RUN_SPEED: { value: 10, min: 0.2, max: 12, step: 0.1 },
-      ROTATION_SPEED: {
-        value: degToRad(0.5),
-        min: degToRad(0.1),
-        max: degToRad(5),
-        step: degToRad(0.1),
-      },
-      JUMP_FORCE: { value: 10, min: 5, max: 20, step: 1 },
-    }
-    
-  ); */
+  const isOnGround = useRef(false);
+
+  /**
+    const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED, JUMP_FORCE } = useControls(
+      "Character Control",
+      {
+        WALK_SPEED: { value: 3, min: 0.1, max: 5, step: 0.1 },
+        RUN_SPEED: { value: 10, min: 0.2, max: 12, step: 0.1 },
+        ROTATION_SPEED: {
+          value: degToRad(0.5),
+          min: degToRad(0.1),
+          max: degToRad(5),
+          step: degToRad(0.1),
+        },
+        JUMP_FORCE: { value: 10, min: 5, max: 20, step: 1 },
+      }
+      
+    ); */
   const WALK_SPEED = 3;
   const RUN_SPEED = 10;
   const ROTATION_SPEED = degToRad(0.5);
   const JUMP_FORCE = 10;
-  
+
   const rb = useRef();
   const container = useRef();
   const character = useRef();
@@ -114,7 +116,7 @@ const CharacterController = ({ positiveChallengeStarted }) => {
       if (get().left) movement.x = 1;
       if (get().right) movement.x = -1;
 
-      
+
       // Movimiento con mouse (solo si no se usan teclas)
       /**
       const usingKeyboard = movement.x !== 0 || movement.z !== 0;
@@ -181,16 +183,16 @@ const CharacterController = ({ positiveChallengeStarted }) => {
           speed === RUN_SPEED
             ? "Running"
             : positiveChallengeStarted || phase3Movement
-            ? "Walking_Sad"
-            : "Walking"
+              ? "Walking_Sad"
+              : "Walking"
         );
       } else {
         setAnimation(
           phase2Movement
             ? "Look_Around"
             : positiveChallengeStarted || phase3Movement
-            ? "Idle_Sad"
-            : "Idle"
+              ? "Idle_Sad"
+              : "Idle"
         );
       }
 
@@ -198,13 +200,23 @@ const CharacterController = ({ positiveChallengeStarted }) => {
       const canJump =
         !positiveChallengeStarted && !disableMovement && !phase2Movement;
 
-      if (get().jump && canJump) {
-        vel.y = JUMP_FORCE;
-        setAnimation("Jumping");
-      }
-
-      rb.current.setLinvel(vel, true);
-
+        if (get().jump && canJump && isOnGround.current) {
+          const forwardX = Math.sin(rotationTarget.current + characterRotationTarget.current);
+          const forwardZ = Math.cos(rotationTarget.current + characterRotationTarget.current);
+          const isRunning = speed === RUN_SPEED;
+        
+          // Empuje hacia adelante al saltar corriendo
+          vel.x = forwardX * (isRunning ? RUN_SPEED * 0.8 : WALK_SPEED * 0.5);
+          vel.y = JUMP_FORCE;
+          vel.z = forwardZ * (isRunning ? RUN_SPEED * 0.8 : WALK_SPEED * 0.5);
+        
+          isOnGround.current = false;
+          setAnimation("Jumping");
+        }
+        
+        
+        rb.current.setLinvel(vel, true);
+        
       // Rotación suave del avatar
       character.current.rotation.y = lerpAngle(
         character.current.rotation.y,
@@ -231,7 +243,7 @@ const CharacterController = ({ positiveChallengeStarted }) => {
   });
 
 
-// x=-3.623488187789917,y=13.85675048828125, z=9.041946411132812
+  // x=-3.623488187789917,y=13.85675048828125, z=9.041946411132812
   return (
     <RigidBody
       colliders={false}
@@ -239,6 +251,16 @@ const CharacterController = ({ positiveChallengeStarted }) => {
       lockRotations
       ref={rb}
       name="character"
+      onCollisionEnter={(e) => {
+        if (e.colliderObject?.name?.includes("ground")) {
+          isOnGround.current = true;
+        }
+      }}
+      onCollisionExit={(e) => {
+        if (e.colliderObject?.name?.includes("ground")) {
+          isOnGround.current = false;
+        }
+      }}
     >
       <group ref={container}>
         <group ref={cameraTarget} position-z={-1.2} />
