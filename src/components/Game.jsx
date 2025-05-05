@@ -107,7 +107,7 @@ const Game = () => {
           color="#ffd8a8"
         />
         <Sky />
-        {/**  debug  <AnimatedWater position={[10, -90, -6]} scale={[30, 20, 30]}  rotation = {[0.7, 0.2, 0]}/>**/}
+        {/**   debug <AnimatedWater position={[10, -90, -6]} scale={[30, 20, 30]}  rotation = {[0.7, 0.2, 0]}/>**/}
         <Physics gravity={[0, -30, 0]}>
            {/**  <Grass position={[0, -18, 0]} scale={80} rotation={islanRotation} />
             **/}
