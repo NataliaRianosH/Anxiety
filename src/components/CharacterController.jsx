@@ -104,6 +104,15 @@ const CharacterController = ({ positiveChallengeStarted }) => {
   }, []);
 
   useFrame(({ camera, mouse }) => {
+    const activeElement = document.activeElement;
+  if (
+    activeElement &&
+    (activeElement.tagName === "INPUT" ||
+     activeElement.tagName === "TEXTAREA" ||
+     activeElement.isContentEditable)
+  ) {
+    return; // No ejecutar nada si está escribiendo
+  }
     if (rb.current) {
       const vel = rb.current.linvel();
       const position = rb.current.translation();
