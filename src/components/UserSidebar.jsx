@@ -7,7 +7,7 @@ import SecurityTab from "./UserTabs/SecurityTab";
 import StatsTab from "./UserTabs/StatsTab";
 
 const UserSidebar = ({ isOpen, closeSidebar }) => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [activeTab, setActiveTab] = useState("informacion");
   const avatarUrl = user?.user_metadata?.avatar_url;
 
@@ -78,9 +78,9 @@ const UserSidebar = ({ isOpen, closeSidebar }) => {
       </div>
       <div className="sidebar-divider"></div>
       {/* Botón cerrar sesión */}
-      <button className="logout-button">
+      <button className="logout-button"  onClick={logout}>
         <span>↪</span> Cerrar Sesión
-      </button>
+      </button> 
     </div>
   );
 };
