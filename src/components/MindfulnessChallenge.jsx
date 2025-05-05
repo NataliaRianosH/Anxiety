@@ -119,7 +119,7 @@ const MindfulnessChallenge = () => {
               </p>
               <p className="secondary-text">
                 Camina hasta el objeto (un reloj) y recolectalo para completar
-                esta fase.
+                esta fase. Pero cuidado, los controles están invertidos.
               </p>
             </div>
           </div>
