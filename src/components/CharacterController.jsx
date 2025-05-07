@@ -256,7 +256,7 @@ const CharacterController = ({ positiveChallengeStarted }) => {
   return (
     <RigidBody
       colliders={false}
-      position={[-3.8, 50, 8.1]}
+      position={[-3.8, 30, 8.1]}
       lockRotations
       ref={rb}
       name="character"
@@ -272,8 +272,8 @@ const CharacterController = ({ positiveChallengeStarted }) => {
       }}
     >
       <group ref={container}>
-        <group ref={cameraTarget} position-z={-1.2} />
-        <group ref={cameraPosition} position-y={0.7} position-z={-2.5} />
+        <group ref={cameraTarget} position-z={-1} />
+        <group ref={cameraPosition} position-y={1} position-z={-6} />
         <group ref={character}>
           {avatarSkin === "Avatar1" && (
             <Avatar1 scale={1.6} position-y={-2.3} animation={animation} />
