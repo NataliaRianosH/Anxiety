@@ -152,7 +152,7 @@ const Achievement = ({
         {/* aplica animación solo si flota */}
         {title === "Reloj" && (
           <PositionalAudio
-            url="../../../public/sounds/clock.mp3"
+            url="/sounds/clock.mp3"
             distance={4} // hasta qué distancia se escucha
             loop
             autoplay
