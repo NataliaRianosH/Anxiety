@@ -118,8 +118,7 @@ const MindfulnessChallenge = () => {
                 Presta atención al sonido. Un objeto cercano hace tic-tac.
               </p>
               <p className="secondary-text">
-                Camina hasta el objeto (un reloj) y recolectalo para completar
-                esta fase. Pero cuidado, los controles están invertidos.
+                Camina hasta el objeto (un reloj) y recolectalo. ¡Pero cuidado!, los controles están invertidos.
               </p>
             </div>
           </div>

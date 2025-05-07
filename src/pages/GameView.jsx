@@ -34,8 +34,7 @@ const GameView = () => {
       setIsMuted(vol === 0);
     }
   }, [volume]);
-  
-  
+
   return (
     <div
       className={`game-container ${
@@ -44,14 +43,14 @@ const GameView = () => {
       style={{ position: "relative", overflow: "hidden" }}
     >
       <GameMenu
-  isMuted={isMuted}
-  setIsMuted={setIsMuted}
-  volume={volume}
-  setVolume={setVolume}
-/>
+        isMuted={isMuted}
+        setIsMuted={setIsMuted}
+        volume={volume}
+        setVolume={setVolume}
+      />
 
       <Game />
-      {(positiveChallengeStarted || (mindfulnessStarted && phase !== 5)) && (
+      {(positiveChallengeStarted || (mindfulnessStarted && phase !== 5 && phase !== 6 )) && (
         <div className="anxiety-overlay"></div>
       )}
       {positiveChallengeStarted && (

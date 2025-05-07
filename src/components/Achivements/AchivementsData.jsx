@@ -77,7 +77,7 @@ const achievementsData = [
   },
   { 
     id: 4, 
-    position: [17.22397, 1, -9.74974], 
+    position: [-21.6476, 1.2762, -1.383], 
     geometry: <Reloj  />, 
     collider: "cuboid",
     title: "Reloj", 
@@ -89,7 +89,7 @@ const achievementsData = [
   },
   { 
     id: 5,
-    position: [15.56363868713378,4.968834, 11.968585968], 
+    position: [14.930821418762207,2.37665295, -1.868562], 
     geometry: <Paleta />, 
     collider: "ball",
     title: "Paleta", 

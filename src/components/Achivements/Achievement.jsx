@@ -1,9 +1,10 @@
 import { RigidBody } from "@react-three/rapier";
 import { useEffect, useRef, useState } from "react";
-import { useFrame } from "@react-three/fiber"; 
+import { useFrame } from "@react-three/fiber";
 import { useAchievements } from "../../context/AchievementsContext";
 import { usePositiveThoughts } from "../../context/PositiveThoughtsContext";
 import { useMindfulness } from "../../context/MindfulnessContext";
+import { PositionalAudio } from "@react-three/drei";
 
 const Achievement = ({
   id,
@@ -13,10 +14,21 @@ const Achievement = ({
   title,
   category,
   onShowLearning,
-  shouldFloat // recibe prop para flotar
+  shouldFloat, // recibe prop para flotar
 }) => {
-  const { positiveMessageValidated, startPositiveChallenge, endPositiveChallenge } = usePositiveThoughts();
-  const { mindfulnessCompleted, startMindfulness, endMindfulness, phase, nextPhase, completeMindfulness  } = useMindfulness(); // añadimos phase y nextPhase
+  const {
+    positiveMessageValidated,
+    startPositiveChallenge,
+    endPositiveChallenge,
+  } = usePositiveThoughts();
+  const {
+    mindfulnessCompleted,
+    startMindfulness,
+    endMindfulness,
+    phase,
+    nextPhase,
+    completeMindfulness,
+  } = useMindfulness(); // añadimos phase y nextPhase
 
   const { collectAchievement } = useAchievements();
   const [collected, setCollected] = useState(false);
@@ -59,7 +71,7 @@ const Achievement = ({
     id,
     mindfulnessCompleted,
     isMindfulnessStarter,
-    endMindfulness
+    endMindfulness,
   ]);
 
   const handleCollision = () => {
@@ -69,7 +81,10 @@ const Achievement = ({
         startPositiveChallenge();
       }
     } else if (isMindfulnessStarter) {
-      console.log("Colisionaste con el logro de inicio de mindfulness: ", title);
+      console.log(
+        "Colisionaste con el logro de inicio de mindfulness: ",
+        title
+      );
       if (!mindfulnessCompleted) {
         startMindfulness();
       }
@@ -96,7 +111,7 @@ const Achievement = ({
         collectAchievement(id);
         nextPhase();
         return;
-      } 
+      }
       if (id === 7 && phase === 5) {
         console.log("Pastel encontrado. Avanzando a la fase final.");
         setCollected(true);
@@ -104,8 +119,7 @@ const Achievement = ({
         nextPhase();
         return;
       }
-      
-      
+
       //console.log("Colisión con objeto mindfulness en fase no programada.");
     } else if (category === "aprendizaje") {
       //console.log("Colisionaste con un logro de aprendizaje:", title);
@@ -133,7 +147,17 @@ const Achievement = ({
         }
       }}
     >
-      <group ref={shouldFloat ? floatRef : null}> {/* aplica animación solo si flota */}
+      <group ref={shouldFloat ? floatRef : null}>
+        {" "}
+        {/* aplica animación solo si flota */}
+        {title === "Reloj" && (
+          <PositionalAudio
+            url="../../../public/sounds/clock.mp3"
+            distance={4} // hasta qué distancia se escucha
+            loop
+            autoplay
+          />
+        )}
         <mesh>
           {geometry}
           <meshStandardMaterial color="gold" />
