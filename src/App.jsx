@@ -41,7 +41,7 @@ function App() {
                   <main>
                     <Routes>
                       <Route path="/" element={<Login />} />
-                      <Route path="/profile" element={<Profile />} />
+                      <Route path="/home" element={<Profile />} />
                       <Route
                         path="/forgot-password"
                         element={<ForgotPassword />}

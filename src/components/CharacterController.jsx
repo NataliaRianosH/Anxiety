@@ -116,7 +116,7 @@ const CharacterController = ({ positiveChallengeStarted }) => {
     if (rb.current) {
       const vel = rb.current.linvel();
       const position = rb.current.translation();
-      console.log( `Posicion del avatar: x=${position.x},y=${position.y}, z=${position.z}`);
+      //console.log( `Posicion del avatar: x=${position.x},y=${position.y}, z=${position.z}`);
       // Movimiento base con teclado
       const movement = { x: 0, z: 0 };
 
@@ -272,8 +272,8 @@ const CharacterController = ({ positiveChallengeStarted }) => {
       }}
     >
       <group ref={container}>
-        <group ref={cameraTarget} position-z={-1.2} />
-        <group ref={cameraPosition} position-y={0.7} position-z={-2.5} />
+        <group ref={cameraTarget} position-z={-2.05} />
+        <group ref={cameraPosition} position-y={0.2} position-z={-2.5} />
         <group ref={character}>
           {avatarSkin === "Avatar1" && (
             <Avatar1 scale={1.6} position-y={-2.3} animation={animation} />

@@ -16,7 +16,7 @@ const Login = () => {
     if (errorMessage) {
       setError(errorMessage); // Establecemos el mensaje de error en el estado
     } else {
-      navigate("/profile"); // Redirigimos al perfil si el login es exitoso
+      navigate("/home"); // Redirigimos al perfil si el login es exitoso
     }
   };
 

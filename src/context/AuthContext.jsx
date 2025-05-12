@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
       (event, session) => {
         //console.log("Cambio de sesión detectado:", event);
         setUser(session?.user || null);
-        if (event === "SIGNED_IN") navigate("/profile");
+        if (event === "SIGNED_IN") navigate("/home");
         if (event === "SIGNED_OUT") {
           setPartida(null);
           navigate("/login");
@@ -77,7 +77,7 @@ export const AuthProvider = ({ children }) => {
       setError(updateError.message);
     } else {
       // Redirigir al perfil
-      navigate("/profile");
+      navigate("/home");
     }
   };
 
@@ -213,7 +213,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       console.log("Avatar actualizado correctamente");
-      navigate("/profile");
+      navigate("/home");
       return { success: true };
     } catch (err) {
       console.error("Error en guardarAvatar:", err);

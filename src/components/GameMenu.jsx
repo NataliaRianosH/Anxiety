@@ -203,7 +203,7 @@ const GameMenu = ({ isMuted, setIsMuted, volume, setVolume }) => {
           <div className="game-dropdown" ref={gameMenuRef}>
             <p className="game-dropdown-title">Menú del juego</p>
             <ul className="game-dropdown-options">
-              <li onClick={() => navigate("/profile")}>
+              <li onClick={() => navigate("/home")}>
                 <FaHome className="dropdown-icon" />
                 Home
               </li>
