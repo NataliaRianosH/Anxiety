@@ -55,44 +55,40 @@ export const AuthProvider = ({ children }) => {
   }, [navigate]);
 
   const register = async (email, password, name) => {
-    // Registro con correo y contraseña
+   
     const { user, error } = await supabase.auth.signUp({
       email,
       password,
     });
-
     if (error) {
       setError(error.message);
       return;
     }
-
-    // Actualización del perfil con el nombre del usuario
     const { error: updateError } = await supabase.auth.updateUser({
       data: {
         full_name: name,
       },
     });
-
     if (updateError) {
       setError(updateError.message);
     } else {
-      // Redirigir al perfil
+     
       navigate("/home");
     }
   };
 
   // Inicio de sesión con email/contraseña
   const login = async (email, password) => {
-    const { user, error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (error) {
-      return error.message; // Retorna el mensaje de error en lugar de solo loguearlo
+      return error.message; 
     }
 
-    return null; // Si no hay error, retorna null
+    return null; 
   };
 
   const resetPassword = async (email) => {
@@ -236,7 +232,6 @@ export const AuthProvider = ({ children }) => {
         return { success: false, error: error.message };
       }
 
-      // Actualizar el contexto también
       setPartida((prev) => ({
         ...prev,
         avatar_skin: nuevaSkin,

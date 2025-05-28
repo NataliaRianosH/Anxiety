@@ -5,7 +5,7 @@ import { AuthProvider } from "./context/AuthContext";
 import Login from "./pages/Login";
 import Story from "./pages/Story";
 import AvatarSelection from "./pages/AvatarSelection";
-import Profile from "./pages/Profile";
+import Home from "./pages/Home";
 import Instructions from "./pages/Instructions";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -34,14 +34,14 @@ function App() {
     <Router>
       <MiniGamesManagerProvider>
         <PositiveThoughtsProvider>
-          <AuthProvider>
+          <AuthProvider> 
             <AchievementsProvider>
               <MindfulnessProvider>
                 <KeyboardControls map={keyboardMap}>
                   <main>
                     <Routes>
                       <Route path="/" element={<Login />} />
-                      <Route path="/home" element={<Profile />} />
+                      <Route path="/home" element={<Home />} />
                       <Route
                         path="/forgot-password"
                         element={<ForgotPassword />}

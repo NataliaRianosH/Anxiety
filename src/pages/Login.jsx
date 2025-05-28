@@ -11,12 +11,12 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const errorMessage = await login(email, password); // Llamamos a la función de login
+    const errorMessage = await login(email, password); 
 
     if (errorMessage) {
-      setError(errorMessage); // Establecemos el mensaje de error en el estado
+      setError(errorMessage); 
     } else {
-      navigate("/home"); // Redirigimos al perfil si el login es exitoso
+      navigate("/home"); 
     }
   };
 

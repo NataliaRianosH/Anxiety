@@ -5,7 +5,7 @@ import AvatarView from "../components/AvatarView";
 import HomeMenu from "../components/HomeMenu";
 import { useState } from "react";
 
-const Profile = () => {
+const Home = () => {
   const { user, logout, partida, reiniciarPartida } = useAuth();
   const navigate = useNavigate();
   const [avatarSeleccionado, setAvatarSeleccionado] = useState(
@@ -76,33 +76,34 @@ const Profile = () => {
             onAvatarChange={(skin) => setAvatarSeleccionado(skin)}
           />
           {avatarSeleccionado !== partida?.avatar_skin && (
-  <p
-    className="avatar-select-text"
-    onClick={async () => {
-      const confirmacion = window.confirm("¿Deseas cambiar tu avatar?");
-      if (!confirmacion) return;
+            <p
+              className="avatar-select-text"
+              onClick={async () => {
+                const confirmacion = window.confirm(
+                  "¿Deseas cambiar tu avatar?"
+                );
+                if (!confirmacion) return;
 
-      const result = await actualizarSkinAvatar(avatarSeleccionado);
+                const result = await actualizarSkinAvatar(avatarSeleccionado);
 
-      if (result.success) {
-        alert("¡Skin del avatar actualizada correctamente!");
-      } else {
-        alert("Error al actualizar: " + result.error);
-      }
-    }}
-  >
-    Seleccionar avatar
-  </p>
-)}
-
+                if (result.success) {
+                  alert("¡Skin del avatar actualizada correctamente!");
+                } else {
+                  alert("Error al actualizar: " + result.error);
+                }
+              }}
+            >
+              Seleccionar avatar
+            </p>
+          )}
         </div>
       </div>
-      
-<button className="continuar-button" onClick={() => navigate("/game")}>
-          Continuar Partida
-        </button>
+
+      <button className="continuar-button" onClick={() => navigate("/game")}>
+        Continuar Partida
+      </button>
     </div>
   );
 };
 
-export default Profile;
+export default Home;

@@ -19,36 +19,22 @@ export const MindfulnessProvider = ({ children }) => {
 
   // Función para iniciar el minijuego
   const startMindfulness = () => {
-    if (isAnyMinigameActive) {
-      console.log(
-        "No se puede iniciar el minijuego de mindfulness porque ya hay otro activo."
-      );
-      return;
-    }
-
-    if (mindfulnessCompleted) {
-      console.log("Ya completaste el minijuego de mindfulness. No puedes volver a jugarlo. crea otra partida");
-      return;
-    }
-
+    if (isAnyMinigameActive || mindfulnessCompleted) return;
     setMindfulnessStarted(true);
     setMindfulnessCompleted(false);
     setActiveGame("mindfulness");
-    console.log(" Minijuego mindfulness iniciado");
   };
 
-  // Función para completarlo
+
   const completeMindfulness = () => {
     setMindfulnessCompleted(true);
     markMindfulnessAchievementsAsCompleted();
     setMindfulnessStarted(false);
-    setPhase(1); // Reinicia la fase para que no se quede en 6
-    setActiveGame(null); // ESTO ES CLAVE
-    console.log("Minijuego mindfulness completado, ganaste");
+    setPhase(1); 
+    setActiveGame(null);
   };
   
 
-  // Función para salir del minijuego
   const endMindfulness = async () => {
     if (!mindfulnessStarted) {
       console.log("No se puede terminar el minijuego de mindfulness porque no ha sido iniciado.");
@@ -65,11 +51,9 @@ export const MindfulnessProvider = ({ children }) => {
   };
 
   const nextPhase = () => {
-    console.log(phase);
     setPhase((prev) => (prev < 6 ? prev + 1 : prev));
-    console.log("nueva fase", phase);
-
   };
+  
   const resetMindfulnessChallenge = () => {
     setMindfulnessStarted(false);
     setMindfulnessCompleted(false);

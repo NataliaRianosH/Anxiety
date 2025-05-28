@@ -88,7 +88,7 @@ const Game = () => {
         className="w-full h-screen bg-transparent"
         camera={{ near: 0.1, far: 1000, position: [-50, 10, 21] }}
       >
-        <Perf position="top-left" />
+        
         <ResizeHandler />
         {/** camera={{ position: [0, 0, 10], near: 0.1, far: 1000 }}  **/}
         {/** <OrbitControls enableZoom={true} enablePan={true} />**/}
